@@ -1,0 +1,124 @@
+/* sass --watch main.scss ../HoSkar/style.css --style compressed --no-source-map */
+
+/*!
+ * Theme Name: HoSkar 1.0.1
+ * Author: Trangdv
+ * Version: 1.0.1
+ * Text Domain: zing
+ */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+@import "variable";
+@import "reset";
+@import "base";
+@import "bs";
+@import "header";
+@import "footer";
+
+.has-scroll {
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 8px;
+        border-radius: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #777;
+        border-radius: 4px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #777;
+        border-radius: 4px;
+    }
+}
+
+img{
+    object-fit: cover;
+}
+
+.thumb{
+    display: block;
+    img{
+        width: 100%;
+        aspect-ratio: 0.68;
+    }
+}
+
+.elementor-section-wrap > .e-con:not(.section-full, .e-loop-item .e-con, .e-con-full){
+    --bc-padding-inline-end: 20px !important;
+    --bc-padding-inline-start: 20px !important;
+    @include lg{
+        --bc-padding-inline-end: 30px !important;
+        --bc-padding-inline-start: 30px !important;
+    }
+}
+
+.need-readmore {
+    overflow: hidden;
+    &.active {
+        .elementor-widget-container {
+            max-height: none !important;
+        }
+    }
+    .elementor-widget-container {
+        @include transition;
+        max-height: 200px;
+        @include sm{
+            max-height: none;
+        }
+    }
+    .read-more-wrap {
+        margin: 0;
+        display: block;
+        @include sm{
+            display: none;
+        }
+        left: 0;
+        bottom: 0;
+        padding-top: 70px;
+        background-image: linear-gradient(to top, #EBEAE5, #EBEAE5, rgba(#EBEAE5, 70%), rgba(#EBEAE5, 30%));
+        padding-bottom: 20px;
+    }
+}
+
+.ho-btn{
+    a{
+        background-image: radial-gradient(circle at 34%, #F99DEE 0%, #343BA0 53%, #FFC3D4 100%);
+    }
+}
+
+.bottom-area{
+    border-top: 2px solid;
+    border-image-slice: 1;
+    border-image-source: radial-gradient(circle at 34%, #F99DEE 0%, #343BA0 53%, #FFC3D4 100%);
+}
+
+.elementor-element-1e50554{
+    @include xxl{
+        --min-height: 1200px !important;
+    }
+}
+
+.intro-hero{
+    height: 100vh;
+    min-height: 760px;
+    .e5{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.e5{
+    display: none;
+}
