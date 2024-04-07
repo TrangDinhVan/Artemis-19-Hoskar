@@ -3,6 +3,7 @@ define("CSS", get_template_directory_uri().'/css');
 define("JS", get_template_directory_uri().'/js');
 define("IMG", get_template_directory_uri().'/images');
 define("EMAIL", get_template_directory().'/emails');
+define("LAZY_IMG", "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=");
 
 global $cu; $cu = false;
 if( is_user_logged_in() ) $cu = wp_get_current_user();

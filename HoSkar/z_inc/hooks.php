@@ -28,4 +28,4 @@ function zing_custom_img_sizes($sizes) {
 }
 add_filter('intermediate_image_sizes_advanced', 'zing_custom_img_sizes');
 
-// show_admin_bar( false );
+show_admin_bar( false );

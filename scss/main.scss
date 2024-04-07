@@ -91,14 +91,13 @@ img{
 
 .ho-btn{
     a{
-        background-image: radial-gradient(circle at 34%, #F99DEE 0%, #343BA0 53%, #FFC3D4 100%);
+        @include zbg;
     }
 }
 
 .bottom-area{
     border-top: 2px solid;
-    border-image-slice: 1;
-    border-image-source: radial-gradient(circle at 34%, #F99DEE 0%, #343BA0 53%, #FFC3D4 100%);
+    @include zborder;
 }
 
 .elementor-element-1e50554{
@@ -108,8 +107,16 @@ img{
 }
 
 .intro-hero{
-    height: 100vh;
-    min-height: 760px;
+    min-height: 360px;
+    margin-top: 150px;
+    @include sm{
+        margin-top: 50px;
+        min-height: 560px;
+    }
+    @include lg{
+        height: 100vh;
+        min-height: 760px;
+    }
     .e5{
         position: absolute;
         top: 0;
@@ -117,8 +124,116 @@ img{
         bottom: 0;
         right: 0;
     }
+    .intro{
+        position: relative;
+        top: 60px;
+        @include sm{
+            top: 40px;
+        }
+    }
+    .t5{
+        font-size: 4em;
+        @include sm{
+            font-size: 5em;
+        }
+        @include xl{
+            font-size: 6em;
+        }
+        @include xxl{
+            font-size: 7em;
+        }
+        position: absolute;
+        top: 50%;
+        margin-top: -70px;
+        z-index: 2;
+        opacity: 0;
+        &.active{
+            opacity: 1;
+        }
+    }
+    .d5{
+        position: absolute;
+        bottom: 20px;
+        z-index: 3;
+        opacity: 0;
+        &.active{
+            opacity: 1;
+        }
+        font-size: 2.6em;
+    }
 }
 
 .e5{
     display: none;
+    .in{
+        position: absolute;
+        max-width: 20%;
+        @include lg{
+            max-width: 220px;
+        }
+        @include xxl{
+            max-width: 250px;
+        }
+        @include transition(0.5s);
+        z-index: 1;
+        cursor: pointer;
+        &.active{
+            translate: 0;
+            z-index: 2;
+            max-width: 45%;
+            @include sm{
+                max-width: 50%;
+                margin-top: 0;
+            }
+            @include lg{
+                max-width: 500px;
+            }
+            @include xxl{
+                max-width: 600px;
+            }
+        }
+        &.intro-0{
+            translate: -180% 90%;
+            @include lg{
+                translate: -180% 90%;
+            }
+            @include xxl{
+                translate: -200% 100%;
+            }
+        }
+        &.intro-1{
+            translate: 180% 90%;
+            @include lg{
+                translate: 180% 90%;
+            }
+            @include xxl{
+                translate: 200% 100%;
+            }
+        }
+        &.intro-2{
+            translate: 180% -90%;
+            @include lg{
+                translate: 180% -90%;
+            }
+            @include xxl{
+                translate: 200% -100%;
+            }
+        }
+        &.intro-3{
+            translate: -180% -90%;
+            @include lg{
+                translate: -180% -90%;
+            }
+            @include xxl{
+                translate: -200% -100%;
+            }
+        }
+    }
+}
+.zflip{
+    transform: scaleX(-1);
+}
+
+.controls{
+
 }
