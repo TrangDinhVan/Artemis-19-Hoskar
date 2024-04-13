@@ -83,3 +83,10 @@
 i.bi{
     display: flex;
 }
+
+nav.elementor-nav-menu--dropdown{
+    border-radius: 30px;
+    li{
+        backdrop-filter: blur(12px);
+    }
+}
