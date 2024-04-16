@@ -52,7 +52,8 @@ img{
     }
 }
 
-.elementor-section-wrap > .e-con:not(.section-full, .e-loop-item .e-con, .e-con-full){
+.elementor-section-wrap > .e-con:not(.section-full, .e-loop-item .e-con, .e-con-full),
+.elementor > .e-con:not(.section-full, .e-loop-item .e-con, .e-con-full){
     --bc-padding-inline-end: 20px !important;
     --bc-padding-inline-start: 20px !important;
     @include lg{
@@ -244,7 +245,7 @@ img{
         position: relative;
         padding: 15px 20px;
         @include sm{
-            padding: 25px 30px;
+            padding: 20px 30px;
         }
         line-height: 1;
         @include text_rainbow;
@@ -277,16 +278,16 @@ img{
 
 .z1{
     img{
-        animation-name: m2;
         max-width: 300px;
+        transform: translateY(15px);
         @include sm{
-            animation-name: m1;
+            transform: translateY(30px);
         }
         @include xl{
             max-width: none;
         }
         animation-duration: 1.5s;
-        animation-iteration-count: infinite;
+        animation-iteration-count: 4;
         animation-direction: alternate-reverse;
         transition-timing-function: linear;
     }
@@ -390,6 +391,14 @@ img{
 }
 
 .active{
+    .z1{
+        img{
+            animation-name: m2;
+            @include sm{
+                animation-name: m1;
+            }
+        }
+    }
     .img{
         opacity: 1;
         scale: 1;
@@ -425,5 +434,301 @@ img{
             bottom: -70px;
             left: 40px;
         }
+    }
+}
+
+.upcoming_events{
+    position: relative;
+    .main{
+        position: relative;
+        z-index: 1;
+        .img-title{
+            height: 50px;
+            @include sm{
+                height: 60px;
+            }
+        }
+        .next{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            right: -10px;
+            top: 140px;
+            @include sm{
+                top: 170px;
+                width: 70px;
+                height: 70px;
+            }
+            @include lg{
+                top: 220px;
+                right: -30px;
+            }
+            opacity: 1;
+            z-index: 2;
+            cursor: pointer;
+            border: none;
+            border-radius: none;
+        }
+    }
+    &::before {
+        content: "";
+        width: 800px;
+        height: 300px;
+        position: absolute;
+        left: 0;
+        top: 200px;
+        max-width: 50vw;
+        filter: blur(150px);
+        @include zbg;
+        left: -30px;
+        @include lg{
+            left: calc((100vw - 1200px) * -0.5);
+        }
+    }
+    &::after {
+        content: "";
+        width: 800px;
+        height: 300px;
+        position: absolute;
+        right: 0;
+        bottom: 200px;
+        max-width: 50vw;
+        filter: blur(150px);
+        @include zbg;
+        right: -30px;
+        @include lg{
+            bottom: -200px;
+            right: calc((100vw - 1200px) * -0.5 - 150px);
+        }
+    }
+    .thumb{
+        width: 100%;
+        aspect-ratio: 1.4;
+        @include sm{
+            width: 280px;
+        }
+        flex-shrink: 0;
+        border: 2px solid rgba(#fff, 0.20);
+        border-radius: 30px;
+    }
+    .img-title{
+        height: 40px;
+        @include sm{
+            height: 50px;
+        }
+        object-fit: contain;
+    }
+    .sapo{
+        opacity: 0.4;
+        font-size: 0.9em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    .others{
+        z-index: 1;
+        @include lg{
+            max-height: 780px;
+            padding-bottom: 200px;
+            z-index: 0;
+        }
+        overflow-y: auto;
+        position: relative;
+    }
+    .btn-rainbow{
+        a{
+            width: 90%;
+            max-width: 250px;
+            -webkit-text-fill-color: #fff;
+            background: rgba(#fff, 10%);
+            border-radius: 40px;
+            overflow: hidden;
+            &::after{
+                padding: 3px !important;
+                background-color: rgba(#fff, 10%);
+            }
+            justify-content: center;
+        }
+    }
+}
+
+.m-gallery{
+    position: relative;
+    width: 100%;
+    height: 320px;
+    @include sm{
+        height: 400px;
+    }
+    @include lg{
+        height: 500px;
+    }
+    img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid rgba(#fff, 0.20);
+        border-radius: 30px;
+        opacity: 0.4;
+        @include transition;
+    }
+    .i-0{
+        rotate: -13deg;
+        bottom: 60px;
+        right: 40px;
+        opacity: 0.2;
+    }
+    .i-1{
+        rotate: -6deg;
+        bottom: 35px;
+        right: 20px;
+    }
+    .i-2{
+        rotate: 0deg;
+        opacity: 1;
+        z-index: 1;
+    }
+}
+
+.event_format{
+    .entry{
+        border-radius: 40px;
+        overflow: hidden;
+        padding: 6px;
+        position: relative;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        @include transition;
+        cursor: pointer;
+        width: 100%;
+        &.active{
+            @include lg{
+                width: 60%;
+            }
+            @include zborder;
+            cursor: auto;
+            .thumb{
+                opacity: 1;
+            }
+            .vtitle{
+                @include lg{
+                    opacity: 0;
+                }
+            }
+            .next, .prev{
+                scale: 1;
+                @include lg{
+                    opacity: 1;
+                    z-index: 1;
+                }
+            }
+        }
+        &::after{
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 40px;
+            padding: 2px;
+            background: radial-gradient(circle at 34%, #F99DEE 0%, #343BA0 53%, #FFC3D4 100%);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    }
+    .thumb{
+        height: 150px;
+        @include sm{
+            height: 320px;
+        }
+        @include lg{
+            height: 460px;
+        }
+        width: 100%;
+        opacity: 0.5;
+        border-radius: 30px;
+    }
+    .vtitle{
+        position: absolute;
+        text-orientation: mixed;
+        writing-mode: lr;
+        font-size: 2em;
+        font-weight: 600;
+        line-height: 1;
+        white-space: nowrap;
+        top: 50%;
+        margin-top: -20px;
+        @include sm{
+            font-size: 2.5em;
+        }
+        @include lg{
+            top: auto;
+            margin-top: 0;
+            font-size: 3.2em;
+            writing-mode: tb-rl;
+            transform: rotate(-180deg);
+            height: 100%;
+            bottom: 0;
+        }
+        opacity: 1;
+        @include transition;
+    }
+    .next{
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 0;
+        scale: 0;
+        @include transition;
+    }
+    .prev{
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 0;
+        scale: 0;
+        @include transition;
+    }
+    &::before {
+        content: "";
+        width: 600px;
+        height: 300px;
+        position: absolute;
+        left: 0;
+        bottom: -300px;
+        max-width: 30vw;
+        filter: blur(150px);
+        @include zbg;
+        left: -60px;
+        @include lg{
+            left: calc((100vw - 1200px) * -0.5 - 150px);
+        }
+    }
+}
+
+.event_format_lb{
+    font-size: 1.6em;
+    @include sm{
+        font-size: 2em;
+    }
+    @include lg{
+        font-size: 3em;
+    }
+    span{
+        @include text_rainbow;
     }
 }
