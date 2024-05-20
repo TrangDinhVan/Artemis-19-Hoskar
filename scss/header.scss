@@ -86,7 +86,8 @@ i.bi{
 
 nav.elementor-nav-menu--dropdown{
     border-radius: 30px;
-    li{
-        backdrop-filter: blur(12px);
-    }
+    background: transparent radial-gradient(rgba($primary, 95%), rgba($secondary, 95%));
+    max-width: 200px;
+    translate: -10px 0;
+    left: 0 !important;
 }

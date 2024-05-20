@@ -21,6 +21,67 @@ jQuery(function($){
         c.removeClass('i-2').addClass('i-0');
     });
 
+    if ($('.logos-slider').length) {
+        new Swiper('.logos-slider', {
+            loop: true,
+            freeMode: true,
+            speed: 1500,
+            autoplay: {
+                delay: 1,
+                disableOnInteraction: false
+            },
+            breakpoints: {
+                200: {
+                    slidesPerView: 2,
+                    spaceBetween: 15
+                },
+                500: {
+                    slidesPerView: 4,
+                    spaceBetween: 15
+                },
+                1000: {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                },
+                1200: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                }
+            }
+        });
+    }
+
+    if ($('.logos-slider-2').length) {
+        new Swiper('.logos-slider-2', {
+            loop: true,
+            freeMode: true,
+            speed: 1500,
+            autoplay: {
+                delay: 1,
+                disableOnInteraction: false,
+                reverseDirection: true
+            },
+            breakpoints: {
+                200: {
+                    slidesPerView: 2,
+                    spaceBetween: 15
+                },
+                500: {
+                    slidesPerView: 4,
+                    spaceBetween: 15
+                },
+                1000: {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                },
+                1200: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                }
+            }
+        });
+    }
+
     $(document).on('click', '.event_format .entry:not(.active)', function(e){
         var t = $(this);
         $('.event_format .entry').not(t).removeClass('active flex-shrink-0');
