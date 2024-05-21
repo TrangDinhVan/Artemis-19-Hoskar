@@ -935,41 +935,20 @@ img{
 }
 
 .sponsor_benefits{
-    width: 100%;
-    min-height: 500px;
-    & > div{
-        cursor: pointer;
-        position: absolute;
-        overflow-y: auto;
-        @include transition;
+    .e{
         z-index: 0;
         align-items: flex-start;
         justify-content: center;
-        width: 50%;
         display: flex;
         flex-direction: column;
         gap: 15px;
         background: #272727;
         border-radius: 25px;
         padding: 40px;
-        translate: 0 0;
         border: 1px solid #ddd;
         height: 100%;
         @include xl{
             gap: 30px;
-        }
-        &.order-1{
-            // translate: 0 -60px;
-            z-index: 1;
-            height: calc(100% + 120px);
-        }
-        &.order-0{
-            left: -30px;
-            right: auto;
-        }
-        &.order-2{
-            left: auto;
-            right: -30px;
         }
     }
     .icon{
