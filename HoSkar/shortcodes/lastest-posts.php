@@ -1,23 +1,10 @@
 <?php
 
-get_header();
+add_shortcode( 'lastest_posts', function(){
 
-if( have_posts() ):
+    ob_start(); ?>
 
-    while( have_posts() ): the_post(); ?>
-    <div class="post_page">
-        <div class="e-con-inner">
-            
-            
-            <h2><?php the_title();?></h2>
-            <p class="date"><img decoding="async" width="20" src="<?php echo IMG; ?>/CalendarBlank.svg" alt=".."><?php the_time('jS F, Y');?></p>
-            <div class="featured_img">
-                <img src="<?php echo get_the_post_thumbnail_url($post_id, ''); ?>" alt="<?php the_title();?>" />
-            </div>
-            <div class="content">
-                <?php the_content(); ?>
-            </div>
-            <div class="more_post blog_list row">
+        <div class="more_post blog_list row">
                 <h3>Read more</h3>
                 
                 <?php
@@ -30,7 +17,21 @@ if( have_posts() ):
                         <img src="<?php the_post_thumbnail_url('full'); ?>" alt="Blog" />
                     </div>
                     <div class="infor">
-                        <p class="date"><?php the_time('jS F, Y');?></p>
+                        <div class="top">
+                            <p class="date"><?php the_time('jS F, Y');?></p>
+                            <div class="categorys">
+                                <?php
+                                $categories = get_the_category();
+                                if (!empty($categories)) {
+                                    $category_links = array();
+                                    foreach ($categories as $cat) {
+                                        $category_links[] = '<a class="category" href="'. get_category_link( $cat->term_id ) .'">' . esc_html($cat->name) . '</a>';
+                                    }
+                                    echo implode(', ', $category_links);
+                                }
+                                ?>
+                            </div>
+                        </div>
                         <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                         <p>
                             <?php if (has_excerpt()) {
@@ -45,13 +46,9 @@ if( have_posts() ):
                 </div>
                 <?php endwhile; wp_reset_postdata(); ?>
             </div>
-        </div>
-    </div>    
-        
-<?php 
-    endwhile;
 
-endif;
+    <?php
 
+    return ob_get_clean();
 
-get_footer(); ?>
+} ); ?>

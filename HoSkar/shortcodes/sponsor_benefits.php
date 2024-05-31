@@ -3,10 +3,13 @@
 add_shortcode( 'sponsor_benefits', function(){
 
     ob_start(); ?>
+<div class="slider">
+	<input type="radio" name="testimonial" id="t-2">
+	<input type="radio" name="testimonial" id="t-3" checked>
+	<input type="radio" name="testimonial" id="t-4">
+    <div class="sponsor_benefits sponsor_benefits_slider testimonials">
 
-    <div class="sponsor_benefits sponsor_benefits_slider">
-
-        <div class="e item">
+        <label class="e item" for="t-2">
 
             <img src="https://samuelw41.sg-host.com/hoskar/wp-content/uploads/2024/04/1-2.png" style="height: 50px;" alt=".." class="icon">
 
@@ -22,9 +25,9 @@ add_shortcode( 'sponsor_benefits', function(){
 
             </div>
 
-        </div>
+        </label>
 
-        <div class="e item">
+        <label class="e item" for="t-3">
 
             <img src="https://samuelw41.sg-host.com/hoskar/wp-content/uploads/2024/05/u2.png" alt=".." class="icon">
 
@@ -54,9 +57,9 @@ add_shortcode( 'sponsor_benefits', function(){
 
             </div>
 
-        </div>
+        </label>
 
-        <div class="e item">
+        <label class="e item" for="t-4">
 
             <img src="https://samuelw41.sg-host.com/hoskar/wp-content/uploads/2024/05/u3.png" alt=".." class="icon">
 
@@ -72,10 +75,10 @@ add_shortcode( 'sponsor_benefits', function(){
 
             </div>
 
-        </div>
+        </label>
 
     </div>
-    
+</div>
 
     <?php
 
