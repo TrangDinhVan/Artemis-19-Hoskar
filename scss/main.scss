@@ -607,6 +607,24 @@ img{
     }
 }
 
+.register_form{
+    .btn-rainbow {
+        a {
+            width: 90%;
+            max-width: 250px;
+            -webkit-text-fill-color: #fff;
+            background: rgba(#fff, 10%);
+            border-radius: 40px;
+            overflow: hidden;
+            &::after {
+                padding: 2px !important;
+                background-color: rgba(#fff, 10%);
+            }
+            justify-content: center;
+        }
+    }
+}
+
 .m-gallery{
     position: relative;
     width: 100%;
