@@ -40,7 +40,7 @@ function z_frontend_statics(){
 
 
 
-    $v = '1.5.5.1';
+    $v = '1.5.5.2';
 
     wp_enqueue_style( 'zing-style', get_stylesheet_uri(), array(), $v );
 
