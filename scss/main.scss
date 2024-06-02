@@ -977,6 +977,35 @@ img{
 
 .cities{
     .name{
-
+        font-size: 2em;
+        @include lg{
+            font-size: 3em;
+        }
+        color: #fff;
+        background: linear-gradient(34deg, #2b40e3, #CC7CC3, #343BA0, #FFC3D4);
+        -webkit-background-clip: text;
+        -webkit-text-stroke: 12px transparent;
+    }
+    .thumb{
+        aspect-ratio: 1;
+    }
+    .content{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(#000, 70%), transparent);
+    }
+    .ho-btn{
+        a{
+            width: 90%;
+            max-width: 200px;
+            line-height: 1;
+            height: 40px;
+            @include sm{
+                height: 46px;
+            }
+        }
     }
 }

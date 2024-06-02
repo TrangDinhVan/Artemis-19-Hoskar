@@ -82,22 +82,22 @@ jQuery(function($){
         });
     }
 
-    if ($('.cities').length) {
-        new Swiper('.cities', {
-            loop: true,
-            speed: 1500,
-            autoplay: {
-                delay: 1,
-                disableOnInteraction: false
-            },
-            breakpoints: {
-                200: {
-                    slidesPerView: 4,
-                    spaceBetween: 30
-                }
-            }
-        });
-    }
+    // if ($('.cities').length) {
+    //     new Swiper('.cities', {
+    //         loop: true,
+    //         speed: 1500,
+    //         autoplay: {
+    //             delay: 1,
+    //             disableOnInteraction: false
+    //         },
+    //         breakpoints: {
+    //             200: {
+    //                 slidesPerView: 4,
+    //                 spaceBetween: 30
+    //             }
+    //         }
+    //     });
+    // }
 
     $(document).on('click', '.event_format .entry:not(.active)', function(e){
         var t = $(this);

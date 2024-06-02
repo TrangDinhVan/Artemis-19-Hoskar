@@ -40,7 +40,7 @@ function z_frontend_statics(){
 
 
 
-    $v = '1.5.5.2';
+    $v = '1.5.6.1';
 
     wp_enqueue_style( 'zing-style', get_stylesheet_uri(), array(), $v );
 
@@ -50,7 +50,7 @@ function z_frontend_statics(){
     wp_enqueue_script( 'custom.js', JS.'/custom.js', array('jquery'), $v, true );
 
     wp_enqueue_script( 'luans.js', JS.'/luans.js', array('jquery'), $v, true );
-    wp_enqueue_script( 'luan2.js', JS.'/luan2.js', array('jquery'), $v, true );
+    // wp_enqueue_script( 'luan2.js', JS.'/luan2.js', array('jquery'), $v, true );
 
     wp_enqueue_style( 'swiper.css', 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css' );
     wp_enqueue_style( 'fancybox.css', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' );

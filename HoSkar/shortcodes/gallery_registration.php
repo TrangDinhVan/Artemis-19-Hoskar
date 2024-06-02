@@ -27,7 +27,9 @@ add_shortcode( 'gallery_registration', function(){
         ?>
 
         <div class="item position_<?php echo $class; ?>">
-            <img src="<?php echo $image; ?>" alt="Image" />
+            <a href="/hoskar/gallery">
+                <img src="<?php echo $image; ?>" alt="Image" />
+            </a>
         </div>
     <?php endwhile; ?>
     </div>

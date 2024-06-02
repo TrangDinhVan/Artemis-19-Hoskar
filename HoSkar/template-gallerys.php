@@ -60,7 +60,7 @@ get_header(); ?>
 					<div class="location-gallery">
 						<label for="category">Location</label>
 						<select name="category" id="category">
-							<option value="">All Locations</option>
+							<option class="category-select" value="">All Locations</option>
 							<?php
 							$categories = get_terms(array(
 								'taxonomy' => 'category', 
@@ -70,14 +70,21 @@ get_header(); ?>
 								if ($cat->term_id == 1) {
 									continue; 
 								}
-								echo '<option value="' . $cat->term_id . '" ' . selected($category, $cat->term_id, false) . '>' . $cat->name . '</option>';
+								echo '<option class="category-select" value="' . $cat->term_id . '" ' . selected($category, $cat->term_id, false) . '>' . $cat->name . '</option>';
 							}
 							?>
 						</select>
 					</div>
 					<div class="time-gallery">
 						<label for="date">Time</label>
-						<input type="date" name="date" id="date" value="<?php echo esc_attr($date); ?>">
+<!-- 						<input type="date" name="date" id="date" value=""> -->
+						<div class="input-date">
+							<input type="month" name="date" id="date" value="<?php echo esc_attr($date); ?>"  onchange="updateHiddenField()">
+							<input type="text" id="hiddenDate" value="<?php echo esc_attr($date); ?>" name="hiddenDate">
+							<span class="elementor-icon-list-icon">
+								<svg aria-hidden="true" id="iconButton" class="e-font-icon-svg e-far-calendar" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M400 64h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V160h352v298c0 3.3-2.7 6-6 6z"></path></svg>							 </span>
+						</div>
+						
 					</div>
 					<div>
 						<button type="submit">Filter</button>
@@ -86,7 +93,14 @@ get_header(); ?>
 					<span class="filter-close">x</span>
 				</form>
 			</div>
-		    <div class="banner_category">
+			<?php
+			if ($category_image_url) {
+			    $img_class = '';
+			} else {
+			    $img_class = 'no_image';
+			}
+			?>
+		    <div class="banner_category <?php echo $img_class; ?>">
 		        <h2><?php echo esc_html($category_name); ?></h2>
 		        <?php if ($date): ?>
 		                <p class="date"><img decoding="async" class="icon-image-date" width="20" src="https://samuelw41.sg-host.com/hoskar/wp-content/themes/HoSkar/images/CalendarBlank.svg" alt=".."><?php echo esc_html($date); ?></p>
@@ -117,6 +131,34 @@ get_header(); ?>
 		</div>    
 	</div>
 </div>
+<script>
+    function updateHiddenField() {
+    var datePicker = document.getElementById("date");
+    var hiddenDate = document.getElementById("hiddenDate");
+    var dateValue = datePicker.value;
+    var yearMonth = dateValue.split("-");
+    hiddenDate.value = yearMonth[1] + "/" + yearMonth[0];
+}
+// Lấy tham chiếu đến button và input
+var iconButton = document.getElementById('iconButton');
+var datePicker = document.getElementById('date');
+
+// Thêm sự kiện click vào button
+iconButton.addEventListener('click', function() {
+    // Kích hoạt sự kiện click của input (giả lập)
+    var event = new MouseEvent('click', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true
+    });
+    datePicker.dispatchEvent(event);
+});
+$(document).ready(function(){
+        $('#category').change(function(){
+            $('.frm-gallery').submit();
+        });
+    });
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     let seeMoreButton = document.getElementById('see-more');

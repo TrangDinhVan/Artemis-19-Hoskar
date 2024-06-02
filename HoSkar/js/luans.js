@@ -33,6 +33,7 @@ $('.js-angle-slider__list').slick({
       settings: {
         arrows: false,
         centerMode: true,
+		  infinite: false,
         centerPadding: '15px',
         slidesToShow: 1
       }
@@ -42,6 +43,7 @@ $('.js-angle-slider__list').slick({
       settings: {
         arrows: false,
         centerMode: true,
+		  infinite: false,
         centerPadding: '15px',
         slidesToShow: 1
       }
@@ -54,12 +56,28 @@ $('.js-angle-slider__body .slick-arrow').click(function() {
         if (currentSlide.css('transform') !== 'none') {
             currentSlide.css('transform', '');
         }
-    $('.js-angle-slider__list .slick-current').prev().css({
-		'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
-	});
-	$('.js-angle-slider__list .slick-current').next().css({
-		'transform': 'translate3d(8%, 100px, 0px) rotate(14deg)'
-	});
+	if ($(window).width() > 1440) { 
+		$('.js-angle-slider__list .slick-current').prev().css({
+			'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
+		});
+		$('.js-angle-slider__list .slick-current').next().css({
+			'transform': 'translate3d(8%, 100px, 0px) rotate(14deg)'
+		});
+	} else if ($(window).width() >= 1024) { 
+		$('.js-angle-slider__list .slick-current').prev().css({
+			'transform': 'translate3d(-4%, 55px, 0px) rotate(-14deg)'
+		});
+		$('.js-angle-slider__list .slick-current').next().css({
+			'transform': 'translate3d(4%, 55px, 0px) rotate(14deg)'
+		});
+	} else if ($(window).width() >= 768) { 
+		$('.js-angle-slider__list .slick-current').prev().css({
+			'transform': 'translate3d(-4%, 55px, 0px) rotate(-14deg)'
+		});
+		$('.js-angle-slider__list .slick-current').next().css({
+			'transform': 'translate3d(4%, 55px, 0px) rotate(14deg)'
+		});
+	}
 });
 $('.paginator .next.slick-arrow').on('click', function(){
 	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
@@ -141,7 +159,7 @@ jQuery(document).ready(function() {
 
     jQuery(document).ready(function(){
         if ($(window).width() < 1400) {
-           jQuery(".arctext_text .elementor-heading-title").arctext({radius: 1000, dir: -1});
+           jQuery(".arctext_text .elementor-heading-title").arctext({radius: 900, dir: -1});
         }else if ($(window).width() < 1024){
             jQuery(".arctext_text .elementor-heading-title").arctext({radius: 500, dir: -1});
         }else if ($(window).width() < 800){
@@ -162,4 +180,4 @@ $('.filter-close').click(function(){
 	else {
 		$(this).text("x");
 	}
-    })
+})
