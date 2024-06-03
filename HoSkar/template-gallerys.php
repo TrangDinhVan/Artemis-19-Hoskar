@@ -87,10 +87,10 @@ get_header(); ?>
 						
 					</div>
 					<div>
-						<button type="submit">Filter</button>
+						<button id="btn-submit-gallery" type="submit">Filter</button>
 						
 					</div>
-					<span class="filter-close">x</span>
+					<span class="filter-close">X</span>
 				</form>
 			</div>
 			<?php
@@ -124,7 +124,7 @@ get_header(); ?>
 	                </div>
 	            <?php endif; ?>
 	        <?php else : ?>
-	            <p>No posts found.</p>
+	            <p class="no-image-gallery">No images found.</p>
 	        <?php endif; ?>
 
 		    <?php wp_reset_postdata(); ?>
@@ -153,11 +153,18 @@ iconButton.addEventListener('click', function() {
     });
     datePicker.dispatchEvent(event);
 });
-$(document).ready(function(){
-        $('#category').change(function(){
-            $('.frm-gallery').submit();
-        });
-    });
+window.onload = function() {
+            var selectCategory = document.getElementById('category');
+            var submitButton = document.getElementById('btn-submit-gallery');
+			var selectDate = document.getElementById('date');
+
+            selectCategory.addEventListener('change', function() {
+                submitButton.click(); // Trigger click event on submit button
+            });
+			selectDate.addEventListener('change', function() {
+                submitButton.click(); // Trigger click event on submit button
+            });
+        };
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

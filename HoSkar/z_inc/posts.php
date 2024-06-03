@@ -1,27 +1,27 @@
 <?php
 function zing_custom_post_type() {
     $labels = array(
-        'name'                  => _x( 'News', 'Post Type General Name', 'zing' ),
-        'singular_name'         => _x( 'News', 'Post Type Singular Name', 'zing' ),
-        'menu_name'             => __( 'News', 'zing' ),
-        'name_admin_bar'        => __( 'News', 'zing' ),
-        'archives'              => __( 'News', 'zing' ),
-        'all_items'             => __( 'News', 'zing' ),
-        'add_new_item'          => __( 'Add News', 'zing' ),
-        'add_new'               => __( 'New News', 'zing' ),
-        'new_item'              => __( 'New News', 'zing' ),
-        'edit_item'             => __( 'Edit News', 'zing' ),
-        'update_item'           => __( 'Update News', 'zing' ),
-        'view_item'             => __( 'View News', 'zing' ),
-        'search_items'          => __( 'Search News', 'zing' ),
-        'not_found'             => __( 'No News found', 'zing' ),
-        'not_found_in_trash'    => __( 'No News found in trash', 'zing' )
+        'name'                  => _x( 'Register', 'Post Type General Name', 'zing' ),
+        'singular_name'         => _x( 'Register', 'Post Type Singular Name', 'zing' ),
+        'menu_name'             => __( 'Register', 'zing' ),
+        'name_admin_bar'        => __( 'Register', 'zing' ),
+        'archives'              => __( 'Register', 'zing' ),
+        'all_items'             => __( 'Register', 'zing' ),
+        'add_new_item'          => __( 'Add Register', 'zing' ),
+        'add_new'               => __( 'New Register', 'zing' ),
+        'new_item'              => __( 'New Register', 'zing' ),
+        'edit_item'             => __( 'Edit Register', 'zing' ),
+        'update_item'           => __( 'Update Register', 'zing' ),
+        'view_item'             => __( 'View Register', 'zing' ),
+        'search_items'          => __( 'Search Register', 'zing' ),
+        'not_found'             => __( 'No Register found', 'zing' ),
+        'not_found_in_trash'    => __( 'No Register found in trash', 'zing' )
     );
     $args = array(
-        'label'                 => __( 'News', 'zing' ),
-        'description'           => __( 'News', 'zing' ),
+        'label'                 => __( 'Register', 'zing' ),
+        'description'           => __( 'Register', 'zing' ),
         'labels'                => $labels,
-        'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+        'supports'              => array( 'title' ),
         'taxonomies'            => array(),
         'hierarchical'          => false,
         'public'                => true,
@@ -34,10 +34,10 @@ function zing_custom_post_type() {
         'can_export'            => true,
         'has_archive'           => true,
         'exclude_from_search'   => false,
-        'publicly_queryable'    => true,
+        'publicly_queryable'    => false,
         'capability_type'       => 'post',
     );
-    // register_post_type( 'news', $args );
+    register_post_type( 'reg_submit', $args );
 
     // register_taxonomy( 'news_category', array('news'), array(
     //     'hierarchical'  =>  true,
@@ -48,4 +48,10 @@ function zing_custom_post_type() {
     //     ),
     // ));
 }
-add_action('init', 'zing_custom_post_type'); ?>
+add_action('init', 'zing_custom_post_type');
+
+add_action( 'edit_form_after_title', function(){
+    if( get_post_type() == 'reg_submit' ):
+        fw_print( get_field( 'json' ) );
+    endif;
+} ); ?>
