@@ -1,7 +1,7 @@
 <?php
 add_shortcode( 'upcoming_events', function(){
     ob_start();
-    $as = get_field( 'locations', 17 );
+    $as = get_field( 'locations', 15 );
     if( !empty($as) ):
         $a = $as[0]; ?>
         <div class="upcoming_events pt-10">

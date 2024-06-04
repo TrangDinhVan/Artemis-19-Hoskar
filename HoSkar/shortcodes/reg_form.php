@@ -125,7 +125,7 @@ add_shortcode( 'reg_form', function(){
                                     <label for="ci_PHNOMPENH"><input id="ci_PHNOMPENH" type="checkbox" name="city[]" value="PHNOM PENH">PHNOM PENH</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="ci_ph"><input id="ci_ph" type="checkbox" name="city[]" value="ALL OF ABOVE">ALL OF ABOVE</label>
+                                    <label @click="maybeLoveAllCities" for="ci_ph"><input id="ci_ph" type="checkbox" name="love_all_cities" value="ALL OF ABOVE">ALL OF ABOVE</label>
                                 </div>
                             </div>
                         </div>
@@ -245,6 +245,11 @@ add_shortcode( 'reg_form', function(){
                             this.step = 2;
                         }else{
                             alert("Please complete the required fields first!");
+                        }
+                    },
+                    maybeLoveAllCities: function(){
+                        if($('[name="love_all_cities"]').is(":checked")){
+                            $('[name="city[]"]').prop("checked", true);
                         }
                     }
                 }

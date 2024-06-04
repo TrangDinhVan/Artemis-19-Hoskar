@@ -23,7 +23,7 @@ function z_do_ajax() {
         <p>Industry: <strong><?php echo $d['industry']; ?></strong></p>
         <p>Category: <strong><?php echo $d['category']; ?></strong></p>
         <p>Interested to attend: <strong><?php echo $d['interest']; ?></strong></p>
-        <p>Intersted in cities: <strong><?php echo implode( "; ", $d['city'] ); ?></strong></p>
+        <p>Interested in cities: <strong><?php echo implode( "; ", $d['city'] ); ?></strong></p>
         <p>Whould like to meet people in <strong><?php echo $d['meet']; ?></strong></p>
         <p>Message: <strong><?php echo $d['desc']; ?></strong></p>
         <?php
