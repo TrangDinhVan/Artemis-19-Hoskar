@@ -41,10 +41,8 @@ add_shortcode( 'entrance', function(){
     </div>
 	  <div class="paginator text-color text-center">
 		<ul>
-			<li class="prev-border"></li>
 			<li class="prev"></li>
 			<li class="next"></li>
-			<li class="next-border"></li>
 		</ul>
 	</div>
   </div>

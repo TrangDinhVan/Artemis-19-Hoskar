@@ -33,7 +33,7 @@ $('.js-angle-slider__list').slick({
       settings: {
         arrows: false,
         centerMode: true,
-		  infinite: false,
+		infinite: false,
         centerPadding: '15px',
         slidesToShow: 1
       }
@@ -43,7 +43,7 @@ $('.js-angle-slider__list').slick({
       settings: {
         arrows: false,
         centerMode: true,
-		  infinite: false,
+		infinite: false,
         centerPadding: '15px',
         slidesToShow: 1
       }
@@ -83,8 +83,10 @@ $('.paginator .next.slick-arrow').on('click', function(){
 	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
         if(currentIndex === 2) {
             $('.js-angle-slider__list .slick-slide:nth-child(1)').css('transform', 'translate3d(-15%, 40%, 0px) rotate(-28deg)');
+			$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled');
         } else {
             $('.js-angle-slider__list .slick-slide:nth-child(1)').css('transform', '');
+			$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled');
         }
 
 });
@@ -92,11 +94,36 @@ $('.paginator .prev.slick-arrow').on('click', function(){
 	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
         if(currentIndex === 0) {
             $('.js-angle-slider__list .slick-slide:nth-child(3)').css('transform', 'translate3d(15%, 40%, 0px) rotate(28deg)');
+			$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled');
         } else {
             $('.js-angle-slider__list .slick-slide:nth-child(3)').css('transform', '');
+			$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled');
         }
 
 });
+if ($(window).width() < 768) { 
+	$('.paginator .next').on('click', function(){
+	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+        if(currentIndex === 2) {
+			$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled slick-arrow');
+        } else {
+			$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
+			$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
+        }
+
+});
+$('.paginator .prev').on('click', function(){
+	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+        if(currentIndex === 0) {
+			$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled slick-arrow');
+        } else {
+			$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
+			$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
+        }
+
+});
+}
+
 $('.blog_slider').slick({
   dots: false,
   infinite: false,
@@ -130,17 +157,30 @@ $('.blog_slider').slick({
     }
   ]
 });
+
+//fancyBox
 $(document).ready(function() {
-  // add all to same gallery
-  $(".gallery-list a.gallery-item").attr("data-fancybox","mygallery");
-  // assign captions and title from alt-attributes of images:
-  $(".gallery-list a.gallery-item").each(function(){
-    $(this).attr("data-caption", $(this).find("img").attr("alt"));
-    $(this).attr("title", $(this).find("img").attr("alt"));
-  });
-  // start fancybox:
-	$(".gallery-list a.gallery-item").fancybox();
+    $(".gallery-list").each(function() {
+        var galleryId = $(this).attr('id');
+        $(this).find("a.gallery-item").attr("data-fancybox", galleryId);
+        $(".gallery-list a.gallery-item").each(function() {
+            $(this).attr("data-caption", $(this).find("img").attr("alt"));
+            $(this).attr("title", $(this).find("img").attr("alt"));
+        });
+        $(".gallery-list a.gallery-item").fancybox();
+    });
 });
+	$(".see-more").click(function(){
+		$(".gallery-list").each(function() {
+			var galleryId = $(this).attr('id');
+			$(this).find("a.gallery-item").attr("data-fancybox", galleryId);
+			$(".gallery-list a.gallery-item").each(function() {
+				$(this).attr("data-caption", $(this).find("img").attr("alt"));
+				$(this).attr("title", $(this).find("img").attr("alt"));
+			});
+			$(".gallery-list a.gallery-item").fancybox();
+		});
+	});
 
 jQuery(document).ready(function() {
     jQuery(window).on("scroll", function () {
@@ -158,14 +198,18 @@ jQuery(document).ready(function() {
     });
 
     jQuery(document).ready(function(){
-        if ($(window).width() < 1400) {
-           jQuery(".arctext_text .elementor-heading-title").arctext({radius: 900, dir: -1});
-        }else if ($(window).width() < 1024){
+		if ($(window).width() < 768){
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 600, dir: -1}); 
+        }else if ($(window).width() < 993) {
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 800, dir: -1});
+        }else if ($(window).width() < 1024) {
             jQuery(".arctext_text .elementor-heading-title").arctext({radius: 500, dir: -1});
-        }else if ($(window).width() < 800){
-            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 200, dir: -1}); 
+        }else if ($(window).width() < 1400){
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 1200, dir: -1});
+        }else if ($(window).width() < 1600){
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 1600, dir: -1}); 
         }else {
-           jQuery(".arctext_text .elementor-heading-title").arctext({radius: 2000, dir: -1});
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 2000, dir: -1});	
         }
         
     });
@@ -175,9 +219,9 @@ $('.filter-close').click(function(){
     $(this).toggleClass('dropdown');
 	$('.frm-gallery').toggleClass('dropdown');
 	if($(this).hasClass('dropdown')) {
-		$(this).text("v");
+		$(this).html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
 	}
 	else {
-		$(this).text("x");
+		$(this).html('<i class="fa fa-times" aria-hidden="true"></i>');
 	}
 })
