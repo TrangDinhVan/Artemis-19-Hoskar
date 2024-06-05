@@ -28,7 +28,7 @@ add_shortcode( 'upcoming_events', function(){
                                 </div>
                                 <div class="col-sm">
                                     <div class="btn-rainbow flex-shrink-0">
-                                        <a href="<?php echo home_url( 'reregistration/' .sanitize_title( $a['title'] ) ); ?>">Register</a>
+                                        <a href="<?php echo $a['url']; ?>">Register</a>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@ add_shortcode( 'upcoming_events', function(){
                                         <p class="d-flex gap-2 align-items-center"><img width="20" src="<?php echo IMG; ?>/CalendarBlank.svg" alt=".."><?php echo $a['time']; ?></p>
                                         <p class="d-flex gap-2 align-items-center"><img width="20" src="<?php echo IMG; ?>/MapPin.svg" alt=".."><?php echo $a['location']; ?></p>
                                         <div class="btn-rainbow">
-                                            <a href="<?php echo home_url( 'reregistration/' .sanitize_title( $a['title'] ) ); ?>">Register</a>
+                                            <a href="<?php echo $a['url']; ?>">Register</a>
                                         </div>
                                     </div>
                                 </div>

@@ -54,4 +54,57 @@ add_action( 'edit_form_after_title', function(){
     if( get_post_type() == 'reg_submit' ):
         fw_print( get_field( 'json' ) );
     endif;
-} ); ?>
+} );
+
+add_filter( 'manage_reg_submit_posts_columns', function( $cols ){
+    $cols['Event'] = 'Event';
+    $cols['Name'] = 'Name';
+    $cols['Company'] = 'Company';
+    $cols['tt'] = 'Title';
+    $cols['Detail'] = 'Detail';
+    $cols['Industry'] = 'Industry';
+    $cols['Category'] = 'Category';
+    $cols['Time'] = 'Interested to attend';
+    $cols['Cities'] = 'Love Citis';
+    $cols['meet'] = 'Love People in';
+    return $cols;
+} );
+
+add_action( 'manage_reg_submit_posts_custom_column' , function($column, $post_id){
+    $json = get_field( 'json', $post_id );
+    switch ( $column ) {
+        case 'Event':
+            echo '<a href="'.$json['location_url'].'" target="_blank">'.$json['location'].'</a>';
+            break;
+        case 'Name':
+            echo "{$json['gender']} {$json['f_name']} {$json['l_name']}";
+            break;
+        case 'Company':
+            echo "{$json['company']} - {$json['company_email']} ";
+            break;
+        case 'tt':
+            echo $json['title'];
+            break;
+        case 'Detail':
+            echo $json['desc'];
+            break;
+        case 'Detail':
+            echo $json['desc'];
+            break;
+        case 'Industry':
+            echo $json['industry'];
+            break;
+        case 'Category':
+            echo $json['category'];
+            break;
+        case 'Time':
+            echo $json['interest'];
+            break;
+        case 'Cities':
+            echo implode(";", $json['city']);
+            break;
+        case 'meet':
+            echo $json['meet'];
+            break;
+    }
+}, 10, 2 ); ?>
