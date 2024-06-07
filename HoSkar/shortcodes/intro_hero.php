@@ -7,19 +7,19 @@ add_shortcode( 'intro_hero', function(){
             <div class="swiper-wrapper mb-5 mb-sm-3">
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/1c.gif" alt="...">
-                    <h2>Grow Your Connection</h2>
+                    <h2>Grow Your Connections</h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/2c.gif" alt="...">
-                    <h2>Share & Connect</h2>
+                    <h2>Grow Your Brand</h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/3c.gif" alt="...">
-                    <h2>Hospitality</h2>
+                    <h2>Grow Your Ideas</h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/4c.gif" alt="...">
-                    <h2>Ideas</h2>
+                    <h2>Grow Your Business</h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/5c.gif" alt="...">

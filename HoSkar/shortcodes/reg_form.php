@@ -102,6 +102,15 @@ add_shortcode( 'reg_form', function(){
                             </div>
                         </div>
                     </div>
+                    <div class="py-1"></div>
+                    <div class="btn-rainbow">
+                        <a class="w-100" style="max-width: none;" href="#" @click.prevent="canGoToStep2">Step 2 <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div v-show="step == 2">
+                <div class="vstack gap-5 lh-10">
+                    <h4 class="font-semi-bold font-15x mb-2">Let’s make this event about you!</h4>
                     <div class="radios">
                         <div class="input">
                             <div class="mb-6 lh-12">I may be interested in being a sponsors in future HoSkar, which city? (Tick more than one Box)</div>
@@ -130,15 +139,6 @@ add_shortcode( 'reg_form', function(){
                             </div>
                         </div>
                     </div>
-                    <div class="py-1"></div>
-                    <div class="btn-rainbow">
-                        <a class="w-100" style="max-width: none;" href="#" @click.prevent="canGoToStep2">Step 2 <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div v-show="step == 2">
-                <div class="vstack gap-5 lh-10">
-                    <h4 class="font-semi-bold font-15x mb-2">Let’s make this event about you!</h4>
                     <div class="radios">
                         <div class="input">
                             <div class="mb-6">Expand business connections. Who would you like to meet?</div>
@@ -240,7 +240,6 @@ add_shortcode( 'reg_form', function(){
                             && $('[name="industry"]').val() != ''
                             && $('[name="category"]').val() != ''
                             && $('[name="interest"]').val() != ''
-                            && $('[name="city"]').val() != ''
                         ){
                             this.step = 2;
                         }else{

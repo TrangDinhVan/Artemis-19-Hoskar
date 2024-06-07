@@ -101,7 +101,9 @@ add_action( 'manage_reg_submit_posts_custom_column' , function($column, $post_id
             echo $json['interest'];
             break;
         case 'Cities':
-            echo implode(";", $json['city']);
+            if( !empty($json['city']) ):
+                echo implode(";", $json['city']);
+            endif;
             break;
         case 'meet':
             echo $json['meet'];

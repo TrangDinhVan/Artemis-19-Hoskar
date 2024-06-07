@@ -36,7 +36,7 @@ add_shortcode( 'upcoming_events', function(){
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="vstack gap-6 others pe-lg-2">
+                    <div class="vstack gap-6 gap-lg-10 others pe-lg-2">
                         <?php
                         for ($i = 1; $i < count($as); $i++) {
                             if( isset($as[$i]) ):
