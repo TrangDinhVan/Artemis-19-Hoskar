@@ -2,10 +2,12 @@
 
 add_shortcode( 'gallery_registration', function(){
 
-    ob_start(); ?>
+    ob_start(); 
+    $page_id = get_queried_object_id();
+    ?>
 
 
-    <div class="gallery_registration">
+    <div class="gallery_registration <?php echo $page_id; ?>">
             <?php if( have_rows('gallery_registration') ): ?>
     <div class="gallerys">
     <?php while( have_rows('gallery_registration') ): the_row(); 

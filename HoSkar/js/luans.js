@@ -160,33 +160,42 @@ $('.blog_slider').slick({
 
 //fancyBox
 $(document).ready(function() {
-    $(".gallery-list").each(function() {
-        var galleryId = $(this).attr('id');
-        $(this).find("a.gallery-item").attr("data-fancybox", galleryId);
+    function setupGalleryItems() {
         $(".gallery-list a.gallery-item").each(function() {
-            $(this).attr("data-caption", $(this).find("img").attr("alt"));
-            $(this).attr("title", $(this).find("img").attr("alt"));
+            var $galleryItem = $(this);
+            var galleryId = $galleryItem.closest(".gallery-list").attr('id');
+            $galleryItem.attr("data-fancybox", galleryId);
+            $galleryItem.attr("data-caption", $galleryItem.find("img").attr("alt"));
+            $galleryItem.attr("title", $galleryItem.find("img").attr("alt"));
         });
         $(".gallery-list a.gallery-item").fancybox();
+    }
+
+    setupGalleryItems();
+
+    $(".see-more").click(function() {
+		setTimeout(function() { 
+			$.fancybox.close();
+			$(".gallery-list a.gallery-item").removeAttr("data-fancybox");
+			setupGalleryItems();
+		}, 1000);
+        
     });
 });
-	$(".see-more").click(function(){
-		$(".gallery-list").each(function() {
-			var galleryId = $(this).attr('id');
-			$(this).find("a.gallery-item").attr("data-fancybox", galleryId);
-			$(".gallery-list a.gallery-item").each(function() {
-				$(this).attr("data-caption", $(this).find("img").attr("alt"));
-				$(this).attr("title", $(this).find("img").attr("alt"));
-			});
-			$(".gallery-list a.gallery-item").fancybox();
-		});
-	});
+
+
 
 jQuery(document).ready(function() {
     jQuery(window).on("scroll", function () {
-        //console.log(jQuery(this).scrollTop(),'top');
-        var height_counter = jQuery(".block_counter_registration").offset().top - 300;
-        //console.log(height_counter,'height_counter');
+        console.log(jQuery(this).scrollTop(),'top');
+        if ($(window).width() < 768){
+            var height_counter = jQuery(".block_counter_registration").offset().top - 200;
+            console.log(2);
+        }else{
+            var height_counter = jQuery(".block_counter_registration").offset().top - 300;
+            console.log(1);
+        }  
+        console.log(height_counter,'height_counter');
         if(jQuery(this).scrollTop() > height_counter){
             jQuery(".block_counter_registration").addClass("animation");
 
@@ -225,3 +234,4 @@ $('.filter-close').click(function(){
 		$(this).html('<i class="fa fa-times" aria-hidden="true"></i>');
 	}
 })
+

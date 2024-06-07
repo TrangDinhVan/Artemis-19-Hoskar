@@ -108,7 +108,7 @@ add_shortcode( 'reg_form', function(){
                     </div>
                 </div>
             </div>
-            <div v-show="step == 2">
+            <div v-show="step > 1">
                 <div class="vstack gap-5 lh-10">
                     <h4 class="font-semi-bold font-15x mb-2">Let’s make this event about you!</h4>
                     <div class="radios">
@@ -190,9 +190,14 @@ add_shortcode( 'reg_form', function(){
                 </div>
             </div>
             <div v-show="step == 3">
-                <div class="text-center input p-6 align-items-center text-primary lh-11 font-medium font-20x vstack gap-5">
-                    <i class="bi bi-check2-circle font-20x"></i>
-                    <p>Your submission is success, <br>thanks for your inquire!</p>
+                <div class="step-3-wrap">
+                    <div class="inner r-10">
+                        <div class="text-center p-6 align-items-center lh-12 font-medium font-15x vstack gap-5 text-rainbow position-relative">
+                            <i class="bi bi-check2-circle font-20x text-primary"></i>
+                            <h4 class="d-inline">Thank you for your interest in our activities! We will keep you posted, and should you need any further support, please contact us at <a href="mailto:Host@wehubyou.com">Host@wehubyou.com</a>!</h4>
+                            <i class="bi bi-x-lg close cursor-pointer" @click="step = 1"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

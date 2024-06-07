@@ -1127,3 +1127,25 @@ img{
         z-index: -1;
     }
 }
+
+.step-3-wrap{
+    position: fixed;
+    z-index: 80;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba( #000, 50% );
+    .inner{
+        max-width: 620px;
+        background-color: rgba(#000, 80%);
+    }
+    .close{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+}

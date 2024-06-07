@@ -135,7 +135,7 @@ function load_more_posts() {
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post();
             $posts_html .= '<a class="gallery-item" href="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" target="_blank" data-fancybox="gallery-list-'.$category.'" data-caption="' . get_the_title() . '" title="' . get_the_title() . '">';
-            $posts_html .= '<img data-src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" alt="' . get_the_title() . '" class=" lazyloaded" style="--smush-placeholder-width: 4480px; --smush-placeholder-aspect-ratio: 4480/6720;"/>';
+            $posts_html .= '<img data-src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" alt="' . get_the_title() . '"/>';
             $posts_html .= '</a>';
         endwhile;
         
@@ -157,4 +157,55 @@ function load_more_posts() {
 }
 add_action('wp_ajax_load_more_posts', 'load_more_posts');
 add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
+
+function load_more_gallery() {
+    $category = isset($_POST['category']) ? intval($_POST['category']) : 0;
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    if($category){
+       $args = array(
+           'post_type' => 'gallery',
+           'posts_per_page' => 9,
+           'paged' => $page,
+           'tax_query' => array(
+               array(
+                   'taxonomy' => 'category',
+                   'field'    => 'term_id',
+                   'terms'    => $category,
+               ),
+           ),
+       ); 
+   }else{
+    $args = array(
+        'post_type' => 'gallery',
+        'posts_per_page' => 9,
+        'paged' => $page
+    );
+   }
+    
+
+    $query = new WP_Query($args);
+
+	$html_content = '';
+
+	if ($query->have_posts()) :
+		while ($query->have_posts()) : $query->the_post();
+			$html_content .= '<a class="gallery-item" href="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" target="_blank" data-fancybox="gallery-list-'.$category.'" data-caption="' . get_the_title() . '" title="' . get_the_title() . '">';
+			$html_content .= '<img data-src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" alt="' . get_the_title() . '"/>';
+			$html_content .= '</a>';
+		endwhile;
+	endif;
+
+	wp_reset_postdata();
+
+	if ($query->found_posts <= 9 * $page) {
+		echo json_encode(array('html' => null, 'no_more_posts' => true));
+	} else {
+		echo json_encode(array('html' => $html_content, 'no_more_posts' => false));
+	}
+
+	wp_die();
+}
+add_action('wp_ajax_load_more_gallery', 'load_more_gallery');
+add_action('wp_ajax_nopriv_load_more_gallery', 'load_more_gallery');
+
 ?>
