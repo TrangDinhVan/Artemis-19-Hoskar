@@ -31,7 +31,43 @@ function z_do_ajax() {
         ob_start();
         include( EMAIL."/standard.php" );
         $content = ob_get_clean();
-        wp_mail( 'trangdv.1502@gmail.com, jasmine@artemisdigital.com', 'New Hoskar Registration', $content );
+        // wp_mail( 'trangdv.1502@gmail.com, jasmine@artemisdigital.com', 'New Hoskar Registration', $content );
+        if( class_exists('Wpgsi_Google_Sheet') ):
+            $spreadsheets_id = '1Bq-vqC3lmTxmgVdKtzeDROXuhxoQZjD0BP7A8R4Ui1g';
+            $a = new Wpgsi_Google_Sheet('DHA', '6.0.1', new Wpgsi_common('CHA', '6.0.1') );
+            $token = $a->wpgsi_token()['access_token'];
+            $range = "Registration";
+            $url = "https://sheets.googleapis.com/v4/spreadsheets/{$spreadsheets_id}/values/{$range}:append?insertDataOption=INSERT_ROWS&valueInputOption=USER_ENTERED";
+            $args = Array(
+                'headers' => Array(
+                    'Authorization' => 'Bearer ' . $token,
+                    'Content-Type' => 'application/json'
+                ),
+                'body' => json_encode( array(
+                    "values" => array(array(
+                        printf("%02d", $pid),
+                        $d['location'],
+                        $d['location_url'],
+                        $d['gender'],
+                        $d['f_name'],
+                        $d['l_name'],
+                        $d['company'],
+                        $d['company_email'],
+                        "'".$d['phone'],
+                        $d['title'],
+                        $d['desc'],
+                        $d['industry'],
+                        $d['category'],
+                        $d['interest'],
+                        implode( "; ", $d['city'] ),
+                        $d['meet'],
+                        date_i18n( 'Y-m-d H:i' )
+                    ))
+                ) )
+            );
+            $return = wp_remote_post($url, $args);
+            $res['dev_return'] = $return;
+        endif;
     endif;
 
     wp_send_json( $res );

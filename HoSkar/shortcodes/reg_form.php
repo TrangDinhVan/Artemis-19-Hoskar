@@ -176,10 +176,10 @@ add_shortcode( 'reg_form', function(){
                     <div class="radios">
                         <div class="input">
                             <div class="mb-6">Interact with our speakers, leave your questions here</div>
-                            <textarea name="desc" rows="5" placeholder="Tell us your question..."></textarea>
+                            <textarea class="lh-13" name="desc" rows="5" placeholder="Tell us your question..."></textarea>
                         </div>
                     </div>
-                    <div class="vstack gap-4 text-center">
+                    <div class="vstack gap-4 text-center" id="submit_group">
                         <div class="btn-rainbow">
                             <a class="w-100" style="max-width: none;" href="#" @click.prevent="submit">Submit <i class="bi bi-send"></i></a>
                         </div>
@@ -192,7 +192,7 @@ add_shortcode( 'reg_form', function(){
             <div v-show="step == 3">
                 <div class="step-3-wrap">
                     <div class="inner r-10">
-                        <div class="text-center p-6 align-items-center lh-12 font-medium font-15x vstack gap-5 text-rainbow position-relative">
+                        <div class="text-center p-6 align-items-center lh-12 font-medium font-15x vstack gap-5 text-white position-relative">
                             <i class="bi bi-check2-circle font-20x text-primary"></i>
                             <h4 class="d-inline">Thank you for your interest in our activities! We will keep you posted, and should you need any further support, please contact us at <a href="mailto:Host@wehubyou.com">Host@wehubyou.com</a>!</h4>
                             <i class="bi bi-x-lg close cursor-pointer" @click="step = 1"></i>
@@ -230,6 +230,11 @@ add_shortcode( 'reg_form', function(){
                             success: function (res) {
                                 console.log(res);
                                 app.step = 3;
+                            },
+                            complete: function(res){
+                                console.log(res);
+                                app.step = 3;
+                                $('#submit_group').remove();
                             }
                         });
                     },
