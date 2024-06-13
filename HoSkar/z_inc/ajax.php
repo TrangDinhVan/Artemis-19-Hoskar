@@ -23,7 +23,6 @@ function z_do_ajax() {
         <p>Industry: <strong><?php echo $d['industry']; ?></strong></p>
         <p>Category: <strong><?php echo $d['category']; ?></strong></p>
         <p>Interested to attend: <strong><?php echo $d['interest']; ?></strong></p>
-        <p>Interested in cities: <strong><?php echo implode( "; ", $d['city'] ); ?></strong></p>
         <p>Whould like to meet people in <strong><?php echo $d['meet']; ?></strong></p>
         <p>Message: <strong><?php echo $d['desc']; ?></strong></p>
         <?php
@@ -59,7 +58,7 @@ function z_do_ajax() {
                         $d['industry'],
                         $d['category'],
                         $d['interest'],
-                        implode( "; ", $d['city'] ),
+                        '',
                         $d['meet'],
                         date_i18n( 'Y-m-d H:i' )
                     ))
@@ -68,6 +67,62 @@ function z_do_ajax() {
             $return = wp_remote_post($url, $args);
             $res['dev_return'] = $return;
         endif;
+        $portalID = '39677787';
+        $formID = '3ec2d2a5-d129-44b9-8d93-d7747f50baf5';
+        $url = "https://api.hsforms.com/submissions/v3/integration/submit/$portalID/$formID";
+        $res['dev2'] = wp_remote_post( $url, array(
+            'headers' => array(
+                'Content-Type'  => 'application/json',
+            ),
+            'sslverify' => false,
+            'method' => 'POST',
+            'body' => json_encode(array(
+                'pageName' => $d['location'],
+                'pageUri' => $d['location_url'],
+                'fields' => array(
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'firstname',
+                        'value' => $d['f_name']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'lastname',
+                        'value' => $d['l_name']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'email',
+                        'value' => $d['company_email']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'salutation',
+                        'value' => $d['gender']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'phone',
+                        'value' => $d['phone']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'jobtitle',
+                        'value' => $d['title']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'industry',
+                        'value' => $d['industry']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'wehub_category',
+                        'value' => $d['category']
+                    )
+                )
+            ))
+        ) );
     endif;
 
     wp_send_json( $res );

@@ -1,62 +1,71 @@
 <?php
 /* Template name: Dev */
-get_header();
-if( isset($_GET['test1']) ):
-
-    // $spreadsheets_id = '1Bq-vqC3lmTxmgVdKtzeDROXuhxoQZjD0BP7A8R4Ui1g';
-    // $a = new Wpgsi_Google_Sheet('DHA', '6.0.1', new Wpgsi_common('CHA', '6.0.1') );
-    // $token = $a->wpgsi_token()['access_token'];
-    // $range = "Registration";
-    // $url = "https://sheets.googleapis.com/v4/spreadsheets/{$spreadsheets_id}/values/{$range}:append?insertDataOption=INSERT_ROWS&valueInputOption=USER_ENTERED";
-    // $args = Array(
-    //     'headers' => Array(
-    //         'Authorization' => 'Bearer ' . $token,
-    //         'Content-Type' => 'application/json'
-    //     ),
-    //     'body' => json_encode( array(
-    //         "values" => array(
-    //             array(1, 2, 3, 4, 5, 6, 7)
-    //         )
-    //     ) )
-    // );
-    // $return = wp_remote_post($url, $args);
-    // fw_print($return);
-
-    if( class_exists('Wpgsi_Google_Sheet') ):
-        $pid = 2884;
-        $d = get_field( 'json', $pid );
-        $spreadsheets_id = '1Bq-vqC3lmTxmgVdKtzeDROXuhxoQZjD0BP7A8R4Ui1g';
-        $a = new Wpgsi_Google_Sheet('DHA', '6.0.1', new Wpgsi_common('CHA', '6.0.1') );
-        $token = $a->wpgsi_token()['access_token'];
-        $range = "Registration";
-        $url = "https://sheets.googleapis.com/v4/spreadsheets/{$spreadsheets_id}/values/{$range}:append?insertDataOption=INSERT_ROWS&valueInputOption=USER_ENTERED";
-        $args = Array(
-            'headers' => Array(
-                'Authorization' => 'Bearer ' . $token,
-                'Content-Type' => 'application/json'
+get_header(); ?>
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  hbspt.forms.create({
+    region: "na1",
+    portalId: "39677787",
+    formId: "3ec2d2a5-d129-44b9-8d93-d7747f50baf5"
+  });
+</script>
+<?php
+$portalID = '39677787';
+$formID = '3ec2d2a5-d129-44b9-8d93-d7747f50baf5';
+$url = "https://api.hsforms.com/submissions/v3/integration/submit/$portalID/$formID";
+return;
+$rq = wp_remote_post( $url, array(
+    'headers' => array(
+        'Content-Type'  => 'application/json',
+    ),
+    'sslverify' => false,
+    'method' => 'POST',
+    'body' => json_encode(array(
+        'pageName' => 'Dev',
+        'pageUri' => 'https://samuelw41.sg-host.com/hoskar/dev/',
+        'fields' => array(
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'firstname',
+                'value' => 'Trangw'
             ),
-            'body' => json_encode( array(
-                "values" => array(array(
-                    printf("%02d", $pid),
-                    get_the_title( $pid ),
-                    get_permalink( $pid ),
-                    $d['gender'],
-                    $d['f_name'],
-                    $d['l_name'],
-                    $d['company'],
-                    $d['company_email'],
-                    "'".$d['phone'],
-                    $d['title'],
-                    $d['detail'],
-                    $d['industry'],
-                    $d['category'],
-                    $d['interest'],
-                    implode( "; ", $d['city'] ),
-                    $d['meet']
-                ))
-            ) )
-        );
-        $return = wp_remote_post($url, $args);
-    endif;
-endif;
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'lastname',
+                'value' => 'Devw'
+            ),
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'email',
+                'value' => 'trangdvw@outlook.com'
+            ),
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'salutation',
+                'value' => 'Mr.'
+            ),
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'phone',
+                'value' => '558'
+            ),
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'jobtitle',
+                'value' => 'Other'
+            ),
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'industry',
+                'value' => 'Other'
+            ),
+            array(
+                'objectTypeId' => '0-1',
+                'name' => 'wehub_category',
+                'value' => 'Other'
+            )
+        )
+    ))
+) );
+fw_print($rq);
 get_footer(); ?>

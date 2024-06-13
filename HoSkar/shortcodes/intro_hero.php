@@ -5,7 +5,7 @@ add_shortcode( 'intro_hero', function(){
         <img src="<?php echo IMG; ?>/PC-optimize.gif" srcc="<?php echo LAZY_IMG; ?>" alt="..." class="d-none d-sm-block intro mx-auto transition">
         <img src="<?php echo IMG; ?>/Phone.gif" srcc="<?php echo LAZY_IMG; ?>" alt="..." class="d-block d-sm-none intro mx-auto transition">
         <div class="e5 font-medium text-center w-100 overflow-hidden transition">
-            <div class="swiper-wrapper mb-5 mb-sm-3">
+            <div class="swiper-wrapper mb-5 mb-sm-3 e55">
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/1c.gif" alt="...">
                     <h2>Grow Your Connections</h2>
@@ -28,10 +28,10 @@ add_shortcode( 'intro_hero', function(){
                 </div>
             </div>
             <div class="d-flex flex-wrap flex-sm-no-wrap gap-6 align-items-center hh">
-                <div class="vstack gap-2">
+                <div class="vstack gap-2 e50">
                     <h4 class="font-regular tag-line">Neworking <span>Redefined</span></h4>
                 </div>
-                <div class="controls d-flex justify-content-center jsutify-content-sm-end gap-2 ms-sm-auto">
+                <div class="controls e55 d-flex justify-content-center jsutify-content-sm-end gap-2 ms-sm-auto">
                     <img width="50" src="<?php echo IMG; ?>/CaretRight.svg" alt="Prev" class="zflip cursor-pointer prev">
                     <img width="50" src="<?php echo IMG; ?>/CaretRight.svg" alt="Next" class="cursor-pointer next">
                 </div>
@@ -55,7 +55,7 @@ add_shortcode( 'intro_hero', function(){
                 if( $(window).width() < 768 ) time = 3600;
                 $('.intro').addClass('active');
                 setTimeout(() => {
-                    $('.e5').addClass('active');
+                    $('.e5, .e55').addClass('active');
                     $('.intro').removeClass('d-block d-sm-block').fadeOut();
                 }, time);
             });
