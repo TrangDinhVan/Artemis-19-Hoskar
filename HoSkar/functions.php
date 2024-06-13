@@ -69,32 +69,32 @@ function add_theme_scripts() {
 add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
 
 // Gallery post type
-add_theme_support('post-thumbnails');
-add_post_type_support( 'gallery', 'thumbnail' );    
-function create_posttype_gallery() {
+// add_theme_support('post-thumbnails');
+// add_post_type_support( 'gallery', 'thumbnail' );    
+// function create_posttype_gallery() {
  
-    register_post_type( 'gallery',
-    // CPT Options
-        array(
-            'labels' => array(
-                'name' => __( 'Gallery' ),
-                'singular_name' => __( 'Gallery' )
-            ),
-            'supports' => array(
-            'title', 
-            'thumbnail',
-            'editor',
-            'custom-fields'
-            ), 
-            'taxonomies' => array( 'category', 'post_tag',  ), 
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array('slug' => 'gallery'),
-        )
-    );
-}
-// Hooking up our function to theme setup
-add_action( 'init', 'create_posttype_gallery' );
+//     register_post_type( 'gallery',
+//     // CPT Options
+//         array(
+//             'labels' => array(
+//                 'name' => __( 'Gallery' ),
+//                 'singular_name' => __( 'Gallery' )
+//             ),
+//             'supports' => array(
+//             'title', 
+//             'thumbnail',
+//             'editor',
+//             'custom-fields'
+//             ), 
+//             'taxonomies' => array( 'category', 'post_tag',  ), 
+//             'public' => true,
+//             'has_archive' => true,
+//             'rewrite' => array('slug' => 'gallery'),
+//         )
+//     );
+// }
+// // Hooking up our function to theme setup
+// add_action( 'init', 'create_posttype_gallery' );
 
 
 function load_more_posts() {
@@ -159,53 +159,55 @@ add_action('wp_ajax_load_more_posts', 'load_more_posts');
 add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
 
 function load_more_gallery() {
-    $category = isset($_POST['category']) ? intval($_POST['category']) : 0;
-    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    if($category){
-       $args = array(
-           'post_type' => 'gallery',
-           'posts_per_page' => 9,
-           'paged' => $page,
-           'tax_query' => array(
-               array(
-                   'taxonomy' => 'category',
-                   'field'    => 'term_id',
-                   'terms'    => $category,
-               ),
-           ),
-       ); 
-   }else{
-    $args = array(
-        'post_type' => 'gallery',
-        'posts_per_page' => 9,
-        'paged' => $page
-    );
-   }
+    $title = sanitize_text_field($_POST['title']);
+    $page = intval($_POST['page']);
+    $offset = ($page - 1) * 9;
+    $id = $_POST['id'];
+    $html = '';
     
+    if (have_rows('gallery_locations', $id)) {
+        $count = 0;
+        while (have_rows('gallery_locations', $id)) {
+            the_row();
+            $gallery = get_sub_field('images', $id);
+            if ($gallery) {
+                foreach ($gallery as $image) {
+                    if($title == 0 || $title == '0'){
+                        if ($count >= $offset && $count < $offset + 9) {
+                            $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                            $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                            $html .= '</a>';
+                        }
+                        $count++;
+                    }else{
+                        $or_title = sanitize_title(get_sub_field('title', $id));
+                        if ($or_title == $title) {
+                            if ($count >= $offset && $count < $offset + 9) {
+                                $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                                $html .= '</a>';
+                            }
+                            $count++;
+                        }
+                    }
+                }
+            }
+        }
+        if ($count <= $offset + 9) {
+            $response = array('html' => $html, 'no_more_posts' => true);
+        } else {
+            $response = array('html' => $html);
+        }
+    } else {
+        $response = array('html' => '', 'no_more_posts' => true);
+    }
 
-    $query = new WP_Query($args);
-
-	$html_content = '';
-
-	if ($query->have_posts()) :
-		while ($query->have_posts()) : $query->the_post();
-			$html_content .= '<a class="gallery-item" href="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" target="_blank" data-fancybox="gallery-list-'.$category.'" data-caption="' . get_the_title() . '" title="' . get_the_title() . '">';
-			$html_content .= '<img data-src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" alt="' . get_the_title() . '"/>';
-			$html_content .= '</a>';
-		endwhile;
-	endif;
-
-	wp_reset_postdata();
-
-	if ($query->found_posts <= 9 * $page) {
-		echo json_encode(array('html' => null, 'no_more_posts' => true));
-	} else {
-		echo json_encode(array('html' => $html_content, 'no_more_posts' => false));
-	}
-
-	wp_die();
+    echo json_encode($response);
+    wp_die();
 }
+
 add_action('wp_ajax_load_more_gallery', 'load_more_gallery');
 add_action('wp_ajax_nopriv_load_more_gallery', 'load_more_gallery');
+
 
 ?>

@@ -2,7 +2,7 @@
 add_shortcode( 'reg_form', function(){
     ob_start();
     if( !isset($_GET['action']) ): ?>
-        <div class="reg_form register_form">
+        <div class="reg_form register_form" v-cloak>
             <form action="">
                 <input type="hidden" name="location" value="<?php the_title(); ?>">
                 <input type="hidden" name="location_url" value="<?php the_permalink(); ?>">

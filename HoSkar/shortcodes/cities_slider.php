@@ -2,7 +2,8 @@
 add_shortcode( 'cities_slider', function(){
     ob_start();
     // $as = get_field( 'cities', 'option' );
-    $as = get_field( 'locations', 15 );
+    $as = get_field( 'locations' );
+    if( empty($as) ) $as = get_field( 'locations', 15 );
     if( !empty($as) ): ?>
     <div class="cities text-center">
         <div class="row justify-content-center gx-2 gx-sm-2 gx-lg-4 gx-xl-6 gy-2 gy-lg-6">

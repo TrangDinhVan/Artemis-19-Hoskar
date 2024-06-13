@@ -1160,3 +1160,7 @@ img{
     opacity: 0.5;
     pointer-events: none;
 }
+
+[v-cloak] {
+    display: none;
+}

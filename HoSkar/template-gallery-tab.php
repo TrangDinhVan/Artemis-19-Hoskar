@@ -1,5 +1,5 @@
 <?php
-/* Template Name: Gallery Page */
+/* Template Name: New Gallery Page */
 
 get_header();
 ?>
@@ -14,14 +14,22 @@ get_header();
                 <ul class="tabs">
                     <li class="tab tab-menu-link is-active" data-content="tab-0" data-tab="tab-0">All locations</li>
                     <?php
-                    $categories = get_terms(array(
-                        'taxonomy' => 'category',
-                        'hide_empty' => false,
-                    ));
-                    foreach ($categories as $index => $category) {
-                        echo '<li class="tab tab-menu-link" data-content="tab-' . $category->term_id . '" data-tab="tab-' . $category->term_id . '">';
-                        echo $category->name;
-                        echo '</li>';
+                    $all_titles = [];
+                    if (have_rows('gallery_locations')) {
+                        $i = 0;
+                        while (have_rows('gallery_locations')) {
+                            the_row();
+                            $i = $i +1;
+
+                            $title = get_sub_field('title');
+                            if (!in_array($title, $all_titles)) {
+                                $all_titles[] = $title;
+                                echo '<li class="tab tab-menu-link" data-content="tab-' . $i . '" data-tab="tab-' . $i . '">';
+                                echo esc_html($title);
+                                echo '</li>';
+                            }
+                            
+                        }
                     }
                     ?>
                 </ul>
@@ -30,64 +38,71 @@ get_header();
                     <div id="tab-0" class="tab-content tab-bar-content is-active">
                         <div class="gallery-list row" id="gallery-list-0" data-category-id="0" data-page="1">
                             <?php
-                            $args = array(
-                                'post_type' => 'gallery',
-                                'posts_per_page' => 9,
-                            );
-                            $query = new WP_Query($args);
-                            if ($query->have_posts()) :
-                                while ($query->have_posts()) : $query->the_post();
-                                    ?>
-                                    <a class="gallery-item" href="<?php the_post_thumbnail_url('full'); ?>" target="_blank">
-                                        <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>" />
-                                    </a>
-                                    <?php
-                                endwhile;
-                            else :
-                                echo '<p class="no_image_gallery">No images found.</p>';
-                            endif;
-                            wp_reset_postdata();
-                            ?>
+                                if (have_rows('gallery_locations')) {
+                                    $count = 0;
+                                    $total_images = 0;
+                                    while (have_rows('gallery_locations')) {
+                                        the_row();
+                                        $gallery = get_sub_field('images');
+                                        if ($gallery) {
+                                            foreach ($gallery as $image) {
+                                                
+                                            $total_images++;
+                                            if ($count < 9) {
+                                                ?>
+                                                <a class="gallery-item" href="<?php echo esc_url($image['url']); ?>" target="_blank" data-fancybox="mygallery">
+                                                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                                                </a>
+                                                <?php
+                                                $count++;
+                                            }
+                                               
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
                         </div>
-                        <div class="see-more-container">
+                        <div class="see-more-container" <?php if ($total_images <= 9) echo 'style="display:none;"'; ?>>
                             <button class="see-more" data-category-id="0">See All</button>
                         </div>
                    
                     </div>
                     <?php
-                    foreach ($categories as $category) {
+                    $j = 0;
+                    foreach ($all_titles as $title) {
+                        $j = $j +1;
                         ?>
-                        <div id="tab-<?php echo $category->term_id; ?>" class="tab-content tab-bar-content" style="display:none;">
-                            <div class="gallery-list row" id="gallery-list-<?php echo $category->term_id; ?>" data-category-id="<?php echo $category->term_id; ?>" data-page="1">
+                        <div id="tab-<?php echo $j; ?>" class="tab-content tab-bar-content" style="display:none;">
+                            <div class="gallery-list row" id="gallery-list-<?php echo $j; ?>" data-category-id="<?php echo sanitize_title($title); ?>" data-page="1">
                                 <?php
-                                $args = array(
-                                    'post_type' => 'gallery',
-                                    'posts_per_page' => 9,
-                                    'tax_query' => array(
-                                        array(
-                                            'taxonomy' => 'category',
-                                            'field'    => 'term_id',
-                                            'terms'    => $category->term_id,
-                                        ),
-                                    ),
-                                );
-                                $query = new WP_Query($args);
-                                if ($query->have_posts()) :
-                                    while ($query->have_posts()) : $query->the_post();
-                                        ?>
-                                        <a class="gallery-item" href="<?php the_post_thumbnail_url('full'); ?>" target="_blank">
-                                            <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>" />
-                                        </a>
-                                        <?php
-                                    endwhile;
-                                else :
-                                    echo '<p class="no_image_gallery">No images found.</p>';
-                                endif;
-                                wp_reset_postdata();
+                                if (have_rows('gallery_locations')) {
+                                    $count = 0;
+                                    $total_images = 0;
+                                    while (have_rows('gallery_locations')) {
+                                        the_row();
+                                        $gallery = get_sub_field('images');
+                                        if ($gallery) {
+                                            foreach ($gallery as $image) {
+                                                if (get_sub_field('title') == $title) {
+                                                    $total_images++;
+                                                    if ($count < 9) {
+                                                        ?>
+                                                        <a class="gallery-item" href="<?php echo esc_url($image['url']); ?>" target="_blank" data-fancybox="mygallery">
+                                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                                                        </a>
+                                                        <?php
+                                                        $count++;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 ?>
                             </div>
-                            <div class="see-more-container">
-                                <button class="see-more" data-category-id="<?php echo $category->term_id; ?>">See All</button>
+                            <div class="see-more-container" <?php if ($total_images <= 9) echo 'style="display:none;"'; ?>>
+                                <button class="see-more" data-category-id="<?php echo sanitize_title($title); ?>">See All</button>
                             </div>
                         </div>
                         <?php
@@ -130,8 +145,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var data = {
                 action: 'load_more_gallery',
-                category: categoryId,
-                page: page
+                title: categoryId,
+                page: page,
+                id: '<?php echo get_the_ID();?>'
             };
 
             fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
@@ -147,6 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.html) {
                     container.insertAdjacentHTML('beforeend', data.html);
                     container.setAttribute('data-page', page);
+                    console.log(data,'data')
+                    if(data.no_more_posts == true){
+                        button.style.display = 'none';
+                    }
                 } else {
                     button.style.display = 'none';
                 }
@@ -157,8 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hide "See More" buttons if there are less than 9 posts
     document.querySelectorAll('.see-more').forEach(function(button) {
-        var category = button.getAttribute('data-category-id');
-        var container = document.getElementById('gallery-list-' + category);
+        var title = button.getAttribute('data-category-id');
+        var container = document.getElementById('gallery-list-' + title);
         if (container && container.children.length < 9) {
             button.style.display = 'none';
         }

@@ -10,11 +10,85 @@ $(document).ready(function() {
 			maxHeight = Math.max(maxHeight, height);
 		});
 
-		$cols.css('height', maxHeight*2 + 'px');
-		$('.testimonials').css('height', maxHeight*2+50 + 'px');
+		$cols.css('height', maxHeight*2-100 + 'px');
+		var numLabels = $(".testimonials .item").length;
+		if(numLabels == 4 || numLabels == 6) {
+			$('.testimonials').css('height', maxHeight*2 + 'px');
+		} else {
+			$('.testimonials').css('height', maxHeight*2-50 + 'px');
+		}
 	}
 
 });
+//slide homepage
+$(document).ready(function() {
+    if ($(window).width() >= 768) {
+        function setTestimonial(positions, targetIndices, numItems, index) {
+            $(".testimonials .item").removeClass("active").eq(index).addClass("active");
+
+            for (let i = 0; i < numItems; i++) {
+                $(".testimonials .item[for='t-" + (targetIndices[i] === 0 ? numItems : targetIndices[i]) + "']").css(positions[i]);
+            }
+        }
+		
+		const positionsSix = [
+            { transform: "translate3d(0, 0, -0) rotateY(-0deg)", zIndex: 4, margin: '0', width: '45%' },
+            { transform: "translate3d(25%, 33.33px, -0px) rotateY(-0deg)", zIndex: 3, margin: '0 0 0 5%', width: '45%' },
+            { transform: "translate3d(50%, 66.66px, -0px) rotateY(-0deg)", zIndex: 2, margin: '0 0 0 10%', width: '45%' },
+            { transform: "translate3d(0%, 100px, -0px) rotateY(-0deg)", zIndex: 1, margin: '0', width: '45%' },
+            { transform: "translate3d(-50%, 66.66px, -0px) rotateY(-0deg)", zIndex: 2, margin: '0 10% 0 0', width: '45%' },
+            { transform: "translate3d(-25%, 33.33px, -0px) rotateY(-0deg)", zIndex: 3, margin: '0 5% 0 0', width: '45%' }
+        ];
+
+        const positionsFive = [
+            { transform: "translate3d(0, 0, -0) rotateY(-0deg)", zIndex: 4, margin: '0', width: '45%' },
+            { transform: "translate3d(25%, 25px, -0px) rotateY(-0deg)", zIndex: 3, margin: '0 0 0 5%', width: '45%' },
+            { transform: "translate3d(50%, 50px, -0px) rotateY(-0deg)", zIndex: 2, margin: '0 0 0 10%', width: '45%' },
+            { transform: "translate3d(-50%, 50px, -0px) rotateY(-0deg)", zIndex: 2, margin: '0 10% 0 0', width: '45%' },
+            { transform: "translate3d(-25%, 25px, -0px) rotateY(-0deg)", zIndex: 3, margin: '0 5% 0 0', width: '45%' }
+        ];
+
+        const positionsFour = [
+            { transform: "translate3d(0, 0, -0) rotateY(-0deg)", zIndex: 4, margin: '0', width: '45%' },
+            { transform: "translate3d(50%, 50px, -0px) rotateY(-0deg)", zIndex: 3, margin: '0 0 0 10%', width: '45%' },
+            { transform: "translate3d(0px, 100px, 0px) rotateY(0deg)", zIndex: 2, margin: '0', width: '45%' },
+            { transform: "translate3d(-50%, 50px, -0px) rotateY(0deg)", zIndex: 3, margin: '0 10% 0 0', width: '45%' }
+        ];
+
+        const positionsThree = [
+            { transform: "translate3d(0, 0, -0) rotateY(-0deg)", zIndex: 4, margin: '0', width: '45%' },
+            { transform: "translate3d(50%, 50px, -0px) rotateY(-0deg)", zIndex: 3, margin: '0 0 0 10%', width: '45%' },
+            { transform: "translate3d(-50%, 50px, -0px) rotateY(-0deg)", zIndex: 3, margin: '0 10% 0 0', width: '45%' }
+        ];
+
+        const numLabels = $(".testimonials .item").length;
+        const index = 1;
+
+        if (numLabels === 6) {
+            setTestimonial(positionsSix, [(index + 1) % 6, (index + 2) % 6, (index + 3) % 6, (index + 4) % 6, (index + 5) % 6, (index + 6) % 6], 6, index);
+        } else if (numLabels === 5) {
+            setTestimonial(positionsFive, [(index + 1) % 5, (index + 2) % 5, (index + 3) % 5, (index + 4) % 5, (index + 5) % 5], 5, index);
+        } else if (numLabels === 4) {
+            setTestimonial(positionsFour, [(index + 1) % 4, (index + 2) % 4, (index + 3) % 4, (index + 4) % 4], 4, index);
+        } else if (numLabels === 3) {
+            setTestimonial(positionsThree, [(index + 1) % 3, (index + 2) % 3, (index + 3) % 3], 3, index);
+        }
+
+        $(".testimonials .item").on("click", function() {
+            const index = $(this).index();
+            if (numLabels === 6) {
+                setTestimonial(positionsSix, [(index + 1) % 6, (index + 2) % 6, (index + 3) % 6, (index + 4) % 6, (index + 5) % 6, (index + 6) % 6], 6, index);
+            } else if (numLabels === 5) {
+                setTestimonial(positionsFive, [(index + 1) % 5, (index + 2) % 5, (index + 3) % 5, (index + 4) % 5, (index + 5) % 5], 5, index);
+            } else if (numLabels === 4) {
+                setTestimonial(positionsFour, [(index + 1) % 4, (index + 2) % 4, (index + 3) % 4, (index + 4) % 4], 4, index);
+            } else if (numLabels === 3) {
+                setTestimonial(positionsThree, [(index + 1) % 3, (index + 2) % 3, (index + 3) % 3], 3, index);
+            }
+        });
+    }
+});
+
 
 $('.js-angle-slider__list').slick({
   dots: false,
@@ -103,25 +177,28 @@ $('.paginator .prev.slick-arrow').on('click', function(){
 });
 if ($(window).width() < 768) { 
 	$('.paginator .next').on('click', function(){
-	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
-        if(currentIndex === 2) {
-			$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled slick-arrow');
-        } else {
-			$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
-			$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
-        }
+		var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+			if(currentIndex === 2) {
+				$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled slick-arrow');
+				$('.js-angle-slider__body .paginator li.prev').addClass('check-slider-mobile');
+			} else {
+				$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
+				$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
+				$('.js-angle-slider__body .paginator li').removeClass('check-slider-mobile');
+			}
 
-});
-$('.paginator .prev').on('click', function(){
-	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
-        if(currentIndex === 0) {
-			$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled slick-arrow');
-        } else {
-			$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
-			$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
-        }
+	});
+	$('.paginator .prev').on('click', function(){
+		var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+			if(currentIndex === 0) {
+				$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled slick-arrow');
+			} else {
+				$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
+				$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
+				$('.js-angle-slider__body .paginator li').removeClass('check-slider-mobile');
+			}
 
-});
+	});
 }
 
 $('.blog_slider').slick({
