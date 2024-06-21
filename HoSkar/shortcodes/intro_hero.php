@@ -2,8 +2,10 @@
 add_shortcode( 'intro_hero', function(){
     ob_start(); ?>
     <div class="intro-hero flex-center position-relative text-white lh-10">
-        <img src="<?php echo IMG; ?>/PC-optimize.gif" srcc="<?php echo LAZY_IMG; ?>" alt="..." class="d-none d-sm-block intro mx-auto transition">
-        <img src="<?php echo IMG; ?>/Phone.gif" srcc="<?php echo LAZY_IMG; ?>" alt="..." class="d-block d-sm-none intro mx-auto transition">
+        <div class="intro transition">
+            <img src="<?php echo IMG; ?>/PC-optimize.gif" srcc="<?php echo LAZY_IMG; ?>" alt="..." class="d-none d-sm-block mx-auto">
+            <img src="<?php echo IMG; ?>/Phone.gif" srcc="<?php echo LAZY_IMG; ?>" alt="..." class="d-block d-sm-none mx-auto">
+        </div>
         <div class="e5 font-medium text-center w-100 overflow-hidden transition">
             <div class="swiper-wrapper mb-5 mb-sm-3 e55">
                 <div class="swiper-slide">
@@ -28,7 +30,7 @@ add_shortcode( 'intro_hero', function(){
                 </div>
             </div>
             <div class="d-flex flex-wrap flex-sm-no-wrap gap-6 align-items-center hh">
-                <div class="vstack gap-2 e50">
+                <div class="vstack gap-2">
                     <h4 class="font-regular tag-line">Neworking <span>Redefined</span></h4>
                 </div>
                 <div class="controls e55 d-flex justify-content-center jsutify-content-sm-end gap-2 ms-sm-auto">
@@ -51,12 +53,12 @@ add_shortcode( 'intro_hero', function(){
                         prevEl: '.prev',
                     }
                 });
-                let time = 4000;
+                let time = 4600;
                 if( $(window).width() < 768 ) time = 3600;
                 $('.intro').addClass('active');
                 setTimeout(() => {
-                    $('.e5, .e55').addClass('active');
                     $('.intro').removeClass('d-block d-sm-block').fadeOut();
+                    $('.e5, .e55').addClass('active');
                 }, time);
             });
         });
