@@ -10,23 +10,23 @@ add_shortcode( 'intro_hero', function(){
             <div class="swiper-wrapper mb-5 mb-sm-3 e55">
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/1c.gif" alt="...">
-                    <h2>Grow Your Connections</h2>
+                    <h2>Grow <span class="b">Your Connections</span></h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/2c.gif" alt="...">
-                    <h2>Grow Your Brand</h2>
+                    <h2>Grow <span class="b">Your Brand</span></h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/3c.gif" alt="...">
-                    <h2>Grow Your Ideas</h2>
+                    <h2>Grow <span class="b">Your Ideas</span></h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/4c.gif" alt="...">
-                    <h2>Grow Your Business</h2>
+                    <h2>Grow <span class="b">Your Business</span></h2>
                 </div>
                 <div class="swiper-slide">
                     <img class="mx-auto" src="<?php echo IMG; ?>/5c.gif" alt="...">
-                    <h2>Grow Your Influence</h2>
+                    <h2>Grow <span class="b">Your Influence</span></h2>
                 </div>
             </div>
             <div class="d-flex flex-wrap flex-sm-no-wrap gap-6 align-items-center hh">
@@ -54,7 +54,7 @@ add_shortcode( 'intro_hero', function(){
                     }
                 });
                 let time = 4600;
-                if( $(window).width() < 768 ) time = 3600;
+                if( $(window).width() < 768 ) time = 3200;
                 $('.intro').addClass('active');
                 setTimeout(() => {
                     $('.intro').removeClass('d-block d-sm-block').fadeOut();
