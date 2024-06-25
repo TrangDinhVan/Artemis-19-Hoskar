@@ -17,7 +17,11 @@ add_shortcode( 'cities_slider', function(){
                             <h2 class="name mb-lg-2 lh-11 text-uppercase font-bold"><?php echo $a['title']; ?></h2>
                             <p class="flex-center gap-1"><i class="bi bi-calendar"></i><?php echo $a['time']; ?></p>
                             <div class="ho-btn w-100 font-semi-bold mb-lg-2">
+                                <?php if(!empty($a['url'])){ ?>
                                 <a class="flex-center r-25 mx-auto" href="<?php echo $a['url']; ?>">Register</a>
+                                <?php }else{ ?>
+                                <a class="flex-center r-25 mx-auto" href="mailto:Host@wehubyou.com">Registration is still close</a>    
+                                <?php } ?>    
                             </div>
                         </div>
                     </div>

@@ -64,7 +64,7 @@ get_header();
                                 ?>
                         </div>
                         <div class="see-more-container" <?php if ($total_images <= 9) echo 'style="display:none;"'; ?>>
-                            <button class="see-more" data-category-id="0">See All</button>
+                            <button class="see-more" data-category-id="0">See More</button>
                         </div>
                    
                     </div>
@@ -102,7 +102,7 @@ get_header();
                                 ?>
                             </div>
                             <div class="see-more-container" <?php if ($total_images <= 9) echo 'style="display:none;"'; ?>>
-                                <button class="see-more" data-category-id="<?php echo sanitize_title($title); ?>">See All</button>
+                                <button class="see-more" data-category-id="<?php echo sanitize_title($title); ?>">See More</button>
                             </div>
                         </div>
                         <?php

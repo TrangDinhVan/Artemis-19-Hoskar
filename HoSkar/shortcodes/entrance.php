@@ -11,7 +11,7 @@ add_shortcode( 'entrance', function(){
             <?php while( have_rows('extrance') ): the_row(); ?>
                 <div class="js-angle-slider__item gradient-border register">
 					<img decoding="async" class="image-register" width="20" src="/hoskar/wp-content/uploads/2024/05/bg_box_large.png" alt="..">
-					<img decoding="async" class="image-register-2" width="20" src="/hoskar/wp-content/uploads/2024/06/Subtract-1.png" alt="..">
+					<!-- <img decoding="async" class="image-register-2" width="20" src="/hoskar/wp-content/uploads/2024/06/Subtract-1.png" alt=".."> -->
                     <div class="slider_contents">						
                         <div class="border-title-register">
                             <h2 class="h2-register">

@@ -210,4 +210,101 @@ add_action('wp_ajax_load_more_gallery', 'load_more_gallery');
 add_action('wp_ajax_nopriv_load_more_gallery', 'load_more_gallery');
 
 
+
+
+function load_more_gallerys() {
+    $title = sanitize_text_field($_POST['title']);
+    $page = intval($_POST['page']);
+    $location = $_POST['location'];
+    $offset = ($page - 1) * 9;
+    $id = $_POST['id'];
+    $html = '';
+
+    if (have_rows('tab_gallery', $id)) {
+        while (have_rows('tab_gallery', $id)) {
+            the_row();
+            $loca = get_sub_field('title');
+
+            if($loca == $location) {
+                $count = 0;
+                if (have_rows('location_gallery', $id)) {
+                    while (have_rows('location_gallery', $id)) {
+                        the_row();
+                        $gallery = get_sub_field('image', $id);
+                        if ($gallery) {
+                            foreach ($gallery as $image) {
+                                if($title == 0 || $title == '0'){
+                                    if ($count >= $offset && $count < $offset + 9) {
+                                        $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                        $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                                        $html .= '</a>';
+                                    }
+                                    $count++;
+                                }else{
+                                    $or_title = sanitize_title(get_sub_field('title_location', $id));
+                                    if ($or_title == $title) {
+                                        if ($count >= $offset && $count < $offset + 9) {
+                                            $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                            $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                                            $html .= '</a>';
+                                        }
+                                        $count++;
+                                    }
+                                }
+                            }
+                        };
+
+                    }
+                    if ($count <= $offset + 9) {
+                        $response = array('html' => $html, 'no_more_posts' => true);
+                    } else {
+                        $response = array('html' => $html);
+                    }
+                } else {
+                    $response = array('html' => '', 'no_more_posts' => true);
+                }
+            } else {
+                if (have_rows('location_gallery', $id)) {
+                    while (have_rows('location_gallery', $id)) {
+                        the_row();
+                        $gallery = get_sub_field('image', $id);
+                        if ($gallery) {
+                            foreach ($gallery as $image) {
+                                $or_title = sanitize_title(get_sub_field('title_location', $id));
+                                if ($or_title == $title) {
+                                    if ($count >= $offset && $count < $offset + 9) {
+                                        $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                        $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                                        $html .= '</a>';
+                                    }
+                                    $count++;
+                                }
+                            }
+                        };
+
+                    }
+                    if ($count <= $offset + 9) {
+                        $response = array('html' => $html, 'no_more_posts' => true);
+                    } else {
+                        $response = array('html' => $html);
+                    }
+                } else {
+                    $response = array('html' => '');
+                }
+            }
+            
+        }
+    } else {
+        $response = array('html' => '');
+    }
+    
+
+    echo json_encode($response);
+    wp_die();
+}
+
+add_action('wp_ajax_load_more_gallerys', 'load_more_gallerys');
+add_action('wp_ajax_nopriv_load_more_gallerys', 'load_more_gallerys');
+
+
 ?>

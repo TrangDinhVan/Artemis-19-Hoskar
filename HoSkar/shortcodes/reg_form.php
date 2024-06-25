@@ -43,7 +43,7 @@ add_shortcode( 'reg_form', function(){
                             </div>
                         </div>
                         <input type="text" name="title" placeholder="Title*">
-                        <div class="radios">
+                        <div class="radios d-none">
                             <div class="input gap-5 d-flex align-items-center flex-wrap">
                                 <span>Industry Field *</span>
                                 <div class="d-flex gap-3 gap-sm-5 ms-lg-auto flex-wrap">
@@ -53,52 +53,99 @@ add_shortcode( 'reg_form', function(){
                                 </div>
                             </div>
                         </div>
+                        <div class="row g-4 yourcompany">
+                            <div class="radios col-lg-12">
+                                <div class="input">
+                                    <div class="mb-6">Where is your company based? *</div>
+                                    <div class="row g-4 lh-12">
+                                        <div class="col-lg-6 morecity">
+                                            <label for="lo_viet"><input id="lo_viet" type="checkbox" name="yourcompany[]" value="Vietnam">Vietnam</label>
+                                            <div class="row g-4 show_city">
+                                                <div class="col-lg-6">
+                                                    <label for="city_hanoi"><input id="city_hanoi" type="checkbox" name="yourcity[]" value="Hanoi">Hanoi</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label for="city_hcmc"><input id="city_hcmc" type="checkbox" name="yourcity[]" value="HCMC ">HCMC </label>
+                                                </div>
+                                                <div class="col-lg-6 other">
+                                                    <label for="city_other"><input id="city_other" type="checkbox" name="yourcity[]" value="Other">Other</label>
+                                                    <textarea class="lh-10 other_city" name="other_city" rows="2" placeholder="Fill in the answer..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="lo_phi"><input id="lo_phi" type="checkbox" name="yourcompany[]" value="Philipine">Philipine</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="lo_thai"><input id="lo_thai" type="checkbox" name="yourcompany[]" value="Thailand">Thailand</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="lo_sing"><input id="lo_sing" type="checkbox" name="yourcompany[]" value="Singapore">Singapore</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="lo_cam"><input id="lo_cam" type="checkbox" name="yourcompany[]" value="Cambodia">Cambodia</label>
+                                        </div>
+                                        <div class="col-lg-6 other">
+                                            <label for="lo_other"><input id="lo_other" type="checkbox" name="yourcompany[]" value="Other">Other</label>
+                                            <textarea class="lh-10 other_yourcompany" name="other_yourcompany" rows="4" placeholder="Fill in the answer..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="radios col-lg-12">
+                                <div class="input">
+                                    <div class="mb-6">Where is your city based?</div>
+                                    <textarea class="lh-13" name="yourcity" rows="5" placeholder="Fill in the answer..."></textarea>
+                                </div>
+                            </div> -->
+                        </div>
                         <div class="radios">
                             <div class="input">
                                 <div class="mb-6">Your Business Category *</div>
                                 <div class="row g-4 lh-12">
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Developer / Investor / Hotel Owner'}" for="cate_one"><input v-model="category" id="cate_one" type="radio" name="category" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
+                                        <label for="cate_one"><input id="cate_one" type="checkbox" name="category[]" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Hospitality & Real Estate Consultant'}" for="cate_two"><input v-model="category" id="cate_two" type="radio" name="category"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
+                                        <label for="cate_two"><input id="cate_two" type="checkbox" name="category[]"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Management Company / Hotel Operator'}" for="cate_three"><input v-model="category" id="cate_three" type="radio" name="category" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
+                                        <label for="cate_three"><input id="cate_three" type="checkbox" name="category[]" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Operation team (GM / Sales & Marketing / Operational Staff)'}" for="cate_four"><input v-model="category" id="cate_four" type="radio" name="category" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
+                                        <label for="cate_four"><input id="cate_four" type="checkbox" name="category[]" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Designer / Architect'}" for="cate_de"><input v-model="category" id="cate_de" type="radio" name="category" value="Designer / Architect">Designer / Architect</label>
+                                        <label for="cate_de"><input id="cate_de" type="checkbox" name="category[]" value="Designer / Architect">Designer / Architect</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Product / Service Provider'}" for="cate_pro"><input v-model="category" id="cate_pro" type="radio" name="category" value="Product / Service Provider">Product / Service Provider</label>
+                                        <label for="cate_pro"><input id="cate_pro" type="checkbox" name="category[]" value="Product / Service Provider">Product / Service Provider</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Contractor / Project Management'}" for="cate_con"><input v-model="category" id="cate_con" type="radio" name="category" value="Contractor / Project Management">Contractor / Project Management</label>
+                                        <label for="cate_con"><input id="cate_con" type="checkbox" name="category[]" value="Contractor / Project Management">Contractor / Project Management</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: category == 'Real estate / Travel Agent'}" for="cate_re"><input v-model="category" id="cate_re" type="radio" name="category" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
+                                        <label for="cate_re"><input id="cate_re" type="checkbox" name="category[]" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <label :class="{active: category == 'Other'}" for="cate_o"><input v-model="category" id="cate_o" type="radio" name="category" value="Other">Other</label>
+                                    <div class="col-lg-6 other">
+                                        <label :class="{active: category == 'Other'}" for="cate_o"><input id="cate_o" type="checkbox" name="category[]" value="Other">Other</label>
+                                        <textarea class="lh-10 other_category" name="other_category" rows="4" placeholder="Fill in the answer..."></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="radios">
                             <div class="input">
-                                <div class="mb-6">I am interested to attend *</div>
+                                <div class="mb-6">I am intersted in attending *</div>
                                 <div class="row g-4 lh-12">
                                     <div class="col-lg-6">
-                                        <label :class="{active: interest == 'Hoskar Networking (from 6:00)'}" for="ra_net"><input v-model="interest" id="ra_net" type="radio" name="interest" value="Hoskar Networking (from 6:00)">Hoskar Networking (from 6:00)</label>
+                                        <label :class="{active: interest == 'Hoskar Talks (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="Hoskar Talks (from 5:00 to 6:00)">Hoskar Talks</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: interest == 'Hoskar Talks (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="Hoskar Talks (from 5:00 to 6:00)">Hoskar Talks (from 5:00 to 6:00)</label>
+                                        <label :class="{active: interest == 'Hoskar Networking (from 6:00)'}" for="ra_net"><input v-model="interest" id="ra_net" type="radio" name="interest" value="Hoskar Networking (from 6:00)">Hoskar Networking</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: interest == 'Both of them'}" for="ra_both"><input v-model="interest" id="ra_both" type="radio" name="interest" value="Both of them">Both of them</label>
+                                        <label :class="{active: interest == 'Both of them'}" for="ra_both"><input v-model="interest" id="ra_both" type="radio" name="interest" value="Both of them">Both sessions</label>
                                     </div>
                                 </div>
                             </div>
@@ -111,32 +158,32 @@ add_shortcode( 'reg_form', function(){
                 </div>
                 <div v-show="step > 1">
                     <div class="vstack gap-5 lh-10">
-                        <h4 class="font-semi-bold font-15x mb-2">Let’s make this event about you!</h4>
-                        <div class="radios d-none">
+                        <h4 class="font-semi-bold font-15x mb-2">Let’s make HoSkar about you!</h4>
+                        <div class="radios">
                             <div class="input">
-                                <div class="mb-6 lh-12">I may be interested in being a sponsors in future HoSkar, which city? (Tick more than one Box)</div>
+                                <div class="mb-6 lh-12">I am interested in attending or sponsoring also HoSkar Night in:</div>
                                 <div class="row g-4 lh-12">
                                     <div class="col-sm-6">
-                                        <label for="ci_hcmc"><input id="ci_hcmc" type="checkbox" name="city[]" value="HCMC">HCMC</label>
+                                        <label for="ci_hcmc"><input id="ci_hcmc" type="checkbox" name="city[]" value="Hcmc">Hcmc</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="ci_MANILA"><input id="ci_MANILA" type="checkbox" name="city[]" value="MANILA">MANILA</label>
+                                        <label for="ci_MANILA"><input id="ci_MANILA" type="checkbox" name="city[]" value="Manila">Manila</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="ci_HANOI"><input id="ci_HANOI" type="checkbox" name="city[]" value="HANOI">HANOI</label>
+                                        <label for="ci_HANOI"><input id="ci_HANOI" type="checkbox" name="city[]" value="Hanoi">Hanoi</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="ci_SINGAPORE"><input id="ci_SINGAPORE" type="checkbox" name="city[]" value="SINGAPORE">SINGAPORE</label>
+                                        <label for="ci_SINGAPORE"><input id="ci_SINGAPORE" type="checkbox" name="city[]" value="Singapore">Singapore</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="ci_BANGKOK"><input id="ci_BANGKOK" type="checkbox" name="city[]" value="BANGKOK">BANGKOK</label>
+                                        <label for="ci_BANGKOK"><input id="ci_BANGKOK" type="checkbox" name="city[]" value="Bangkor">Bangkor</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="ci_PHNOMPENH"><input id="ci_PHNOMPENH" type="checkbox" name="city[]" value="PHNOM PENH">PHNOM PENH</label>
+                                        <label for="ci_PHNOMPENH"><input id="ci_PHNOMPENH" type="checkbox" name="city[]" value="Phnom Penh">Phnom Penh</label>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <label @click="maybeLoveAllCities" for="ci_ph"><input id="ci_ph" type="checkbox" name="love_all_cities" value="ALL OF ABOVE">ALL OF ABOVE</label>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -145,38 +192,39 @@ add_shortcode( 'reg_form', function(){
                                 <div class="mb-6">Expand business connections. Who would you like to meet?</div>
                                 <div class="row g-4 lh-12">
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Developer / Investor / Hotel Owner'}" for="meet_one"><input v-model="meet" id="meet_one" type="radio" name="meet" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
+                                        <label for="meet_one"><input id="meet_one" type="checkbox" name="meet[]" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Hospitality & Real Estate Consultant'}" for="meet_two"><input v-model="meet" id="meet_two" type="radio" name="meet"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
+                                        <label for="meet_two"><input id="meet_two" type="checkbox" name="meet[]"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Management Company / Hotel Operator'}" for="meet_three"><input v-model="meet" id="meet_three" type="radio" name="meet" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
+                                        <label for="meet_three"><input id="meet_three" type="checkbox" name="meet[]" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Operation team (GM / Sales & Marketing / Operational Staff)'}" for="meet_four"><input v-model="meet" id="meet_four" type="radio" name="meet" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
+                                        <label for="meet_four"><input id="meet_four" type="checkbox" name="meet" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Designer / Architect'}" for="meet_de"><input v-model="meet" id="meet_de" type="radio" name="meet" value="Designer / Architect">Designer / Architect</label>
+                                        <label for="meet_de"><input id="meet_de" type="checkbox" name="meet[]" value="Designer / Architect">Designer / Architect</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Product / Service Provider'}" for="meet_pro"><input v-model="meet" id="meet_pro" type="radio" name="meet" value="Product / Service Provider">Product / Service Provider</label>
+                                        <label for="meet_pro"><input id="meet_pro" type="checkbox" name="meet[]" value="Product / Service Provider">Product / Service Provider</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Contractor / Project Management'}" for="meet_con"><input v-model="meet" id="meet_con" type="radio" name="meet" value="Contractor / Project Management">Contractor / Project Management</label>
+                                        <label for="meet_con"><input id="meet_con" type="checkbox" name="meet[]" value="Contractor / Project Management">Contractor / Project Management</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Real estate / Travel Agent'}" for="meet_re"><input v-model="meet" id="meet_re" type="radio" name="meet" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
+                                        <label for="meet_re"><input id="meet_re" type="checkbox" name="meet[]" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label :class="{active: meet == 'Other'}" for="meet_o"><input v-model="meet" id="meet_o" type="radio" name="meet" value="Other">Other</label>
+                                    <div class="col-sm-6 other">
+                                        <label for="meet_o"><input id="meet_o" type="checkbox" name="meet[]" value="Other">Other</label>
+                                        <textarea class="lh-10 other_meet" name="other_meet" rows="4" placeholder="Fill in the answer..."></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="radios">
                             <div class="input">
-                                <div class="mb-6">Interact with our speakers, leave your questions here</div>
+                                <div class="mb-6">Interact with us or our speakers and leave your question here</div>
                                 <textarea class="lh-13" name="desc" rows="5" placeholder="Tell us your question..."></textarea>
                             </div>
                         </div>
@@ -213,6 +261,7 @@ add_shortcode( 'reg_form', function(){
                         gender: '',
                         industry: '',
                         category: '',
+                        yourcompany: '',
                         interest: '',
                         meet: '',
                         form_data: []
@@ -244,13 +293,16 @@ add_shortcode( 'reg_form', function(){
                             this.form_data = $('.reg_form form').serializeArray();
                             a = this.form_data;
                             console.log(a);
+                            console.log($('[name="yourcompany"]').val(),'yourcompany');
                             if( $('[name="f_name"]').val() != ''
                                 && $('[name="l_name"]').val() != ''
+                                && $('[name="gender"]').val() != ''
                                 && $('[name="company"]').val() != ''
                                 && $('[name="company_email"]').val() != ''
                                 && $('[name="title"]').val() != ''
+                                && $('[name="yourcompany"]').val() != ''
                                 && $('[name="industry"]').val() != ''
-                                && $('[name="category"]').val() != ''
+                                && $('[name="category[]"]').val() != ''
                                 && $('[name="interest"]').val() != ''
                             ){
                                 this.step = 2;
@@ -266,6 +318,27 @@ add_shortcode( 'reg_form', function(){
                         }
                     }
                 });
+
+                $('input[type="checkbox"]').on('change', function(){
+                    if(this.checked && $(this).val()=="Other"){
+                        $(this).parents('.other').addClass("active");
+                    }else{
+                        $(this).parents('.other').removeClass("active");
+                    }
+                    if ($('#lo_viet').is(':checked')) {
+                        $(this).parents('.morecity').addClass("active");
+                    }else{
+                        $(this).parents('.morecity').removeClass("active");
+                    }
+                });
+                // $('.morecity input[type="checkbox"]').on('change', function(){
+                //     console.log($(this).val(),'val');
+                //    if($(this).val()=="Vietnam"){
+                //         $(this).parents('.morecity').addClass("active");
+                //    }else{
+                //         $(this).parents('.morecity').removeClass("active");
+                //    }
+                // });
             });
         </script>
         <?php

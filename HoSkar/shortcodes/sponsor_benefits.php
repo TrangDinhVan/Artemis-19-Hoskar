@@ -12,11 +12,11 @@ add_shortcode( 'sponsor_benefits', function(){
                 $i = $i + 1;
             ?> 
             <label class="e item" for="t-<?php echo $i;?>">
-
-                <img src="<?php the_sub_field('icon'); ?>" style="height: 50px;" alt=".." class="icon">
-
-                <h4><?php the_sub_field('title'); ?></h4>
-
+                <span class="no_number"><?php echo $i;?></span>
+                <div class="title">
+                    <img src="<?php the_sub_field('icon'); ?>" style="height: 50px;" alt=".." class="icon">
+                    <h4><?php the_sub_field('title'); ?></h4>
+                </div>
                 <div class="desc lh-13 vstack gap-3">
                     <?php the_sub_field('descriptions'); ?>                   
                 </div>

@@ -33,7 +33,7 @@ add_shortcode( 'intro_hero', function(){
             </div>
             <div class="d-flex flex-wrap flex-sm-no-wrap gap-6 align-items-center hh">
                 <div class="vstack gap-2">
-                    <h4 class="font-regular tag-line">Neworking <span class="e55 transition">Redefined</span></h4>
+                    <h4 class="font-regular tag-line">Networking <span class="e55 transition">Redefined</span></h4>
                 </div>
                 <div class="controls transition d-flex justify-content-center jsutify-content-sm-end gap-2 ms-sm-auto">
                     <img width="50" src="<?php echo IMG; ?>/CaretRight.svg" alt="Prev" class="zflip cursor-pointer prev">
