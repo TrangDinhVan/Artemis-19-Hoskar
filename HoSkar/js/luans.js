@@ -128,7 +128,6 @@ $('.js-angle-slider__list').slick({
 });
 
 $(window).on("load", function() {
-    console.log(11);
     if ($(window).width() > 1440) { 
         $('.js-angle-slider__list .slick-current').prev().css({
             'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
@@ -373,7 +372,6 @@ jQuery(document).ready(function($) {
                 $(this).siblings().removeClass('is-active');
                 $('#tab-0').css('display', 'none');
                 
-                // Thêm class is-active vào sub_tab được click
                 $(this).addClass('is-active');
             }
         });
