@@ -43,16 +43,6 @@ add_shortcode( 'reg_form', function(){
                             </div>
                         </div>
                         <input type="text" name="title" placeholder="Title*">
-                        <div class="radios d-none">
-                            <div class="input gap-5 d-flex align-items-center flex-wrap">
-                                <span>Industry Field *</span>
-                                <div class="d-flex gap-3 gap-sm-5 ms-lg-auto flex-wrap">
-                                    <label :class="{active: industry == 'Hospitality'}" for="industry_one"><input v-model="industry" id="industry_one" type="radio" name="industry" value="Hospitality">Hospitality</label>
-                                    <label :class="{active: industry == 'Real Estate'}" for="industry_two"><input v-model="industry" id="industry_two" type="radio" name="industry" value="Real Estate">Real Estate</label>
-                                    <label :class="{active: industry == 'Other'}" for="industry_three"><input v-model="industry" id="industry_three" type="radio" name="industry" value="Other">Other</label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row g-4 yourcompany">
                             <div class="radios col-lg-12">
                                 <div class="input">
@@ -65,7 +55,7 @@ add_shortcode( 'reg_form', function(){
                                                     <label for="city_hanoi"><input id="city_hanoi" type="checkbox" name="yourcity[]" value="Hanoi">Hanoi</label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label for="city_hcmc"><input id="city_hcmc" type="checkbox" name="yourcity[]" value="HCMC ">HCMC </label>
+                                                    <label for="city_hcmc"><input id="city_hcmc" type="checkbox" name="yourcity[]" value="HCMC">HCMC</label>
                                                 </div>
                                                 <div class="col-lg-6 other">
                                                     <label for="city_other"><input id="city_other" type="checkbox" name="yourcity[]" value="Other">Other</label>
@@ -204,6 +194,9 @@ add_shortcode( 'reg_form', function(){
                                         <label for="meet_four"><input id="meet_four" type="checkbox" name="meet" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
                                     </div>
                                     <div class="col-sm-6">
+                                        <label for="meet_four"><input id="meet_four" type="checkbox" name="meet" value="Association/ Authority">Association/ Authority</label>
+                                    </div>
+                                    <div class="col-sm-6">
                                         <label for="meet_de"><input id="meet_de" type="checkbox" name="meet[]" value="Designer / Architect">Designer / Architect</label>
                                     </div>
                                     <div class="col-sm-6">
@@ -225,7 +218,7 @@ add_shortcode( 'reg_form', function(){
                         <div class="radios">
                             <div class="input">
                                 <div class="mb-6">Interact with us or our speakers and leave your question here</div>
-                                <textarea class="lh-13" name="desc" rows="5" placeholder="Tell us your question..."></textarea>
+                                <textarea class="lh-13" name="detail" rows="5" placeholder="Tell us your question..."></textarea>
                             </div>
                         </div>
                         <div class="vstack gap-4 text-center" id="submit_group">
@@ -259,7 +252,6 @@ add_shortcode( 'reg_form', function(){
                     data: {
                         step: 1,
                         gender: '',
-                        industry: '',
                         category: '',
                         yourcompany: '',
                         interest: '',
@@ -293,7 +285,6 @@ add_shortcode( 'reg_form', function(){
                             this.form_data = $('.reg_form form').serializeArray();
                             a = this.form_data;
                             console.log(a);
-                            console.log($('[name="yourcompany"]').val(),'yourcompany');
                             if( $('[name="f_name"]').val() != ''
                                 && $('[name="l_name"]').val() != ''
                                 && $('[name="gender"]').val() != ''
@@ -301,7 +292,6 @@ add_shortcode( 'reg_form', function(){
                                 && $('[name="company_email"]').val() != ''
                                 && $('[name="title"]').val() != ''
                                 && $('[name="yourcompany"]').val() != ''
-                                && $('[name="industry"]').val() != ''
                                 && $('[name="category[]"]').val() != ''
                                 && $('[name="interest"]').val() != ''
                             ){

@@ -51,7 +51,7 @@ add_shortcode( 'intro_hero', function(){
                     effect: "fade",
                     speed: 400,
                     autoplay: {
-                        delay: 2000,
+                        delay: 3000,
                     },
                     navigation: {
                         nextEl: '.next',

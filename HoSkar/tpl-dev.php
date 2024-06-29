@@ -1,6 +1,12 @@
 <?php
 /* Template name: Dev */
 get_header(); ?>
+<div class="py-10"></div>
+<style>
+    body{
+        background-color: #fff !important;
+    }
+</style>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
 <script>
   hbspt.forms.create({
