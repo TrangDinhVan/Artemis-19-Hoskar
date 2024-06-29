@@ -44,7 +44,7 @@ function z_do_ajax() {
                 ),
                 'body' => json_encode( array(
                     "values" => array(array(
-                        printf("%02d", $pid),
+                        sprintf("%02d", $pid),
                         $d['location'],
                         $d['location_url'],
                         $d['gender'],
@@ -55,11 +55,11 @@ function z_do_ajax() {
                         "'".$d['phone'],
                         $d['title'],
                         $d['detail'],
-                        '', //industry - nhưng ko dùng nữa
-                        'category chưa xử lý',
+                        implode( "\n", array_merge( $d['yourcompany'], array($d['other_yourcompany']), $d['yourcity'] ) ),
+                        implode( "\n", array_merge( $d['category'], array($d['other_category']) ) ),
                         $d['interest'],
-                        'Dữ liệu chưa xử lý',
-                        $d['meet'],
+                        implode( "\n", $d['city'] ),
+                        implode( "\n", $d['meet'] ),
                         date_i18n( 'Y-m-d H:i' )
                     ))
                 ) )
@@ -113,17 +113,17 @@ function z_do_ajax() {
                     array(
                         'objectTypeId' => '0-1',
                         'name' => 'wehub_category',
-                        'value' => 'category chưa xử lý'
+                        'value' => $d['category'][0]
                     ),
                     array(
                         'objectTypeId' => '0-1',
                         'name' => 'country',
-                        'value' => 'Dữ liệu chưa xử lý country'
+                        'value' => $d['yourcompany'][0]
                     ),
                     array(
                         'objectTypeId' => '0-1',
                         'name' => 'city',
-                        'value' => 'Dữ liệu chưa xử lý city'
+                        'value' => $d['yourcity'][0]
                     )
                 )
             ))

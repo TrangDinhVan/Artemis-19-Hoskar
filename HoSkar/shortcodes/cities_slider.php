@@ -20,7 +20,7 @@ add_shortcode( 'cities_slider', function(){
                                 <?php if(!empty($a['url'])){ ?>
                                 <a class="flex-center r-25 mx-auto" href="<?php echo $a['url']; ?>">Register</a>
                                 <?php }else{ ?>
-                                <a class="flex-center r-25 mx-auto" href="mailto:Host@wehubyou.com">Registration is still close</a>    
+                                <a class="flex-center r-25 mx-auto" href="mailto:Host@wehubyou.com">Registration is opening soon</a>    
                                 <?php } ?>    
                             </div>
                         </div>

@@ -74,6 +74,20 @@ form .elementor-button:hover{
 .cities .content{
     z-index: 9;
 }
+.upcoming_events h4{
+        font-family: Poppins;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 66px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #FFFFFF;
+    -webkit-text-stroke: 12px transparent;
+    background: linear-gradient(34deg, #2b40e3, #CC7CC3, #343BA0, #FFC3D4);
+    -webkit-background-clip: text;
+    padding: 0px 4px;
+    text-transform: uppercase;
+}
 @media only screen and (min-width:768px) {
 
     .testimonials {
@@ -2747,4 +2761,67 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
             margin: 0;
         }
     } 
-       
+.partner_and_sponsor {
+    gap: 30px 30px;
+}
+.partner_and_sponsor .logo_image {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+.partner_and_sponsor .logo_image img {
+    width: 150px;
+    background-color: #FFFFFF;
+    border-radius: 10px 10px 10px 10px;
+}
+.partner_and_sponsor .logo_image a {
+    display: flex;
+    justify-content: center;
+}
+.partner_and_sponsor .text-center p {
+    font-size: 25.6px;
+    line-height: 38.4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+.entrance_list .no_number {
+    background: radial-gradient(circle at 34%, #F99DEE 0%, #343BA0 53%, #FFC3D4 100%);
+    font-size: 33px;
+    font-weight: 600;
+    position: absolute;
+    color: #FFFFFF;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media only screen and (max-width: 1440px) { 
+    .entrance_list .no_number {
+        font-size: 28px;
+        line-height: 30px;
+    }
+}
+@media only screen and (max-width: 1024px) { 
+    .partner_and_sponsor .text-center p {
+        font-size: 19px;
+        line-height: 28.6px;
+    }
+    .entrance_list .no_number {
+        font-size: 28px;
+        line-height: 30px;
+    }
+}
+@media only screen and (max-width: 767px) { 
+    .partner_and_sponsor .logo_image img {
+        width: 60px;
+    }
+    .partner_and_sponsor .logo_image {
+        gap: 20px;
+    }
+}

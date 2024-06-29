@@ -59,7 +59,7 @@ add_shortcode( 'reg_form', function(){
                                                 </div>
                                                 <div class="col-lg-6 other">
                                                     <label for="city_other"><input id="city_other" type="checkbox" name="yourcity[]" value="Other">Other</label>
-                                                    <textarea class="lh-10 other_city" name="other_city" rows="2" placeholder="Fill in the answer..."></textarea>
+                                                    <textarea class="lh-10 other_city" name="yourcity[]" rows="2" placeholder="Fill in the answer..."></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,10 +129,10 @@ add_shortcode( 'reg_form', function(){
                                 <div class="mb-6">I am intersted in attending *</div>
                                 <div class="row g-4 lh-12">
                                     <div class="col-lg-6">
-                                        <label :class="{active: interest == 'Hoskar Talks (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="Hoskar Talks (from 5:00 to 6:00)">Hoskar Talks</label>
+                                        <label :class="{active: interest == 'HoSkar Talk (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="HoSkar Talk (from 5:00 to 6:00)">HoSkar Talk</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label :class="{active: interest == 'Hoskar Networking (from 6:00)'}" for="ra_net"><input v-model="interest" id="ra_net" type="radio" name="interest" value="Hoskar Networking (from 6:00)">Hoskar Networking</label>
+                                        <label :class="{active: interest == 'HoSkar Networking (from 6:00)'}" for="ra_net"><input v-model="interest" id="ra_net" type="radio" name="interest" value="HoSkar Networking (from 6:00)">HoSkar Networking</label>
                                     </div>
                                     <div class="col-lg-6">
                                         <label :class="{active: interest == 'Both of them'}" for="ra_both"><input v-model="interest" id="ra_both" type="radio" name="interest" value="Both of them">Both sessions</label>
@@ -210,7 +210,7 @@ add_shortcode( 'reg_form', function(){
                                     </div>
                                     <div class="col-sm-6 other">
                                         <label for="meet_o"><input id="meet_o" type="checkbox" name="meet[]" value="Other">Other</label>
-                                        <textarea class="lh-10 other_meet" name="other_meet" rows="4" placeholder="Fill in the answer..."></textarea>
+                                        <textarea class="lh-10 other_meet" name="meet[]" rows="4" placeholder="Fill in the answer..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -273,10 +273,7 @@ add_shortcode( 'reg_form', function(){
                                 success: function (res) {
                                     console.log(res);
                                     app.step = 3;
-                                },
-                                complete: function(res){
-                                    console.log(res);
-                                    app.step = 3;
+                                    console.log("Success!");
                                     $('#submit_group').remove();
                                 }
                             });
@@ -284,21 +281,25 @@ add_shortcode( 'reg_form', function(){
                         canGoToStep2: function(){
                             this.form_data = $('.reg_form form').serializeArray();
                             a = this.form_data;
-                            console.log(a);
-                            if( $('[name="f_name"]').val() != ''
-                                && $('[name="l_name"]').val() != ''
-                                && $('[name="gender"]').val() != ''
-                                && $('[name="company"]').val() != ''
-                                && $('[name="company_email"]').val() != ''
-                                && $('[name="title"]').val() != ''
-                                && $('[name="yourcompany"]').val() != ''
-                                && $('[name="category[]"]').val() != ''
-                                && $('[name="interest"]').val() != ''
-                            ){
-                                this.step = 2;
-                                $('.goSubmit').removeClass('onWaiting');
-                            }else{
-                                alert("Please complete the required fields first!");
+                            // console.log(a.company_email);
+                            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('[name="company_email"]').val())) {
+                                if( $('[name="f_name"]').val() != ''
+                                    && $('[name="l_name"]').val() != ''
+                                    && $('[name="gender"]').val() != ''
+                                    && $('[name="company"]').val() != ''
+                                    && $('[name="company_email"]').val() != ''
+                                    && $('[name="title"]').val() != ''
+                                    && $('[name="yourcompany"]').val() != ''
+                                    && $('[name="category[]"]').val() != ''
+                                    && $('[name="interest"]').val() != ''
+                                ){
+                                    this.step = 2;
+                                    $('.goSubmit').removeClass('onWaiting');
+                                }else{
+                                    alert("Please complete the required fields first!");
+                                }
+                            } else {
+                                alert("Please enter a valid email address");
                             }
                         },
                         maybeLoveAllCities: function(){

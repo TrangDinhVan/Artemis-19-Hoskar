@@ -109,7 +109,7 @@ $('.js-angle-slider__list').slick({
       settings: {
         arrows: false,
         centerMode: true,
-		infinite: false,
+		infinite: true,
         centerPadding: '15px',
         slidesToShow: 1
       }
@@ -119,7 +119,7 @@ $('.js-angle-slider__list').slick({
       settings: {
         arrows: false,
         centerMode: true,
-		infinite: false,
+		infinite: true,
         centerPadding: '15px',
         slidesToShow: 1
       }
@@ -129,16 +129,34 @@ $('.js-angle-slider__list').slick({
 
 $(window).on("load", function() {
     if ($(window).width() > 1440) { 
+        $('.js-angle-slider__list .slick-current').prev().prev().css({
+            'transform': 'translate3d(-16%, 40%, 0px) rotate(-28deg)'
+        });
         $('.js-angle-slider__list .slick-current').prev().css({
             'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
         });
+        $('.js-angle-slider__list .slick-current').next().next().css({
+            'transform': 'translate3d(16%, 40%, 0px) rotate(28deg)'
+        });
     } else if ($(window).width() >= 1024) { 
+        $('.js-angle-slider__list .slick-current').prev().prev().css({
+            'transform': 'translate3d(-8%, 30%, 0px) rotate(-28deg)'
+        });
         $('.js-angle-slider__list .slick-current').prev().css({
             'transform': 'translate3d(-4%, 55px, 0px) rotate(-14deg)'
         });
+        $('.js-angle-slider__list .slick-current').next().next().css({
+            'transform': 'translate3d(8%, 30%, 0px) rotate(28deg)'
+        });
     } else if ($(window).width() >= 768) { 
+        $('.js-angle-slider__list .slick-current').prev().prev().css({
+            'transform': 'translate3d(-8%, 30%, 0px) rotate(-28deg)'
+        });
         $('.js-angle-slider__list .slick-current').prev().css({
             'transform': 'translate3d(-4%, 55px, 0px) rotate(-14deg)'
+        });
+        $('.js-angle-slider__list .slick-current').next().next().css({
+            'transform': 'translate3d(8%, 30%, 0px) rotate(28deg)'
         });
     }
 });
@@ -149,72 +167,109 @@ $('.js-angle-slider__body .slick-arrow').click(function() {
             currentSlide.css('transform', '');
         }
 	if ($(window).width() > 1440) { 
+        $('.js-angle-slider__list .slick-current').prev().prev().css({
+            'transform': 'translate3d(-16%, 40%, 0px) rotate(-28deg)'
+        });
 		$('.js-angle-slider__list .slick-current').prev().css({
 			'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
 		});
 		$('.js-angle-slider__list .slick-current').next().css({
 			'transform': 'translate3d(8%, 100px, 0px) rotate(14deg)'
 		});
+        $('.js-angle-slider__list .slick-current').next().next().css({
+            'transform': 'translate3d(16%, 40%, 0px) rotate(28deg)'
+        });
 	} else if ($(window).width() >= 1024) { 
+        $('.js-angle-slider__list .slick-current').prev().prev().css({
+            'transform': 'translate3d(-8%, 30%, 0px) rotate(-28deg)'
+        });
 		$('.js-angle-slider__list .slick-current').prev().css({
 			'transform': 'translate3d(-4%, 55px, 0px) rotate(-14deg)'
 		});
 		$('.js-angle-slider__list .slick-current').next().css({
 			'transform': 'translate3d(4%, 55px, 0px) rotate(14deg)'
 		});
+        $('.js-angle-slider__list .slick-current').next().next().css({
+            'transform': 'translate3d(8%, 30%, 0px) rotate(28deg)'
+        });
 	} else if ($(window).width() >= 768) { 
-		$('.js-angle-slider__list .slick-current').prev().css({
-			'transform': 'translate3d(-4%, 55px, 0px) rotate(-14deg)'
-		});
-		$('.js-angle-slider__list .slick-current').next().css({
-			'transform': 'translate3d(4%, 55px, 0px) rotate(14deg)'
-		});
-	}
+		$('.js-angle-slider__list .slick-current').prev().prev().css({
+            'transform': 'translate3d(-8%, 30%, 0px) rotate(-28deg)'
+        });
+        $('.js-angle-slider__list .slick-current').prev().css({
+            'transform': 'translate3d(-4%, 55px, 0px) rotate(-14deg)'
+        });
+        $('.js-angle-slider__list .slick-current').next().css({
+            'transform': 'translate3d(4%, 55px, 0px) rotate(14deg)'
+        });
+        $('.js-angle-slider__list .slick-current').next().next().css({
+            'transform': 'translate3d(8%, 30%, 0px) rotate(28deg)'
+        });
+	} else if ($(window).width() < 767) {
+        $('.js-angle-slider__list .slick-current').prev().css({
+            'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
+        });
+        $('.js-angle-slider__list .slick-current').next().css({
+            'transform': 'translate3d(8%, 100px, 0px) rotate(14deg)'
+        });
+    }
 });
-$('.paginator .next.slick-arrow').on('click', function(){
-	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
-        if(currentIndex === 2) {
-            $('.js-angle-slider__list .slick-slide:nth-child(1)').css('transform', 'translate3d(-15%, 40%, 0px) rotate(-28deg)');
-			//$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled');
-        } else {
-            $('.js-angle-slider__list .slick-slide:nth-child(1)').css('transform', '');
-			//$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled');
-        }
+// $('.paginator .next.slick-arrow').on('click', function(){
+// 	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+//     var slideCount = $('.js-angle-slider__list').slick('getSlick').slideCount;
+//         if(currentIndex === slideCount - 1) {
+// 			$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled');
+//         } else {
+// 			$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled');
+//         }
 
-});
-$('.paginator .prev.slick-arrow').on('click', function(){
-	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
-        if(currentIndex === 0) {
-            $('.js-angle-slider__list .slick-slide:nth-child(3)').css('transform', 'translate3d(15%, 40%, 0px) rotate(28deg)');
-			//$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled');
-        } else {
-            $('.js-angle-slider__list .slick-slide:nth-child(3)').css('transform', '');
-			//$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled');
-        }
+// });
+// $('.paginator .prev.slick-arrow').on('click', function(){
+// 	var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+//         if(currentIndex === 0) {
+// 			$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled');
+//         } else {
+// 			$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled');
+//         }
 
-});
+// });
+
 if ($(window).width() < 768) { 
 	$('.paginator .next').on('click', function(){
-		var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
-			if(currentIndex === 2) {
-				$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled slick-arrow');
-				$('.js-angle-slider__body .paginator li.prev').addClass('check-slider-mobile');
-			} else {
-				$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
-				$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
-				$('.js-angle-slider__body .paginator li').removeClass('check-slider-mobile');
-			}
+        $('.js-angle-slider__list .slick-current').prev().css({
+            'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
+        });
+        $('.js-angle-slider__list .slick-current').next().css({
+            'transform': 'translate3d(8%, 100px, 0px) rotate(14deg)'
+        });
+		// var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+		// var slideCount = $('.js-angle-slider__list').slick('getSlick').slideCount;
+        //     if(currentIndex === slideCount - 1) {
+		// 		$('.js-angle-slider__body .paginator li.next').addClass('slick-disabled slick-arrow');
+		// 		$('.js-angle-slider__body .paginator li.prev').addClass('check-slider-mobile');
+		// 	} else {
+		// 		$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
+		// 		$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
+		// 		$('.js-angle-slider__body .paginator li').removeClass('check-slider-mobile');
+		// 	}
 
 	});
 	$('.paginator .prev').on('click', function(){
-		var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
-			if(currentIndex === 0) {
-				$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled slick-arrow');
-			} else {
-				$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
-				$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
-				$('.js-angle-slider__body .paginator li').removeClass('check-slider-mobile');
-			}
+        $('.js-angle-slider__list .slick-current').prev().css({
+            'transform': 'translate3d(-8%, 100px, 0px) rotate(-14deg)'
+        });
+        $('.js-angle-slider__list .slick-current').next().css({
+            'transform': 'translate3d(8%, 100px, 0px) rotate(14deg)'
+        });
+
+		// var currentIndex = $('.js-angle-slider__list').slick('slickCurrentSlide');
+		// 	if(currentIndex === 0) {
+		// 		$('.js-angle-slider__body .paginator li.prev').addClass('slick-disabled slick-arrow');
+		// 	} else {
+		// 		$('.js-angle-slider__body .paginator li.prev').removeClass('slick-disabled slick-arrow');
+		// 		$('.js-angle-slider__body .paginator li.next').removeClass('slick-disabled slick-arrow');
+		// 		$('.js-angle-slider__body .paginator li').removeClass('check-slider-mobile');
+		// 	}
 
 	});
 }

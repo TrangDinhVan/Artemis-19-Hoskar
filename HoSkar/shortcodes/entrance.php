@@ -7,12 +7,16 @@ add_shortcode( 'entrance', function(){
   <div class="js-angle-slider__body">
 
     <div class="js-angle-slider__list" data-slide-angle="12" data-show="7" data-speed="400" data-drag-speed-ratio="0.1" data-dots="true">
-        <?php if( have_rows('extrance') ): ?>
-            <?php while( have_rows('extrance') ): the_row(); ?>
+        <?php if( have_rows('extrance') ): 
+            $i = 0;
+            ?>
+            <?php while( have_rows('extrance') ): the_row(); 
+                $i = $i + 1;?>
                 <div class="js-angle-slider__item gradient-border register">
 					<img decoding="async" class="image-register" width="20" src="/hoskar/wp-content/uploads/2024/05/bg_box_large.png" alt="..">
+                    <span class="no_number"><?php echo $i;?></span> 
 					<!-- <img decoding="async" class="image-register-2" width="20" src="/hoskar/wp-content/uploads/2024/06/Subtract-1.png" alt=".."> -->
-                    <div class="slider_contents">						
+                    <div class="slider_contents">	
                         <div class="border-title-register">
                             <h2 class="h2-register">
                                 <?php the_sub_field('title'); ?>

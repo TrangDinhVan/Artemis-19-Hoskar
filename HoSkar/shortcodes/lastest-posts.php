@@ -14,7 +14,15 @@ add_shortcode( 'lastest_posts', function(){
                 ?>  
                     <div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4">
                     <div class="img">
-                        <img src="<?php the_post_thumbnail_url('full'); ?>" alt="Blog" />
+                        <?php if ( has_post_thumbnail() ) : ?>
+                            <a href="<?php the_permalink(); ?>">
+                                <img src="<?php the_post_thumbnail_url('full'); ?>" alt="Blog" />
+                            </a>
+                        <?php else : ?>
+                            <a href="<?php the_permalink(); ?>">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/default-featured-image.jpg" alt="Default Image" />
+                            </a>
+                        <?php endif; ?>
                     </div>
                     <div class="infor">
                         <div class="top">

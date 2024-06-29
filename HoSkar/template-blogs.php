@@ -43,7 +43,16 @@
         	
 <!-- 				<div class="blog-item" style="background-image: url('<?php //the_post_thumbnail_url('full'); ?>');"> -->
 				<div class="blog-item">
-					<a href="<?php the_permalink(); ?>"><img src="<?php the_post_thumbnail_url('full'); ?>" alt="Blog" /></a>
+					
+					<?php if ( has_post_thumbnail() ) : ?>
+					    <a href="<?php the_permalink(); ?>">
+					        <img src="<?php the_post_thumbnail_url('full'); ?>" alt="Blog" />
+					    </a>
+					<?php else : ?>
+					    <a href="<?php the_permalink(); ?>">
+					        <img src="<?php echo get_template_directory_uri(); ?>/images/default-featured-image.jpg" alt="Default Image" />
+					    </a>
+					<?php endif; ?>
 					
 					<div class="infor">
 						<p class="date"><?php the_time('jS F, Y');?></p>
@@ -81,8 +90,15 @@
 		        ?>
 				<div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4">
 					<div class="img">
-						<a href="<?php the_permalink(); ?>"><img src="<?php the_post_thumbnail_url('full'); ?>" alt="Blog" /></a>
-						
+						<?php if ( has_post_thumbnail() ) : ?>
+						    <a href="<?php the_permalink(); ?>">
+						        <img src="<?php the_post_thumbnail_url('full'); ?>" alt="Blog" />
+						    </a>
+						<?php else : ?>
+						    <a href="<?php the_permalink(); ?>">
+						        <img src="<?php echo get_template_directory_uri(); ?>/images/default-featured-image.jpg" alt="Default Image" />
+						    </a>
+						<?php endif; ?>
 					</div>
 					<div class="infor">
 						<div class="top">
