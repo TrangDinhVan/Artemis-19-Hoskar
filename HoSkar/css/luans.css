@@ -88,6 +88,13 @@ form .elementor-button:hover{
     padding: 0px 4px;
     text-transform: uppercase;
 }
+.intro-hero h2{
+    letter-spacing: -10px;
+    font-family: DM Sans!important;
+}
+.intro-hero h4{
+    line-height: 1.5!important;
+}
 @media only screen and (min-width:768px) {
 
     .testimonials {
@@ -391,8 +398,11 @@ button.js-angle-slider__next {
 .js-angle-slider__body {
   position: relative;
 }
-.js-angle-slider__body .slick-slide:not(.slick-current) {
+.js-angle-slider__body .slick-slide {
     opacity: 0.2;
+}
+.js-angle-slider__body .slick-slide.slick-current {
+    opacity: 1;
 }
 .js-angle-slider__list .slick-slide.slick-current.slick-center + div {
     transform: translate3d(8%, 100px, 0px) rotate(14deg);
@@ -427,11 +437,32 @@ button.js-angle-slider__next {
   z-index: 2000;
     position: relative;
 }
-
+.js-angle-slider__body .slick-list:before{
+    content:'';
+    transform: translate3d(-8%, 100px, 0px) rotate(-14deg);
+    width: 33.33%;
+    position: absolute;
+    left: 0;
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+    height: 100%;
+    z-index: 9;
+}
+.js-angle-slider__body .slick-list:after{
+    content:'';
+    transform: translate3d(8%, 100px, 0px) rotate(14deg);
+    width: 33.33%;
+    position: absolute;
+    left: 0;
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+    height: 100%;
+    z-index: 9;
+}
   /* the slides */
   .js-angle-slider__body .slick-slide {
       margin: 0 40px;
-      transition: all 1s;
+      transition: all 0.3s;
   }
 
   /* the parent */
@@ -1454,7 +1485,12 @@ p.hoskar-register-4{
         width:220px;
         height:auto;
     }
-
+    .intro-hero h2{
+        letter-spacing: inherit;
+    }
+    .features .hh{
+        font-size: 30px!important;
+    }
 }
 
 /* GALLERYS */
@@ -2823,5 +2859,8 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
     }
     .partner_and_sponsor .logo_image {
         gap: 20px;
+    }
+    .intro-hero .swiper-wrapper {
+        height: 322px;
     }
 }
