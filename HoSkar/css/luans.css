@@ -462,7 +462,7 @@ button.js-angle-slider__next {
   /* the slides */
   .js-angle-slider__body .slick-slide {
       margin: 0 40px;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
   }
 
   /* the parent */
