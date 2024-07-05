@@ -64,7 +64,7 @@ add_shortcode( 'reg_form', function(){
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="lo_phi"><input id="lo_phi" type="checkbox" name="yourcompany[]" value="Philipine">Philipine</label>
+                                            <label for="lo_phi"><input id="lo_phi" type="checkbox" name="yourcompany[]" value="Philippines">Philippines</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="lo_thai"><input id="lo_thai" type="checkbox" name="yourcompany[]" value="Thailand">Thailand</label>
