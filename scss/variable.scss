@@ -150,7 +150,8 @@ $body-color: #4F4B41;
 }
 
 .text-underline {
-    text-decoration: underline;
+    text-decoration: underline !important;
+    text-underline-position: under;
 }
 
 .font-regular {

@@ -221,6 +221,11 @@ add_shortcode( 'reg_form', function(){
                                 <textarea class="lh-13" name="detail" rows="5" placeholder="Tell us your question..."></textarea>
                             </div>
                         </div>
+                        <div class="radios">
+                            <div class="input font-9x font-regular lh-15">
+                                <label for="term_agreement" class="d-block"><input id="term_agreement" v-modal="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">Bằng cách tiếp tục đăng kí, chúng tôi hiểu rằng bạn cam kết đã đọc, hiểu, chấp nhận những điều khoản, quy định và chính sách quyền riêng tư của chúng tôi/ By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline">Privacy Policy</a></label>
+                            </div>
+                        </div>
                         <div class="vstack gap-4 text-center" id="submit_group">
                             <div class="btn-rainbow">
                                 <a class="w-100 goSubmit onWaiting" style="max-width: none;" href="#" @click.prevent="submit">Submit <i class="bi bi-send"></i></a>
@@ -256,27 +261,32 @@ add_shortcode( 'reg_form', function(){
                         yourcompany: '',
                         interest: '',
                         meet: '',
+                        term_agreement: '',
                         form_data: []
                     },
                     methods: {
                         submit: function(){
-                            $('.goSubmit').text("Loading...").addClass('onWaiting');
-                            $.ajax({
-                                type: "POST",
-                                url: zing.ajax_url,
-                                data: {
-                                    action: 'z_do_ajax',
-                                    _action: 'submitReg',
-                                    form_data: $('.reg_form form').serialize()
-                                },
-                                dataType: "json",
-                                success: function (res) {
-                                    console.log(res);
-                                    app.step = 3;
-                                    console.log("Success!");
-                                    $('#submit_group').remove();
-                                }
-                            });
+                            if( this.term_agreement != 'Yes' ){
+                                alert("Please confirm that you agree with our Term and Condition and Privacy Policy.");
+                            }else{
+                                $('.goSubmit').text("Loading...").addClass('onWaiting');
+                                $.ajax({
+                                    type: "POST",
+                                    url: zing.ajax_url,
+                                    data: {
+                                        action: 'z_do_ajax',
+                                        _action: 'submitReg',
+                                        form_data: $('.reg_form form').serialize()
+                                    },
+                                    dataType: "json",
+                                    success: function (res) {
+                                        console.log(res);
+                                        app.step = 3;
+                                        console.log("Success!");
+                                        $('#submit_group').remove();
+                                    }
+                                });
+                            }
                         },
                         canGoToStep2: function(){
                             this.form_data = $('.reg_form form').serializeArray();
