@@ -10,7 +10,7 @@
 			<h2>Blog</h2>
 			<div class="div_heading">
 				<h3>Latest</h3>
-				<p class="btn-rainbow"><a href="javascript:void(0);">News</a></p>
+				<p class="btn-rainbow"><span class="elementor-heading-title">News</span></p>
 			</div>
 		</div>
 	</div>

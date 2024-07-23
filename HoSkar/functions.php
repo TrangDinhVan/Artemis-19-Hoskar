@@ -68,34 +68,6 @@ function add_theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
 
-// Gallery post type
-// add_theme_support('post-thumbnails');
-// add_post_type_support( 'gallery', 'thumbnail' );    
-// function create_posttype_gallery() {
- 
-//     register_post_type( 'gallery',
-//     // CPT Options
-//         array(
-//             'labels' => array(
-//                 'name' => __( 'Gallery' ),
-//                 'singular_name' => __( 'Gallery' )
-//             ),
-//             'supports' => array(
-//             'title', 
-//             'thumbnail',
-//             'editor',
-//             'custom-fields'
-//             ), 
-//             'taxonomies' => array( 'category', 'post_tag',  ), 
-//             'public' => true,
-//             'has_archive' => true,
-//             'rewrite' => array('slug' => 'gallery'),
-//         )
-//     );
-// }
-// // Hooking up our function to theme setup
-// add_action( 'init', 'create_posttype_gallery' );
-
 
 function load_more_posts() {
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
@@ -158,58 +130,46 @@ function load_more_posts() {
 add_action('wp_ajax_load_more_posts', 'load_more_posts');
 add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
 
-function load_more_gallery() {
-    $title = sanitize_text_field($_POST['title']);
-    $page = intval($_POST['page']);
-    $offset = ($page - 1) * 9;
-    $id = $_POST['id'];
-    $html = '';
-    
-    if (have_rows('gallery_locations', $id)) {
-        $count = 0;
-        while (have_rows('gallery_locations', $id)) {
-            the_row();
-            $gallery = get_sub_field('images', $id);
-            if ($gallery) {
-                foreach ($gallery as $image) {
-                    if($title == 0 || $title == '0'){
-                        if ($count >= $offset && $count < $offset + 9) {
-                            $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
-                            $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
-                            $html .= '</a>';
-                        }
-                        $count++;
-                    }else{
-                        $or_title = sanitize_title(get_sub_field('title', $id));
-                        if ($or_title == $title) {
-                            if ($count >= $offset && $count < $offset + 9) {
-                                $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
-                                $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
-                                $html .= '</a>';
-                            }
-                            $count++;
-                        }
-                    }
-                }
-            }
-        }
-        if ($count <= $offset + 9) {
-            $response = array('html' => $html, 'no_more_posts' => true);
-        } else {
-            $response = array('html' => $html);
-        }
-    } else {
-        $response = array('html' => '', 'no_more_posts' => true);
-    }
-
-    echo json_encode($response);
-    wp_die();
-}
-
+// AJAX handler to load more gallery images
 add_action('wp_ajax_load_more_gallery', 'load_more_gallery');
 add_action('wp_ajax_nopriv_load_more_gallery', 'load_more_gallery');
 
+function load_more_gallery() {
+    $post_id = intval($_POST['id']);
+    $tab_id = intval($_POST['tab_id']);
+    $page = intval($_POST['page']);
 
+    if (have_rows('tab_gallery', $post_id)) {
+        $i = 0;
+        while (have_rows('tab_gallery', $post_id)) {
+            the_row();
+            $i++;
+            if ($i == $tab_id) {
+                $gallery = get_sub_field('image');
+                $total_images = count($gallery);
+                $images_to_show = array_slice($gallery, ($page - 1) * 9, 9);
+
+                ob_start();
+                foreach ($images_to_show as $image) {
+                    ?>
+                    <a class="gallery-item" href="<?php echo esc_url($image['url']); ?>" target="_blank" data-fancybox="mygallery">
+                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                    </a>
+                    <?php
+                }
+                $html = ob_get_clean();
+
+                wp_send_json_success([
+                    'html' => $html,
+                    'no_more_posts' => count($images_to_show) < 9
+                ]);
+                exit;
+            }
+        }
+    }
+
+    wp_send_json_error();
+}
 
 
 function load_more_gallerys() {
@@ -220,17 +180,17 @@ function load_more_gallerys() {
     $id = $_POST['id'];
     $html = '';
 
-    if (have_rows('tab_gallery', $id)) {
-        while (have_rows('tab_gallery', $id)) {
+    if (have_rows('tab_gallery2', $id)) {
+        while (have_rows('tab_gallery2', $id)) {
             the_row();
-            $loca = get_sub_field('title');
+            $loca = get_sub_field('title2');
 
             if($loca == $location) {
                 $count = 0;
-                if (have_rows('location_gallery', $id)) {
-                    while (have_rows('location_gallery', $id)) {
+                if (have_rows('location_gallery2', $id)) {
+                    while (have_rows('location_gallery2', $id)) {
                         the_row();
-                        $gallery = get_sub_field('image', $id);
+                        $gallery = get_sub_field('image2', $id);
                         if ($gallery) {
                             foreach ($gallery as $image) {
                                 if($title == 0 || $title == '0'){
@@ -241,7 +201,7 @@ function load_more_gallerys() {
                                     }
                                     $count++;
                                 }else{
-                                    $or_title = sanitize_title(get_sub_field('title_location', $id));
+                                    $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                     if ($or_title == $title) {
                                         if ($count >= $offset && $count < $offset + 9) {
                                             $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
@@ -265,13 +225,13 @@ function load_more_gallerys() {
             } 
             else {
                 if($title == 0 || $title == '0') {
-                    if (have_rows('location_gallery', $id)) {
-                        while (have_rows('location_gallery', $id)) {
+                    if (have_rows('location_gallery2', $id)) {
+                        while (have_rows('location_gallery2', $id)) {
                             the_row();
-                            $gallery = get_sub_field('image', $id);
+                            $gallery = get_sub_field('image2', $id);
                             if ($gallery) {
                                 foreach ($gallery as $image) {
-                                    $or_title = sanitize_title(get_sub_field('title_location', $id));
+                                    $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                     if ($or_title == $title) {
                                         if ($count >= $offset && $count < $offset + 9) {
                                             $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
@@ -295,13 +255,13 @@ function load_more_gallerys() {
                 else {
                     if($loca == $location) {
                         $count = 0;
-                        if (have_rows('location_gallery', $id)) {
-                            while (have_rows('location_gallery', $id)) {
+                        if (have_rows('location_gallery2', $id)) {
+                            while (have_rows('location_gallery2', $id)) {
                                 the_row();
-                                $gallery = get_sub_field('image', $id);
+                                $gallery = get_sub_field('image2', $id);
                                 if ($gallery) {
                                     foreach ($gallery as $image) {
-                                        $or_title = sanitize_title(get_sub_field('title_location', $id));
+                                        $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                         if ($or_title == $title) {
                                             if ($count >= $offset && $count < $offset + 9) {
                                                 $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';

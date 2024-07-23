@@ -1,3 +1,12 @@
+.intro-hero .e5 .swiper-slide{
+    height: auto;
+}
+.intro-hero .e6{
+    display: flex;
+}
+.intro-hero h2 span.b{
+    letter-spacing: 0px;
+}
 .banner_registration .bg_overlay:before {
     content: '';
     height: 100%;
@@ -89,7 +98,7 @@ form .elementor-button:hover{
     text-transform: uppercase;
 }
 .intro-hero h2{
-    letter-spacing: -10px;
+    letter-spacing: inherit;
     font-family: DM Sans!important;
 }
 .intro-hero h4{
@@ -793,7 +802,7 @@ hr.hidden-borders {
     text-align: left;
 }
 
-.page-template-template-blogs .blog-page .heading_page .div_heading p.btn-rainbow a {
+.page-template-template-blogs .blog-page .heading_page .div_heading p.btn-rainbow span {
     font-family: DM Sans;
     font-size: 48px;
     font-weight: 700;
@@ -971,6 +980,8 @@ hr.hidden-borders {
     display: flex;
     justify-content: center;
     gap: 20px;
+    z-index: 9;
+    position: relative;
 }
 .page-template-template-blogs .blog-page .pagination a.page-numbers {
     color: #FDFDFD80;
@@ -1718,10 +1729,6 @@ form.frm-gallery.dropdown .location-gallery select, form.frm-gallery.dropdown .t
             margin-top: 145px;
           margin-bottom: 40px;
     }
-    .page-template-template-gallerys .gallery_page .main .banner_category h2 {
-        font-size: 45px;
-    line-height: 45px;
-    }
     .page-template-template-gallerys .gallery_page .main .banner_category.no_image {
         margin-bottom: 0;
     }
@@ -2277,7 +2284,6 @@ form.frm-gallery.dropdown .location-gallery select, form.frm-gallery.dropdown .t
     display: flex;
     flex-wrap: wrap;
     justify-content: var(--titles-container-justify-content, center);
-    margin-bottom: 20px;
 }
 
 .gallery_page .main .tab-container .tab {
@@ -2408,10 +2414,6 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
         line-height: 50px;
         padding-top: 145px;
         margin-bottom: 40px;
-    }
-    .gallery_page .main .banner_category h2 {
-        font-size: 45px;
-    	line-height: 45px;
     }
     .gallery_page .main .banner_category.no_image {
         margin-bottom: 0;
@@ -2547,7 +2549,16 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
     margin: auto;
     width: auto;
 }*/
-
+.contact_box_form .elementor-field-group-term_and_codition label{
+    color: #FDFDFD80!important;
+}
+.contact_box_form{
+    background: #383738;
+} 
+.contact_box_form .elementor-field-group-term_and_codition label a{
+    text-transform: capitalize;
+    text-decoration: underline;
+}
 @media only screen and (width: 768px) {
     .js-angle-slider__body .slider_contents {
         padding: 0 20px;
@@ -2594,12 +2605,13 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
         -webkit-background-clip: text;
         padding: 15px 30px;
         font-family: Poppins;
-        font-size: 50px;
+        font-size: 46px;
         font-weight: 800;
-        line-height: 70px;
+        line-height: 1.2;
         letter-spacing: -0.02em;
         text-align: center;
         background-image: radial-gradient(70.63% 251.85% at 29.83% 84.37%, #F99DEE 0%, #343BA0 52.53%, #CC7CC3 100%, #FFC3D4 100%);
+        width: 100%;
     }
     .gallery_page .banner_category img {
         border-radius: 29px;
@@ -2638,6 +2650,9 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
         color: #FCFCF9;
         height: 35px;
     }
+    .tab-content.is-active{
+        display: block;
+    }
     p.tab_parent.is-active ~ .sub_tabs {
         display: flex;
         position: absolute;
@@ -2656,7 +2671,7 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
     }
     .gallery_page .main .tab-container ul.tabs {
         position: relative;
-        margin-bottom: 90px;
+        margin-bottom: 80px;
     }
     .gallery_page .main .tab-container .tab.is-active {
         font-family: "DM Sans", Sans-serif;
@@ -2775,9 +2790,7 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
             align-items: center;
         }
         .gallery_page .main .banner_category h2 {
-            font-size: 35px;
-            line-height: 35px;
-            width: 90%;
+            font-size: 20px;
         }
         .gallery_page .banner_category img {
             height: 100px;
@@ -2851,6 +2864,11 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
     .entrance_list .no_number {
         font-size: 28px;
         line-height: 30px;
+    }
+    .gallery_page .banner_category h2{
+        font-size: 24px;
+        line-height: 1.3;
+        width: 90%;
     }
 }
 @media only screen and (max-width: 767px) { 
