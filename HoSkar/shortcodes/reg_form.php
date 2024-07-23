@@ -6,7 +6,7 @@ add_shortcode( 'reg_form', function(){
             <form action="">
                 <input type="hidden" name="location" value="<?php the_title(); ?>">
                 <input type="hidden" name="location_url" value="<?php the_permalink(); ?>">
-                <div class="steps-label d-flex gap-1 lh-10 font-medium mb-6">
+                <div class="steps-label d-flexx d-none gap-1 lh-10 font-medium mb-6">
                     <div @click="step = 1" class="s" :class="{ active : step > 0 }">Step 1</div>
                     <div @click="step = 2" class="s" :class="{ active : step > 1 }">Step 2</div>
                 </div>
@@ -140,21 +140,21 @@ add_shortcode( 'reg_form', function(){
                                 </div>
                             </div>
                         </div>
-                        <div class="py-1"></div>
-                        <div class="btn-rainbow">
+                        <div class="py-100"></div>
+                        <div class="btn-rainbow d-none">
                             <a class="w-100" style="max-width: none;" href="#" @click.prevent="canGoToStep2">Step 2 <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                <div v-show="step > 1">
+                <div v-show="step > 1 || true">
                     <div class="vstack gap-5 lh-10">
                         <h4 class="font-semi-bold font-15x mb-2">Let’s make HoSkar about you!</h4>
                         <div class="radios">
                             <div class="input">
-                                <div class="mb-6 lh-12">I am interested in attending or sponsoring also HoSkar Night in:</div>
+                                <div class="mb-6 lh-12"> I am interested in attending HoSkar Night in HoSkar Night in:</div>
                                 <div class="row g-4 lh-12">
                                     <div class="col-sm-6">
-                                        <label for="ci_hcmc"><input id="ci_hcmc" type="checkbox" name="city[]" value="Hcmc">Hcmc</label>
+                                        <label for="ci_hcmc"><input id="ci_hcmc" type="checkbox" name="city[]" value="Hcmc">HCMC</label>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="ci_MANILA"><input id="ci_MANILA" type="checkbox" name="city[]" value="Manila">Manila</label>
@@ -166,51 +166,10 @@ add_shortcode( 'reg_form', function(){
                                         <label for="ci_SINGAPORE"><input id="ci_SINGAPORE" type="checkbox" name="city[]" value="Singapore">Singapore</label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="ci_BANGKOK"><input id="ci_BANGKOK" type="checkbox" name="city[]" value="Bangkor">Bangkor</label>
+                                        <label for="ci_BANGKOK"><input id="ci_BANGKOK" type="checkbox" name="city[]" value="Bangkor">Bangkok</label>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="ci_PHNOMPENH"><input id="ci_PHNOMPENH" type="checkbox" name="city[]" value="Phnom Penh">Phnom Penh</label>
-                                    </div>
-                                    <!-- <div class="col-sm-6">
-                                        <label @click="maybeLoveAllCities" for="ci_ph"><input id="ci_ph" type="checkbox" name="love_all_cities" value="ALL OF ABOVE">ALL OF ABOVE</label>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="radios">
-                            <div class="input">
-                                <div class="mb-6">Expand business connections. Who would you like to meet?</div>
-                                <div class="row g-4 lh-12">
-                                    <div class="col-sm-6">
-                                        <label for="meet_one"><input id="meet_one" type="checkbox" name="meet[]" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_two"><input id="meet_two" type="checkbox" name="meet[]"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_three"><input id="meet_three" type="checkbox" name="meet[]" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_four"><input id="meet_four" type="checkbox" name="meet" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_four"><input id="meet_four" type="checkbox" name="meet" value="Association/ Authority">Association/ Authority</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_de"><input id="meet_de" type="checkbox" name="meet[]" value="Designer / Architect">Designer / Architect</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_pro"><input id="meet_pro" type="checkbox" name="meet[]" value="Product / Service Provider">Product / Service Provider</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_con"><input id="meet_con" type="checkbox" name="meet[]" value="Contractor / Project Management">Contractor / Project Management</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="meet_re"><input id="meet_re" type="checkbox" name="meet[]" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
-                                    </div>
-                                    <div class="col-sm-6 other">
-                                        <label for="meet_o"><input id="meet_o" type="checkbox" name="meet[]" value="Other">Other</label>
-                                        <textarea class="lh-10 other_meet" name="meet[]" rows="4" placeholder="Fill in the answer..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -223,14 +182,14 @@ add_shortcode( 'reg_form', function(){
                         </div>
                         <div class="radios">
                             <div class="input font-9x font-regular lh-15">
-                                <label for="term_agreement" class="d-block"><input id="term_agreement" v-modal="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">Bằng cách tiếp tục đăng kí, chúng tôi hiểu rằng bạn cam kết đã đọc, hiểu, chấp nhận những điều khoản, quy định và chính sách quyền riêng tư của chúng tôi/ By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline">Privacy Policy</a></label>
+                                <label for="term_agreement" class="d-block"><input id="term_agreement" v-model="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline">Privacy Policy</a></label>
                             </div>
                         </div>
                         <div class="vstack gap-4 text-center" id="submit_group">
                             <div class="btn-rainbow">
-                                <a class="w-100 goSubmit onWaiting" style="max-width: none;" href="#" @click.prevent="submit">Submit <i class="bi bi-send"></i></a>
+                                <a class="w-100 goSubmit onWaitingg" style="max-width: none;" href="#" @click.prevent="submit">Submit <i class="bi bi-send"></i></a>
                             </div>
-                            <div class="text-center">
+                            <div class="text-center d-none">
                                 <a class="flex-center gap-2" href="#" @click.prevent="step = 1"><i class="bi bi-arrow-left"></i>Step 1</a>
                             </div>
                         </div>
@@ -266,32 +225,44 @@ add_shortcode( 'reg_form', function(){
                     },
                     methods: {
                         submit: function(){
-                            if( this.term_agreement != 'Yes' ){
+                            if( !this.term_agreement ){
                                 alert("Please confirm that you agree with our Term and Condition and Privacy Policy.");
                             }else{
-                                $('.goSubmit').text("Loading...").addClass('onWaiting');
-                                $.ajax({
-                                    type: "POST",
-                                    url: zing.ajax_url,
-                                    data: {
-                                        action: 'z_do_ajax',
-                                        _action: 'submitReg',
-                                        form_data: $('.reg_form form').serialize()
-                                    },
-                                    dataType: "json",
-                                    success: function (res) {
-                                        console.log(res);
-                                        app.step = 3;
-                                        console.log("Success!");
-                                        $('#submit_group').remove();
-                                    }
-                                });
+                                 if( $('[name="f_name"]').val() != ''
+                                    && $('[name="l_name"]').val() != ''
+                                    && $('[name="gender"]').val() != ''
+                                    && $('[name="company"]').val() != ''
+                                    && $('[name="company_email"]').val() != ''
+                                    && $('[name="title"]').val() != ''
+                                    && $('[name="yourcompany"]').val() != ''
+                                    && $('[name="category[]"]').val() != ''
+                                    && $('[name="interest"]').val() != ''
+                                ){
+                                    $('.goSubmit').text("Loading...").addClass('onWaiting');
+                                    $.ajax({
+                                        type: "POST",
+                                        url: zing.ajax_url,
+                                        data: {
+                                            action: 'z_do_ajax',
+                                            _action: 'submitReg',
+                                            form_data: $('.reg_form form').serialize()
+                                        },
+                                        dataType: "json",
+                                        success: function (res) {
+                                            console.log(res);
+                                            app.step = 3;
+                                            console.log("Success!");
+                                            $('#submit_group').remove();
+                                        }
+                                    });
+                                }else{
+                                    alert("Please complete the required fields first!");
+                                }
                             }
                         },
                         canGoToStep2: function(){
                             this.form_data = $('.reg_form form').serializeArray();
                             a = this.form_data;
-                            // console.log(a.company_email);
                             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('[name="company_email"]').val())) {
                                 if( $('[name="f_name"]').val() != ''
                                     && $('[name="l_name"]').val() != ''
@@ -332,14 +303,6 @@ add_shortcode( 'reg_form', function(){
                         $(this).parents('.morecity').removeClass("active");
                     }
                 });
-                // $('.morecity input[type="checkbox"]').on('change', function(){
-                //     console.log($(this).val(),'val');
-                //    if($(this).val()=="Vietnam"){
-                //         $(this).parents('.morecity').addClass("active");
-                //    }else{
-                //         $(this).parents('.morecity').removeClass("active");
-                //    }
-                // });
             });
         </script>
         <?php
