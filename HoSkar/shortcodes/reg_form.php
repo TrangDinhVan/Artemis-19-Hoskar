@@ -182,7 +182,7 @@ add_shortcode( 'reg_form', function(){
                         </div>
                         <div class="radios">
                             <div class="input font-9x font-regular lh-15">
-                                <label for="term_agreement" class="d-block"><input id="term_agreement" v-model="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline">Privacy Policy</a></label>
+                                <label for="term_agreement" class="d-block"><input id="term_agreement" v-model="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline" target="_blank">Privacy Policy</a></label>
                             </div>
                         </div>
                         <div class="vstack gap-4 text-center" id="submit_group">
@@ -238,7 +238,8 @@ add_shortcode( 'reg_form', function(){
                                     && $('[name="category[]"]').val() != ''
                                     && $('[name="interest"]').val() != ''
                                 ){
-                                    $('.goSubmit').text("Loading...").addClass('onWaiting');
+                                    // $('.goSubmit').text("Loading...").addClass('onWaiting');
+                                    console.log($('.reg_form form').serializeArray());
                                     $.ajax({
                                         type: "POST",
                                         url: zing.ajax_url,
@@ -253,6 +254,9 @@ add_shortcode( 'reg_form', function(){
                                             app.step = 3;
                                             console.log("Success!");
                                             $('#submit_group').remove();
+                                        },
+                                        complete: function(ss){
+                                            console.log(ss);
                                         }
                                     });
                                 }else{

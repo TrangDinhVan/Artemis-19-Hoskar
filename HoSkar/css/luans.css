@@ -1,3 +1,6 @@
+.logos img{
+    max-width: 160px;
+}
 .intro-hero .e5 .swiper-slide{
     height: auto;
 }
@@ -1264,6 +1267,9 @@ p.hoskar-register-4{
     .counter_number .elementor-counter-number{
         font-size:180px;
     }
+	.elementor-15 .elementor-element.elementor-element-0d5ef76 img {
+		width: 400px;
+	}
 }
 @media (max-width: 1366px){
     .counter_number .elementor-counter-number{
@@ -1286,6 +1292,9 @@ p.hoskar-register-4{
     
 }
 @media (max-width: 1024px){
+	.elementor-15 .elementor-element.elementor-element-0d5ef76 img {
+        width: 150px; 
+    }
     .animation .gallery_registration .position_lef_center {
         left: -167px;
     }
@@ -1309,6 +1318,9 @@ p.hoskar-register-4{
     }
 }
 @media (max-width: 767px){
+	.elementor-15 .elementor-element.elementor-element-0d5ef76 img {
+        width: 120px; 
+    }
     .img_regis .elementor-widget-image{
         text-align: center;
     }
@@ -2659,8 +2671,8 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
         left: 50%;
         transform: translate(-50%, 30%);
         border-radius: 100px;
-        border: 1px solid #FFFFFF33;
-        background: linear-gradient(90.92deg, rgba(255, 255, 255, 0.12) 31.12%, rgba(255, 255, 255, 0.34) 91.37%);
+        /*border: 1px solid #FFFFFF33;
+        background: linear-gradient(90.92deg, rgba(255, 255, 255, 0.12) 31.12%, rgba(255, 255, 255, 0.34) 91.37%);*/
     }
     .gallery_page .main .tab-container .tab {
         position: unset;
@@ -2690,17 +2702,17 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
         background: no-repeat;
         border: none;
         flex-wrap: wrap;
-        transform: translate(-50%, 5%);
+        transform: translate(-50%, 15%);
         height: 98px;
         overflow-y: auto;
         border-radius: 0;
         width: 70%;
         justify-content: center;
     }
-    .gallery_page .main .tab-container .sub_tabs.more_location .sub_tab {
+    /*.gallery_page .main .tab-container .sub_tabs.more_location .sub_tab {
         padding: 6px 20px 6px 20px;
         margin: 6px 0;
-    }
+    }*/
 
     .sub_tabs.more_location::-webkit-scrollbar {
         width: 6px;
