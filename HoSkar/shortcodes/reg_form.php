@@ -238,7 +238,7 @@ add_shortcode( 'reg_form', function(){
                                     && $('[name="category[]"]').val() != ''
                                     && $('[name="interest"]').val() != ''
                                 ){
-                                    // $('.goSubmit').text("Loading...").addClass('onWaiting');
+                                    $('.goSubmit').text("Loading...").addClass('onWaiting');
                                     console.log($('.reg_form form').serializeArray());
                                     $.ajax({
                                         type: "POST",
