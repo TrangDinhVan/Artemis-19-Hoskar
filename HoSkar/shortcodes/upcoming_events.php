@@ -37,7 +37,6 @@ add_shortcode( 'upcoming_events', function(){
                         <div class="vstack gap-4 content-wrap py-2">
 
                             <h4><?php echo $a['title']; ?></h4>
-                            <!-- <img loading="lazy" class="img-title align-self-start" src="<?php echo $a['icon']['url']; ?>" alt="..."> -->
 
                             <p class="lh-13 sapo mb-2"><?php echo $a['desc']; ?></p>
 
@@ -93,7 +92,6 @@ add_shortcode( 'upcoming_events', function(){
 
                                     <div class="vstack gap-4 content-wrap py-2">
                                         <h4><?php echo $a['title']; ?></h4>
-                                        <!-- <img loading="lazy" class="img-title align-self-start" src="<?php echo $a['icon']['url']; ?>" alt="..."> -->
 
                                         <p class="lh-13 sapo"><?php echo $a['desc']; ?></p>
 

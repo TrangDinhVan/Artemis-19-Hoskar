@@ -4,7 +4,7 @@ add_action('wp_ajax_z_do_ajax', 'z_do_ajax');
 function z_do_ajax() {
     // check_ajax_referer( 'z_do_ajax', 'nonce' );
     $res = array('mes' => 'ajax-processed'); $_action = $_POST['_action'];
-    if( $_action == 'submitRegg' ):
+    if( $_action == 'submitReg' ):
         parse_str($_POST['form_data'], $d);
         $res['dev_d'] = $d;
         $pid = wp_insert_post( array(
@@ -59,7 +59,8 @@ function z_do_ajax() {
                         implode( "\n", array_merge( $d['category'], array($d['other_category']) ) ),
                         $d['interest'],
                         implode( "\n", $d['city'] ),
-                        implode( "\n", $d['meet'] ),
+                        // implode( "\n", $d['meet'] ),
+                        '',
                         date_i18n( 'Y-m-d H:i' )
                     ))
                 ) )
