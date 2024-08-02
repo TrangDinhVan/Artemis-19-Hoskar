@@ -78,24 +78,35 @@ add_shortcode( 'tab_gallery_country', function(){
                                     <div class="gallery-list row" id="gallery-list-0" data-category-id="0" data-title_location="<?php echo sanitize_title(get_sub_field('title2')); ?>" data-location-id="<?php echo get_sub_field('title2'); ?>" data-title-id="<?php echo sanitize_title(get_sub_field('title2')); ?>" data-page="1">
                                     <?php
                                     if (have_rows('location_gallery2')) {
-                                        $count = 0;
+
+                                        $images = [];
                                         while (have_rows('location_gallery2')) {
                                             the_row();
                                             $gallery = get_sub_field('image2');
                                             if ($gallery) {
                                                 foreach ($gallery as $image) {   
-                                                    $total_images++;
-                                                    if ($count < 9) {
-                                                        ?>
-                                                        <a class="gallery-item" href="<?php echo esc_url($image['url']); ?>" target="_blank" data-fancybox="mygallery">
-                                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
-                                                        </a>
-                                                        <?php
-                                                        $count++;
-                                                    }
+                                                    $images[] = $image;
                                                 }
                                             }
                                         }
+
+                                        shuffle($images);
+                                        $first_images = [];
+                                        $count = 0;
+                                        foreach ($images as $image) {
+                                            $total_images++;
+                                            if ($count < 9) {
+                                                $first_images[] = $image['url'];
+                                                ?>
+                                                <a class="gallery-item" href="<?php echo esc_url($image['url']); ?>" target="_blank" data-fancybox="mygallery">
+                                                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                                                </a>
+                                                <?php
+                                                $count++;
+                                            }
+                                        }
+
+                                        
                                     
                                     }?>
                                     </div>
@@ -207,7 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: categoryId,
                 location: locationId,
                 page: page,
-                id: '<?php echo get_the_ID();?>'
+                id: '<?php echo get_the_ID();?>',
+                first_images: '<?php echo json_encode($first_images)?>'
             };
             console.log(data);
 

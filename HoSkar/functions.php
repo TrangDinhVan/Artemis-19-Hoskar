@@ -179,6 +179,13 @@ function load_more_gallerys() {
     $offset = ($page - 1) * 9;
     $id = $_POST['id'];
     $html = '';
+    $first_images_json = isset($_POST['first_images']) ? stripslashes($_POST['first_images']) : '[]';
+
+    $first_images = json_decode($first_images_json, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        $first_images = [];
+    }
 
     if (have_rows('tab_gallery2', $id)) {
         while (have_rows('tab_gallery2', $id)) {
@@ -194,21 +201,26 @@ function load_more_gallerys() {
                         if ($gallery) {
                             foreach ($gallery as $image) {
                                 if($title == 0 || $title == '0'){
-                                    if ($count >= $offset && $count < $offset + 9) {
-                                        $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
-                                        $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
-                                        $html .= '</a>';
-                                    }
-                                    $count++;
-                                }else{
-                                    $or_title = sanitize_title(get_sub_field('title_location2', $id));
-                                    if ($or_title == $title) {
+                                    if(!in_array($image['url'],$first_images)){
                                         if ($count >= $offset && $count < $offset + 9) {
-                                            $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                            $html .= '<a class="gallery-item n" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
                                             $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
                                             $html .= '</a>';
                                         }
                                         $count++;
+                                    }
+                                    
+                                }else{
+                                    if(!in_array($image['url'],$first_images)){
+                                        $or_title = sanitize_title(get_sub_field('title_location2', $id));
+                                        if ($or_title == $title) {
+                                            if ($count >= $offset && $count < $offset + 9) {
+                                                $html .= '<a class="gallery-item m" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                                $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                                                $html .= '</a>';
+                                            }
+                                            $count++;
+                                        }
                                     }
                                 }
                             }
@@ -233,12 +245,14 @@ function load_more_gallerys() {
                                 foreach ($gallery as $image) {
                                     $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                     if ($or_title == $title) {
-                                        if ($count >= $offset && $count < $offset + 9) {
-                                            $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
-                                            $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
-                                            $html .= '</a>';
+                                        if(!in_array($image['url'],$first_images)){
+                                            if ($count >= $offset && $count < $offset + 9) {
+                                                $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                                $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                                                $html .= '</a>';
+                                            }
+                                            $count++;
                                         }
-                                        $count++;
                                     }
                                 }
                             };
@@ -263,12 +277,14 @@ function load_more_gallerys() {
                                     foreach ($gallery as $image) {
                                         $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                         if ($or_title == $title) {
-                                            if ($count >= $offset && $count < $offset + 9) {
-                                                $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
-                                                $html .= '<img data-in="'. $count .'" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
-                                                $html .= '</a>';
+                                            if(!in_array($image['url'],$first_images)){
+                                                if ($count >= $offset && $count < $offset + 9) {
+                                                    $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
+                                                    $html .= '<img data-in="'. $count .'" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
+                                                    $html .= '</a>';
+                                                }
+                                                $count++;
                                             }
-                                            $count++;
                                         }
                                     }
                                 };
