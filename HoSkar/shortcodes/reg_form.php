@@ -186,13 +186,19 @@ add_shortcode( 'reg_form', function(){
                         </div>
                     </div>
                 </div>
+                <div v-show="step == 4">
+                    <div class="text-center p-6 align-items-center lh-12 font-medium font-15x vstack gap-5 text-white position-relative">
+                        <i class="bi bi-check2-circle font-20x text-primary"></i>
+                        <h4 class="d-inline">Your submission is successful!</h4>
+                    </div>
+                </div>
                 <div v-show="step == 3">
                     <div class="step-3-wrap">
                         <div class="inner r-10">
                             <div class="text-center p-6 align-items-center lh-12 font-medium font-15x vstack gap-5 text-white position-relative">
                                 <i class="bi bi-check2-circle font-20x text-primary"></i>
                                 <h4 class="d-inline"><?php the_field( 'thanks_message' ); ?></h4>
-                                <i class="bi bi-x-lg close cursor-pointer" @click="step = 1"></i>
+                                <i class="bi bi-x-lg close cursor-pointer" @click="step = 4"></i>
                             </div>
                         </div>
                     </div>
