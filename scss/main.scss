@@ -607,9 +607,12 @@ img{
         font-size: 0.9em;
         overflow: hidden;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
         -webkit-box-orient: vertical;
+        @include transition;
+        &.max-3{
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+        }
     }
     .others{
         z-index: 1;
