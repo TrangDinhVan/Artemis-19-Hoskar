@@ -7,6 +7,28 @@
 });
 
 jQuery(function($){
+
+    $('.need-readmore').append('<div class="text-center read-more-wrap position-absolute w-100"><a href="#" class="go-open-room-desc text-underline" >Read More</a></div>');
+
+    $(document).on('click', '.go-open-room-desc', function (e) {
+
+        e.preventDefault();
+
+        var t = $(this);
+
+        t.closest('.read-more-wrap').toggle();
+
+        t.closest('.need-readmore').toggleClass('active');
+
+    });
+
+    $('.go-read-full').on('click', function (e) {
+        e.preventDefault();
+        p = $(this).parents('.need-readmoree');
+        $(this).fadeOut();
+        $('.sapo', p).removeClass('max-3');
+    });
+
     $(window).scroll(function () {
         if ($('.z3').is(":in-viewport(-500)")) {
             $('.z3').addClass('active');

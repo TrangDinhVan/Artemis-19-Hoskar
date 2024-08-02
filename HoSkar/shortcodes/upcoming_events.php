@@ -37,8 +37,10 @@ add_shortcode( 'upcoming_events', function(){
                         <div class="vstack gap-4 content-wrap py-2">
 
                             <h4><?php echo $a['title']; ?></h4>
-
-                            <p class="lh-13 sapo mb-2"><?php echo $a['desc']; ?></p>
+                            <div class="need-readmoree mb-2">
+                                <p class="lh-13 sapo max-3 mb-2"><?php echo $a['desc']; ?></p>
+                                <p class="text-right go-read-full"><a class="font-8x" href="#">Read More</a></p>
+                            </div>
 
                             <div class="row gy-6 gx-4 justify-content-between align-items-center">
 
@@ -92,8 +94,10 @@ add_shortcode( 'upcoming_events', function(){
 
                                     <div class="vstack gap-4 content-wrap py-2">
                                         <h4><?php echo $a['title']; ?></h4>
-
-                                        <p class="lh-13 sapo"><?php echo $a['desc']; ?></p>
+                                        <div class="need-readmoree">
+                                            <p class="lh-13 sapo mb-1 max-3"><?php echo $a['desc']; ?></p>
+                                            <p class="text-right go-read-full"><a class="font-8x" href="#">Read More</a></p>
+                                        </div>
 
                                         <p class="d-flex gap-2 align-items-center"><img width="20" src="<?php echo IMG; ?>/CalendarBlank.svg" alt=".."><?php echo $a['time']; ?></p>
 
