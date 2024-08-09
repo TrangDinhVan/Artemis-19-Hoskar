@@ -28,4 +28,48 @@ function zing_custom_img_sizes($sizes) {
 }
 add_filter('intermediate_image_sizes_advanced', 'zing_custom_img_sizes');
 
+add_action( 'elementor_pro/forms/new_record', function($record, $handler){
+    $form_name = $record->get_form_settings( 'form_name' );
+    if ( 'Contact Form' == $form_name ):
+        $portalID = '39677787';
+        $formID = '0b6e6fd1-e329-4036-a1ae-5a03df364242';
+        $url = "https://api.hsforms.com/submissions/v3/integration/submit/$portalID/$formID";
+
+        $raw_fields = $record->get( 'fields' );
+        $fields = [];
+        foreach ( $raw_fields as $id => $field ) {
+            $fields[ $id ] = $field['value'];
+        }
+
+        $d_mes = wp_remote_post( $url, array(
+            'headers' => array(
+                'Content-Type'  => 'application/json',
+            ),
+            'sslverify' => false,
+            'method' => 'POST',
+            'body' => json_encode(array(
+                'pageName' => $d['location'],
+                'pageUri' => $d['location_url'],
+                'fields' => array(
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'lastname',
+                        'value' => $fields['name']
+                    ),
+                    array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'email',
+                        'value' => $fields['email']
+                    ),
+                     array(
+                        'objectTypeId' => '0-1',
+                        'name' => 'phone',
+                        'value' => $fields['phone']
+                    ),
+                )
+            ))
+        ) );
+    endif;
+}, 10, 2 );
+
 // show_admin_bar( false );
