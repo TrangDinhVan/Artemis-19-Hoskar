@@ -64,7 +64,7 @@ add_shortcode( 'tab_gallery_country', function(){
                 
                 <div class="banner_category">
                     <h2>Good Vibes Only!</h2>
-                    <img src="/hoskar/wp-content/uploads/2024/06/image-17.png" alt="Asia Pacific">
+                    <img src="https://hoskarnight.com/wp-content/uploads/2024/08/image-17.jpg" alt="Asia Pacific">
                 </div>
                 <div class="tab-content-container">
                     
