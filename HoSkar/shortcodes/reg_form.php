@@ -143,7 +143,7 @@ add_shortcode( 'reg_form', function(){
                     <h4 class="font-semi-bold font-15x mb-2">Let’s make HoSkar about you!</h4>
                     <div class="radios">
                         <div class="input">
-                            <div class="mb-6 lh-12"> I am interested in attending HoSkar Night in HoSkar Night in:</div>
+                            <div class="mb-6 lh-12"> I am interested in attending HoSkar Night in:</div>
                             <div class="row g-4 lh-12">
                                 <div class="col-sm-6">
                                     <label for="ci_hcmc"><input id="ci_hcmc" type="checkbox" name="city[]" value="Hcmc">HCMC</label>
