@@ -180,7 +180,7 @@ add_shortcode( 'reg_form', function(){
                         <div class="input font-9x font-regular lh-15 input_term click_to_remove_border">
                             <label for="term_agreement" class="d-block"><input id="term_agreement" v-model="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline" target="_blank">Privacy Policy</a></label>
                         </div>
-                        <p class="text-warning font-8x pt-2 mark-required">*Please confirm that you agree with our Term and Condition and Privacy Policy.</p>
+                        <p class="text-warning font-8x pt-2 mark-required lh-12">*Please confirm that you agree with our Term and Condition and Privacy Policy.</p>
                     </div>
                     <div class="vstack gap-4 text-center" id="submit_group">
                         <div class="btn-rainbow">
