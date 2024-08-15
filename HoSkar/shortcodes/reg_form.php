@@ -3,14 +3,14 @@ add_shortcode( 'reg_form', function(){
     ob_start();
     if( !isset($_GET['action']) ): ?>
         <div class="reg_form register_form" v-cloak>
-            <form action="">
+            <form action="" id="the_reg_form">
                 <input type="hidden" name="location" value="<?php the_title(); ?>">
                 <input type="hidden" name="location_url" value="<?php the_permalink(); ?>">
                 <div class="steps-label d-flexx d-none gap-1 lh-10 font-medium mb-6">
                     <div @click="step = 1" class="s" :class="{ active : step > 0 }">Step 1</div>
                     <div @click="step = 2" class="s" :class="{ active : step > 1 }">Step 2</div>
                 </div>
-                <div class="vstack gap-4">
+                <div class="vstack gap-4" v-show="step < 4">
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <input type="text" name="f_name" placeholder="First Name*">
@@ -22,10 +22,10 @@ add_shortcode( 'reg_form', function(){
                     <div class="row g-4 radios">
                         <div class="col-lg-6">
                             <div class="input d-flex gap-5 flex-wrap align-items-center">
-                                <span>Gender*</span>
+                                <span style="font-size: 16px;">Gender*</span>
                                 <div class="d-flex gap-3 gap-lg-5 ms-lg-auto">
-                                    <label :class="{active: gender == 'Mr.'}" for="gender_mr"><input v-model="gender" id="gender_mr" type="radio" name="gender" value="Mr.">Mr.</label>
-                                    <label :class="{active: gender == 'Ms.'}" for="gender_ms"><input v-model="gender" id="gender_ms" type="radio" name="gender" value="Ms.">Ms.</label>
+                                    <label style="font-size: 16px;" :class="{active: gender == 'Mr.'}" for="gender_mr"><input v-model="gender" id="gender_mr" type="radio" name="gender" value="Mr.">Mr.</label>
+                                    <label style="font-size: 16px;" :class="{active: gender == 'Ms.'}" for="gender_ms"><input v-model="gender" id="gender_ms" type="radio" name="gender" value="Ms.">Ms.</label>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@ add_shortcode( 'reg_form', function(){
                     </div>
                     <div class="radios">
                         <div class="input">
-                            <div class="mb-6">I am intersted in attending *</div>
+                            <div class="mb-6">I am interested in attending *</div>
                             <div class="row g-4 lh-12">
                                 <div class="col-lg-6">
                                     <label :class="{active: interest == 'HoSkar Talk (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="HoSkar Talk (from 5:00 to 6:00)">HoSkar Talk</label>
@@ -138,12 +138,12 @@ add_shortcode( 'reg_form', function(){
                         <a class="w-100" style="max-width: none;" href="#" @click.prevent="canGoToStep2">Step 2 <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <div class="vstack gap-5 lh-10">
-                    <h4 class="font-semi-bold font-15x mb-2">Let’s make HoSkar about you!</h4>
+                <div class="py-2"></div>
+                <div class="vstack gap-5 lh-10" v-show="step < 4">
+                    <h4 class="font-semi-bold font-15x mb-1">Let’s make HoSkar about you!</h4>
                     <div class="radios">
                         <div class="input">
-                            <div class="mb-6 lh-12"> I am interested in attending HoSkar Night in:</div>
+                            <div class="mb-6 lh-12">I am also interested in attending HoSkar Night in the following destination(s)</div>
                             <div class="row g-4 lh-12">
                                 <div class="col-sm-6">
                                     <label for="ci_hcmc"><input id="ci_hcmc" type="checkbox" name="city[]" value="Hcmc">HCMC</label>
@@ -155,7 +155,7 @@ add_shortcode( 'reg_form', function(){
                                     <label for="ci_HANOI"><input id="ci_HANOI" type="checkbox" name="city[]" value="Hanoi">Hanoi</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="ci_SINGAPORE"><input id="ci_SINGAPORE" type="checkbox" name="city[]" value="Singapore">Singapore</label>
+                                    <label for="ci_SINGAPORE"><input id="ci_SINGAPORE" type="checkbox" name="city[]" value="Dubai">Dubai</label>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="ci_BANGKOK"><input id="ci_BANGKOK" type="checkbox" name="city[]" value="Bangkor">Bangkok</label>
@@ -173,7 +173,7 @@ add_shortcode( 'reg_form', function(){
                         </div>
                     </div>
                     <div class="radios">
-                        <div class="input font-9x font-regular lh-15">
+                        <div class="input font-9x font-regular lh-15 input_term need_remove_warning" @click="removeBorder();">
                             <label for="term_agreement" class="d-block"><input id="term_agreement" v-model="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline" target="_blank">Privacy Policy</a></label>
                         </div>
                     </div>
@@ -224,6 +224,7 @@ add_shortcode( 'reg_form', function(){
                         submit: function(){
                             if( !this.term_agreement ){
                                 alert("Please confirm that you agree with our Term and Condition and Privacy Policy.");
+                                $('.input_term').addClass('border border-warning');
                             }else{
                                  if( $('[name="f_name"]').val() != ''
                                     && $('[name="l_name"]').val() != ''
@@ -258,6 +259,27 @@ add_shortcode( 'reg_form', function(){
                                     });
                                 }else{
                                     alert("Please complete the required fields first!");
+                                    if( $('[name="f_name"]').val() == '' ){
+                                        $('[name="f_name"]').addClass('border border-warning');
+                                    }
+                                    if( $('[name="l_name"]').val() == '' ){
+                                        $('[name="l_name"]').addClass('border border-warning');
+                                    }
+                                    if( $('[name="company"]').val() == '' ){
+                                        $('[name="company"]').addClass('border border-warning');
+                                    }
+                                    if( $('[name="company_email"]').val() == '' ){
+                                        $('[name="company_email"]').addClass('border border-warning');
+                                    }
+                                    if( $('[name="title"]').val() == '' ){
+                                        $('[name="title"]').addClass('border border-warning');
+                                    }
+                                    if( $('[name="phone"]').val() == '' ){
+                                        $('[name="phone"]').addClass('border border-warning');
+                                    }
+                                    $('html, body').animate({
+                                        scrollTop: $("#the_reg_form").offset().top - 200
+                                    }, 400);
                                 }
                             }
                         },
@@ -288,6 +310,9 @@ add_shortcode( 'reg_form', function(){
                             if($('[name="love_all_cities"]').is(":checked")){
                                 $('[name="city[]"]').prop("checked", true);
                             }
+                        },
+                        removeBorder: function(){
+                            $('.need_remove_warning').removeClass('border border-warning');
                         }
                     }
                 });

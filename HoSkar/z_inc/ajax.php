@@ -58,8 +58,7 @@ function z_do_ajax() {
                         implode( "\n", array_merge( $d['yourcompany'], array($d['other_yourcompany']), $d['yourcity'] ) ),
                         implode( "\n", array_merge( $d['category'], array($d['other_category']) ) ),
                         $d['interest'],
-                        implode( "\n", $d['city'] ),
-                        // implode( "\n", $d['meet'] ),
+                        isset( $d['city'] ) && !empty( $d['city'] ) ? implode( "\n", $d['city'] ) : '',
                         '',
                         date_i18n( 'Y-m-d H:i' )
                     ))
@@ -114,17 +113,17 @@ function z_do_ajax() {
                     array(
                         'objectTypeId' => '0-1',
                         'name' => 'wehub_category',
-                        'value' => $d['category'][0]
+                        'value' => isset( $d['category'] ) && !empty( $d['category'] ) ? $d['category'][0] : 'Empty'
                     ),
                     array(
                         'objectTypeId' => '0-1',
                         'name' => 'country',
-                        'value' => $d['yourcompany'][0]
+                        'value' => isset( $d['yourcompany'] ) && !empty( $d['yourcompany'] ) ? $d['yourcompany'][0] : 'Empty'
                     ),
                     array(
                         'objectTypeId' => '0-1',
                         'name' => 'city',
-                        'value' => $d['yourcity'][0]
+                        'value' => isset( $d['city'] ) && !empty( $d['city'] ) ? $d['city'][0] : 'Empty'
                     )
                 )
             ))
