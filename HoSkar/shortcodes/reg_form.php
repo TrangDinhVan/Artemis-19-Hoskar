@@ -6,81 +6,83 @@ add_shortcode( 'reg_form', function(){
             <form action="" id="the_reg_form">
                 <input type="hidden" name="location" value="<?php the_title(); ?>">
                 <input type="hidden" name="location_url" value="<?php the_permalink(); ?>">
-                <div class="steps-label d-flexx d-none gap-1 lh-10 font-medium mb-6">
-                    <div @click="step = 1" class="s" :class="{ active : step > 0 }">Step 1</div>
-                    <div @click="step = 2" class="s" :class="{ active : step > 1 }">Step 2</div>
-                </div>
                 <div class="vstack gap-4" v-show="step < 4">
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <input type="text" name="f_name" placeholder="First Name*">
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                         </div>
                         <div class="col-lg-6">
                             <input type="text" name="l_name" placeholder="Last Name*">
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                         </div>
                     </div>
                     <div class="row g-4 radios">
                         <div class="col-lg-6">
-                            <div class="input d-flex gap-5 flex-wrap align-items-center">
-                                <span style="font-size: 16px;">Gender*</span>
+                            <div class="input d-flex gap-5 flex-wrap align-items-center input_gender" style="font-size: 16px; max-height: 57px;">
+                                <span>Gender*</span>
                                 <div class="d-flex gap-3 gap-lg-5 ms-lg-auto">
-                                    <label style="font-size: 16px;" :class="{active: gender == 'Mr.'}" for="gender_mr"><input v-model="gender" id="gender_mr" type="radio" name="gender" value="Mr.">Mr.</label>
-                                    <label style="font-size: 16px;" :class="{active: gender == 'Ms.'}" for="gender_ms"><input v-model="gender" id="gender_ms" type="radio" name="gender" value="Ms.">Ms.</label>
+                                    <label :class="{active: gender == 'Mr.'}" for="gender_mr"><input v-model="gender" id="gender_mr" type="radio" name="gender" value="Mr.">Mr.</label>
+                                    <label :class="{active: gender == 'Ms.'}" for="gender_ms"><input v-model="gender" id="gender_ms" type="radio" name="gender" value="Ms.">Ms.</label>
                                 </div>
                             </div>
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                         </div>
                         <div class="col-lg-6">
                             <input type="text" name="phone" placeholder="Phone Number*">
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                         </div>
                     </div>
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <input type="text" name="company" placeholder="Company*">
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                         </div>
                         <div class="col-lg-6">
                             <input type="text" name="company_email" placeholder="Company Email*">
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                         </div>
                     </div>
                     <input type="text" name="title" placeholder="Title*">
-                    <div class="row g-4 yourcompany">
-                        <div class="radios col-lg-12">
-                            <div class="input">
-                                <div class="mb-6">Where is your company based? *</div>
-                                <div class="row g-4 lh-12">
-                                    <div class="col-lg-6 morecity">
-                                        <label for="lo_viet"><input id="lo_viet" type="checkbox" name="yourcompany[]" value="Vietnam">Vietnam</label>
-                                        <div class="row g-4 show_city">
-                                            <div class="col-lg-6">
-                                                <label for="city_hanoi"><input id="city_hanoi" type="checkbox" name="yourcity[]" value="Hanoi">Hanoi</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label for="city_hcmc"><input id="city_hcmc" type="checkbox" name="yourcity[]" value="HCMC">HCMC</label>
-                                            </div>
-                                            <div class="col-lg-6 other">
-                                                <label for="city_other"><input id="city_other" type="checkbox" name="yourcity[]" value="Other">Other</label>
-                                                <textarea class="lh-10 other_city" name="yourcity[]" rows="2" placeholder="Fill in the answer..."></textarea>
-                                            </div>
+                    <p class="text-warning font-8x mark-required">*Please fill in this required field.</p>
+                    <div class="radios">
+                        <div class="input">
+                            <div class="mb-6">Where is your company based? *</div>
+                            <div class="row g-4 lh-12">
+                                <div class="col-lg-6 morecity">
+                                    <label for="lo_viet"><input id="lo_viet" type="checkbox" name="yourcompany[]" value="Vietnam">Vietnam</label>
+                                    <div class="row g-4 show_city">
+                                        <div class="col-lg-6">
+                                            <label for="city_hanoi"><input id="city_hanoi" type="checkbox" name="yourcity[]" value="Hanoi">Hanoi</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="city_hcmc"><input id="city_hcmc" type="checkbox" name="yourcity[]" value="HCMC">HCMC</label>
+                                        </div>
+                                        <div class="col-lg-6 other">
+                                            <label for="city_other"><input id="city_other" type="checkbox" name="yourcity[]" value="Other">Other</label>
+                                            <textarea class="lh-10 other_city" name="yourcity[]" rows="2" placeholder="Fill in the answer..."></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <label for="lo_phi"><input id="lo_phi" type="checkbox" name="yourcompany[]" value="Philippines">Philippines</label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="lo_thai"><input id="lo_thai" type="checkbox" name="yourcompany[]" value="Thailand">Thailand</label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="lo_sing"><input id="lo_sing" type="checkbox" name="yourcompany[]" value="Singapore">Singapore</label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="lo_cam"><input id="lo_cam" type="checkbox" name="yourcompany[]" value="Cambodia">Cambodia</label>
-                                    </div>
-                                    <div class="col-lg-6 other">
-                                        <label for="lo_other"><input id="lo_other" type="checkbox" name="yourcompany[]" value="Other">Other</label>
-                                        <textarea class="lh-10 other_yourcompany" name="other_yourcompany" rows="4" placeholder="Fill in the answer..."></textarea>
-                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="lo_phi"><input id="lo_phi" type="checkbox" name="yourcompany[]" value="Philippines">Philippines</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="lo_thai"><input id="lo_thai" type="checkbox" name="yourcompany[]" value="Thailand">Thailand</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="lo_sing"><input id="lo_sing" type="checkbox" name="yourcompany[]" value="Singapore">Singapore</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="lo_cam"><input id="lo_cam" type="checkbox" name="yourcompany[]" value="Cambodia">Cambodia</label>
+                                </div>
+                                <div class="col-lg-6 other">
+                                    <label for="lo_other"><input id="lo_other" type="checkbox" name="yourcompany[]" value="Other">Other</label>
+                                    <textarea class="lh-10 other_yourcompany" name="other_yourcompany" rows="4" placeholder="Fill in the answer..."></textarea>
                                 </div>
                             </div>
                         </div>
+                        <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                     </div>
                     <div class="radios">
                         <div class="input">
@@ -116,6 +118,7 @@ add_shortcode( 'reg_form', function(){
                                 </div>
                             </div>
                         </div>
+                        <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                     </div>
                     <div class="radios">
                         <div class="input">
@@ -132,6 +135,7 @@ add_shortcode( 'reg_form', function(){
                                 </div>
                             </div>
                         </div>
+                        <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                     </div>
                     <div class="py-100"></div>
                     <div class="btn-rainbow d-none">
@@ -173,9 +177,10 @@ add_shortcode( 'reg_form', function(){
                         </div>
                     </div>
                     <div class="radios">
-                        <div class="input font-9x font-regular lh-15 input_term need_remove_warning" @click="removeBorder();">
+                        <div class="input font-9x font-regular lh-15 input_term click_to_remove_border">
                             <label for="term_agreement" class="d-block"><input id="term_agreement" v-model="term_agreement" type="checkbox" name="term_agreement" value="Yes" class="me-1">By continuing with the registration you are confirming that you have read, understand and accept our <a href="<?php echo home_url( 'terms-and-conditions' ); ?>" target="_blank" class="text-underline">Term and condition</a> and <a href="<?php echo home_url( 'privacy-policy' ); ?>" class="text-underline" target="_blank">Privacy Policy</a></label>
                         </div>
+                        <p class="text-warning font-8x pt-2 mark-required">*Please confirm that you agree with our Term and Condition and Privacy Policy.</p>
                     </div>
                     <div class="vstack gap-4 text-center" id="submit_group">
                         <div class="btn-rainbow">
@@ -223,7 +228,7 @@ add_shortcode( 'reg_form', function(){
                     methods: {
                         submit: function(){
                             if( !this.term_agreement ){
-                                alert("Please confirm that you agree with our Term and Condition and Privacy Policy.");
+                                // alert("Please confirm that you agree with our Term and Condition and Privacy Policy.");
                                 $('.input_term').addClass('border border-warning');
                             }else{
                                  if( $('[name="f_name"]').val() != ''
@@ -258,7 +263,7 @@ add_shortcode( 'reg_form', function(){
                                         }
                                     });
                                 }else{
-                                    alert("Please complete the required fields first!");
+                                    // alert("Please complete the required fields first!");
                                     if( $('[name="f_name"]').val() == '' ){
                                         $('[name="f_name"]').addClass('border border-warning');
                                     }
@@ -277,6 +282,19 @@ add_shortcode( 'reg_form', function(){
                                     if( $('[name="phone"]').val() == '' ){
                                         $('[name="phone"]').addClass('border border-warning');
                                     }
+                                    if( this.yourcompany == '' ){
+                                        $('[name="yourcompany[]"]').parents('.input').addClass('border border-warning');
+                                    }
+                                    if( this.gender == '' ){
+                                        $('[name="gender"]').parents('.input').addClass('border border-warning');
+                                    }
+                                    if( this.category == '' ){
+                                        $('[name="category[]"]').parents('.input').addClass('border border-warning');
+                                    }
+                                    if( this.interest == '' ){
+                                        $('[name="interest"]').parents('.input').addClass('border border-warning');
+                                    }
+                                    console.log($('[name="yourcompany[]"]').val());
                                     $('html, body').animate({
                                         scrollTop: $("#the_reg_form").offset().top - 200
                                     }, 400);
@@ -310,9 +328,6 @@ add_shortcode( 'reg_form', function(){
                             if($('[name="love_all_cities"]').is(":checked")){
                                 $('[name="city[]"]').prop("checked", true);
                             }
-                        },
-                        removeBorder: function(){
-                            $('.need_remove_warning').removeClass('border border-warning');
                         }
                     }
                 });
@@ -328,6 +343,11 @@ add_shortcode( 'reg_form', function(){
                     }else{
                         $(this).parents('.morecity').removeClass("active");
                     }
+                });
+
+                $('input').on('click', function(){
+                    $(this).removeClass('border border-warning');
+                    $(this).parents('.input').removeClass('border border-warning');
                 });
             });
         </script>

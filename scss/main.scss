@@ -1205,3 +1205,11 @@ img{
         font-size: 16px;
     }
 }
+
+.mark-required{
+    display: none;
+}
+
+.border-warning + .mark-required{
+    display: block;
+}

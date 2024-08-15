@@ -16,7 +16,7 @@ function z_backend_statics() {
 add_action('wp_enqueue_scripts', 'z_frontend_statics', 20 );
 function z_frontend_statics(){
     if ( is_admin() ) { return; }
-    $v = '1.7.27';
+    $v = '1.7.29';
     wp_enqueue_style( 'zing-style', get_stylesheet_uri(), array(), $v );
     wp_enqueue_style( 'luans', CSS . '/luans.css', array(), time(), 'all' );
     wp_enqueue_script( 'jqueryarctextjs', JS.'/jquery-arctext.js', array('jquery'), $v, true );
