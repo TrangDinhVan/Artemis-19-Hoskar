@@ -30,7 +30,7 @@ add_shortcode( 'reg_form', function(){
                         </div>
                         <div class="col-lg-6">
                             <input type="text" name="phone" placeholder="Phone Number*">
-                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in a valid phone number.</p>
                         </div>
                     </div>
                     <div class="row g-4">
@@ -40,7 +40,7 @@ add_shortcode( 'reg_form', function(){
                         </div>
                         <div class="col-lg-6">
                             <input type="text" name="company_email" placeholder="Company Email*">
-                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in a valid email.</p>
                         </div>
                     </div>
                     <input type="text" name="title" placeholder="Title*">
@@ -50,70 +50,70 @@ add_shortcode( 'reg_form', function(){
                             <div class="mb-6">Where is your company based? *</div>
                             <div class="row g-4 lh-12">
                                 <div class="col-lg-6 morecity">
-                                    <label for="lo_viet"><input id="lo_viet" type="checkbox" name="yourcompany[]" value="Vietnam">Vietnam</label>
+                                    <label for="lo_viet"><input id="lo_viet" type="checkbox" v-model="yourcompany" name="yourcompany[]" value="Vietnam">Vietnam</label>
                                     <div class="row g-4 show_city">
                                         <div class="col-lg-6">
-                                            <label for="city_hanoi"><input id="city_hanoi" type="checkbox" name="yourcity[]" value="Hanoi">Hanoi</label>
+                                            <label for="city_hanoi"><input id="city_hanoi" v-model="yourcity" type="checkbox" name="yourcity[]" value="Hanoi">Hanoi</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="city_hcmc"><input id="city_hcmc" type="checkbox" name="yourcity[]" value="HCMC">HCMC</label>
+                                            <label for="city_hcmc"><input id="city_hcmc" v-model="yourcity" type="checkbox" name="yourcity[]" value="HCMC">HCMC</label>
                                         </div>
                                         <div class="col-lg-6 other">
-                                            <label for="city_other"><input id="city_other" type="checkbox" name="yourcity[]" value="Other">Other</label>
+                                            <label for="city_other"><input id="city_other" v-model="yourcity" type="checkbox" name="yourcity[]" value="Other">Other</label>
                                             <textarea class="lh-10 other_city" name="yourcity[]" rows="2" placeholder="Fill in the answer..."></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="lo_phi"><input id="lo_phi" type="checkbox" name="yourcompany[]" value="Philippines">Philippines</label>
+                                    <label for="lo_phi"><input id="lo_phi" type="checkbox" v-model="yourcompany" name="yourcompany[]" value="Philippines">Philippines</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="lo_thai"><input id="lo_thai" type="checkbox" name="yourcompany[]" value="Thailand">Thailand</label>
+                                    <label for="lo_thai"><input id="lo_thai" type="checkbox" v-model="yourcompany" name="yourcompany[]" value="Thailand">Thailand</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="lo_sing"><input id="lo_sing" type="checkbox" name="yourcompany[]" value="Singapore">Singapore</label>
+                                    <label for="lo_sing"><input id="lo_sing" type="checkbox" v-model="yourcompany" name="yourcompany[]" value="Singapore">Singapore</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="lo_cam"><input id="lo_cam" type="checkbox" name="yourcompany[]" value="Cambodia">Cambodia</label>
+                                    <label for="lo_cam"><input id="lo_cam" type="checkbox" v-model="yourcompany" name="yourcompany[]" value="Cambodia">Cambodia</label>
                                 </div>
                                 <div class="col-lg-6 other">
-                                    <label for="lo_other"><input id="lo_other" type="checkbox" name="yourcompany[]" value="Other">Other</label>
+                                    <label for="lo_other"><input id="lo_other" type="checkbox" v-model="yourcompany" name="yourcompany[]" value="Other">Other</label>
                                     <textarea class="lh-10 other_yourcompany" name="other_yourcompany" rows="4" placeholder="Fill in the answer..."></textarea>
                                 </div>
                             </div>
                         </div>
-                        <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
+                        <p class="text-warning font-8x pt-2 mark-required">{{mesVietnam}}</p>
                     </div>
                     <div class="radios">
                         <div class="input">
                             <div class="mb-6">Your Business Category *</div>
                             <div class="row g-4 lh-12">
                                 <div class="col-lg-6">
-                                    <label for="cate_one"><input id="cate_one" type="checkbox" name="category[]" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
+                                    <label for="cate_one"><input v-model="category" id="cate_one" type="checkbox" name="category[]" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_two"><input id="cate_two" type="checkbox" name="category[]"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
+                                    <label for="cate_two"><input v-model="category" id="cate_two" type="checkbox" name="category[]"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_three"><input id="cate_three" type="checkbox" name="category[]" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
+                                    <label for="cate_three"><input v-model="category" id="cate_three" type="checkbox" name="category[]" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_four"><input id="cate_four" type="checkbox" name="category[]" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
+                                    <label for="cate_four"><input v-model="category" id="cate_four" type="checkbox" name="category[]" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_de"><input id="cate_de" type="checkbox" name="category[]" value="Designer / Architect">Designer / Architect</label>
+                                    <label for="cate_de"><input v-model="category" id="cate_de" type="checkbox" name="category[]" value="Designer / Architect">Designer / Architect</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_pro"><input id="cate_pro" type="checkbox" name="category[]" value="Product / Service Provider">Product / Service Provider</label>
+                                    <label for="cate_pro"><input v-model="category" id="cate_pro" type="checkbox" name="category[]" value="Product / Service Provider">Product / Service Provider</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_con"><input id="cate_con" type="checkbox" name="category[]" value="Contractor / Project Management">Contractor / Project Management</label>
+                                    <label for="cate_con"><input v-model="category" id="cate_con" type="checkbox" name="category[]" value="Contractor / Project Management">Contractor / Project Management</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_re"><input id="cate_re" type="checkbox" name="category[]" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
+                                    <label for="cate_re"><input v-model="category" id="cate_re" type="checkbox" name="category[]" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
                                 </div>
                                 <div class="col-lg-6 other">
-                                    <label :class="{active: category == 'Other'}" for="cate_o"><input id="cate_o" type="checkbox" name="category[]" value="Other">Other</label>
+                                    <label :class="{active: category == 'Other'}" for="cate_o"><input v-model="category" id="cate_o" type="checkbox" name="category[]" value="Other">Other</label>
                                     <textarea class="lh-10 other_category" name="other_category" rows="4" placeholder="Fill in the answer..."></textarea>
                                 </div>
                             </div>
@@ -218,15 +218,19 @@ add_shortcode( 'reg_form', function(){
                     data: {
                         step: 1,
                         gender: '',
-                        category: '',
-                        yourcompany: '',
+                        category: [],
+                        yourcompany: [],
+                        yourcity: [],
                         interest: '',
                         meet: '',
                         term_agreement: '',
-                        form_data: []
+                        form_data: [],
+                        mesVietnam: '*Please fill in this required field.'
                     },
                     methods: {
                         submit: function(){
+                            console.log(this.yourcompany);
+                            console.log(this.yourcity);
                             if( !this.term_agreement ){
                                 // alert("Please confirm that you agree with our Term and Condition and Privacy Policy.");
                                 $('.input_term').addClass('border border-warning');
@@ -235,11 +239,13 @@ add_shortcode( 'reg_form', function(){
                                     && $('[name="l_name"]').val() != ''
                                     && $('[name="gender"]').val() != ''
                                     && $('[name="company"]').val() != ''
-                                    && $('[name="company_email"]').val() != ''
+                                    && validateEmail($('[name="company_email"]').val())
+                                    && validatePhone($('[name="phone"]').val())
                                     && $('[name="title"]').val() != ''
                                     && $('[name="yourcompany"]').val() != ''
                                     && $('[name="category[]"]').val() != ''
                                     && $('[name="interest"]').val() != ''
+                                    && this.checkVietnam()
                                 ){
                                     $('.goSubmit').text("Loading...").addClass('onWaiting');
                                     console.log($('.reg_form form').serializeArray());
@@ -276,10 +282,13 @@ add_shortcode( 'reg_form', function(){
                                     if( $('[name="company_email"]').val() == '' ){
                                         $('[name="company_email"]').addClass('border border-warning');
                                     }
+                                    if( !validateEmail($('[name="company_email"]').val()) ){
+                                        $('[name="company_email"]').addClass('border border-warning');
+                                    }
                                     if( $('[name="title"]').val() == '' ){
                                         $('[name="title"]').addClass('border border-warning');
                                     }
-                                    if( $('[name="phone"]').val() == '' ){
+                                    if( !validatePhone($('[name="phone"]').val()) ){
                                         $('[name="phone"]').addClass('border border-warning');
                                     }
                                     if( this.yourcompany == '' ){
@@ -294,7 +303,9 @@ add_shortcode( 'reg_form', function(){
                                     if( this.interest == '' ){
                                         $('[name="interest"]').parents('.input').addClass('border border-warning');
                                     }
-                                    console.log($('[name="yourcompany[]"]').val());
+                                    if( !this.checkVietnam() ){
+                                        $('[name="yourcompany[]"]').parents('.input').addClass('border border-warning');
+                                    }
                                     $('html, body').animate({
                                         scrollTop: $("#the_reg_form").offset().top - 200
                                     }, 400);
@@ -328,9 +339,30 @@ add_shortcode( 'reg_form', function(){
                             if($('[name="love_all_cities"]').is(":checked")){
                                 $('[name="city[]"]').prop("checked", true);
                             }
+                        },
+                        checkVietnam: function(){
+                            this.mesVietnam = '*Please fill in this required field.';
+                            if( this.yourcompany.includes('Vietnam') ){
+                                console.log(this.yourcity.length);
+                                if(this.yourcity.length < 1){
+                                    this.mesVietnam = '*Please tell us which city in Vietnam';
+                                    return false;
+                                }
+                            }
+                            return true;
                         }
                     }
                 });
+
+                const validateEmail = (email) => {
+                    return email.match(
+                        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    );
+                };
+
+                const validatePhone = (phone) => {
+                    return phone.length > 8;
+                };
 
                 $('input[type="checkbox"]').on('change', function(){
                     if(this.checked && $(this).val()=="Other"){
