@@ -176,8 +176,8 @@ function load_more_gallerys() {
     $title = sanitize_text_field($_POST['title']);
     $page = intval($_POST['page']);
     $location = $_POST['location'];
-    $offset = ($page - 1) * 9;
     $id = $_POST['id'];
+    $show_all = isset($_POST['show_all']) && $_POST['show_all'] == 'true';
     $html = '';
     $first_images_json = isset($_POST['first_images']) ? stripslashes($_POST['first_images']) : '[]';
 
@@ -186,6 +186,8 @@ function load_more_gallerys() {
     if (json_last_error() !== JSON_ERROR_NONE) {
         $first_images = [];
     }
+
+    $offset = ($page - 1) * 9;
 
     if (have_rows('tab_gallery2', $id)) {
         while (have_rows('tab_gallery2', $id)) {
@@ -202,7 +204,7 @@ function load_more_gallerys() {
                             foreach ($gallery as $image) {
                                 if($title == 0 || $title == '0'){
                                     if(!in_array($image['url'],$first_images)){
-                                        if ($count >= $offset && $count < $offset + 9) {
+                                        if ($show_all || ($count >= $offset && $count < $offset + 9)) {
                                             $html .= '<a class="gallery-item n" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
                                             $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
                                             $html .= '</a>';
@@ -214,7 +216,7 @@ function load_more_gallerys() {
                                     if(!in_array($image['url'],$first_images)){
                                         $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                         if ($or_title == $title) {
-                                            if ($count >= $offset && $count < $offset + 9) {
+                                            if ($show_all || ($count >= $offset && $count < $offset + 9)) {
                                                 $html .= '<a class="gallery-item m" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
                                                 $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
                                                 $html .= '</a>';
@@ -226,7 +228,8 @@ function load_more_gallerys() {
                             }
                         };
                     }
-                    if ($count <= $offset + 9) {
+
+                    if ($show_all || $count <= $offset + 9) {
                         $response = array('html' => $html, 'no_more_posts' => true);
                     } else {
                         $response = array('html' => $html);
@@ -234,8 +237,8 @@ function load_more_gallerys() {
                 } else {
                     $response = array('html' => '', 'no_more_posts' => true);
                 }
-            } 
-            else {
+            } else {
+                // Handle when $loca != $location, similar logic applies as above
                 if($title == 0 || $title == '0') {
                     if (have_rows('location_gallery2', $id)) {
                         while (have_rows('location_gallery2', $id)) {
@@ -246,7 +249,7 @@ function load_more_gallerys() {
                                     $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                     if ($or_title == $title) {
                                         if(!in_array($image['url'],$first_images)){
-                                            if ($count >= $offset && $count < $offset + 9) {
+                                            if ($show_all || ($count >= $offset && $count < $offset + 9)) {
                                                 $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
                                                 $html .= '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
                                                 $html .= '</a>';
@@ -257,7 +260,7 @@ function load_more_gallerys() {
                                 }
                             };
                         }
-                        if ($count <= $offset + 9) {
+                        if ($show_all || $count <= $offset + 9) {
                             $response = array('html' => $html, 'no_more_posts' => true);
                         } else {
                             $response = array('html' => $html);
@@ -278,7 +281,7 @@ function load_more_gallerys() {
                                         $or_title = sanitize_title(get_sub_field('title_location2', $id));
                                         if ($or_title == $title) {
                                             if(!in_array($image['url'],$first_images)){
-                                                if ($count >= $offset && $count < $offset + 9) {
+                                                if ($show_all || ($count >= $offset && $count < $offset + 9)) {
                                                     $html .= '<a class="gallery-item" href="' . esc_url($image['url']) . '" target="_blank" data-fancybox="mygallery">';
                                                     $html .= '<img data-in="'. $count .'" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" />';
                                                     $html .= '</a>';
@@ -289,7 +292,7 @@ function load_more_gallerys() {
                                     }
                                 };
                             }
-                            if ($count <= $offset + 9) {
+                            if ($show_all || $count <= $offset + 9) {
                                 $response = array('html' => $html, 'no_more_posts' => true);
                             } else {
                                 $response = array('html' => $html);
@@ -311,6 +314,20 @@ function load_more_gallerys() {
 
 add_action('wp_ajax_load_more_gallerys', 'load_more_gallerys');
 add_action('wp_ajax_nopriv_load_more_gallerys', 'load_more_gallerys');
+
+add_action('rest_api_init', function() {
+    $site_url = get_site_url();
+    header("Access-Control-Allow-Origin: ".$site_url);
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Headers: Authorization, Content-Type");
+
+    // Nếu không phải domain a.com, sẽ trả về lỗi 403
+    if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] !== $site_url) {
+        wp_send_json(array('message' => 'Access denied'), 403);
+        exit;
+    }
+}, 15);
 
 
 ?>

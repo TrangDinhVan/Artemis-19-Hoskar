@@ -1,3 +1,6 @@
+.header__main{
+    display: none;
+}
 .logos img{
     max-width: 160px;
 }
@@ -2430,6 +2433,10 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
     .gallery_page .main .banner_category.no_image {
         margin-bottom: 0;
     }
+    .logos img{
+        max-width: 100px;
+        max-height: 100px;
+    }
 }
 
 
@@ -2885,10 +2892,11 @@ div#elementor-lightbox-slideshow-single-img img.elementor-lightbox-image.element
 }
 @media only screen and (max-width: 767px) { 
     .partner_and_sponsor .logo_image img {
-        width: 60px;
+        width: 80px;
     }
     .partner_and_sponsor .logo_image {
-        gap: 20px;
+        gap: 10px;
+        flex-flow: wrap;
     }
     .intro-hero .swiper-wrapper {
         height: 322px;
