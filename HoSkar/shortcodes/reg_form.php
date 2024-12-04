@@ -255,7 +255,8 @@ add_shortcode( 'reg_form', function(){
                                         data: {
                                             action: 'z_do_ajax',
                                             _action: 'submitReg',
-                                            form_data: $('.reg_form form').serialize()
+                                            form_data: $('.reg_form form').serialize(),
+                                            nonce: zing.nonce
                                         },
                                         dataType: "json",
                                         success: function (res) {
