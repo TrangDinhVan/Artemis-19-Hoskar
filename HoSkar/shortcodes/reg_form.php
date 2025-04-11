@@ -89,31 +89,28 @@ add_shortcode( 'reg_form', function(){
                             <div class="mb-6">Your Business Category *</div>
                             <div class="row g-4 lh-12">
                                 <div class="col-lg-6">
-                                    <label for="cate_one"><input v-model="category" id="cate_one" type="checkbox" name="category[]" value="Developer / Investor / Hotel Owner" >Developer / Investor / Hotel Owner</label>
+                                    <label for="cate_one"><input v-model="category" id="cate_one" type="radio" name="category" value="Developer/ Investor/ Hotel Owner" >Developer/ Investor/ Hotel Owner</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_two"><input v-model="category" id="cate_two" type="checkbox" name="category[]"  value="Hospitality & Real Estate Consultant">Hospitality & Real Estate Consultant</label>
+                                    <label for="cate_two"><input v-model="category" id="cate_two" type="radio" name="category"  value="Project Designer (Architecture/ Interior/ Lighting/ Landscape, etc.)">Project Designer (Architecture/ Interior/ Lighting/ Landscape, etc.)</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_three"><input v-model="category" id="cate_three" type="checkbox" name="category[]" value="Management Company / Hotel Operator">Management Company / Hotel Operator</label>
+                                    <label for="cate_three"><input v-model="category" id="cate_three" type="radio" name="category" value="Contractor/ Project Management/ Project Consultant (incl. M&E, QS, Engineering, etc.)">Contractor/ Project Management/ Project Consultant (incl. M&E, QS, Engineering, etc.)</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_four"><input v-model="category" id="cate_four" type="checkbox" name="category[]" value="Operation team (GM / Sales & Marketing / Operational Staff)">Operation team (GM / Sales & Marketing / Operational Staff)</label>
+                                    <label for="cate_four"><input v-model="category" id="cate_four" type="radio" name="category" value="Hotel Operator/ Management Company">Hotel Operator/ Management Company</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_de"><input v-model="category" id="cate_de" type="checkbox" name="category[]" value="Designer / Architect">Designer / Architect</label>
+                                    <label for="cate_de"><input v-model="category" id="cate_de" type="radio" name="category" value="Hotel Chain Representative/ Hotel Operations (GM/ Sales & Marketing, Revenue, etc.)">Hotel Chain Representative/ Hotel Operations (GM/ Sales & Marketing, Revenue, etc.)</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_pro"><input v-model="category" id="cate_pro" type="checkbox" name="category[]" value="Product / Service Provider">Product / Service Provider</label>
+                                    <label for="cate_pro"><input v-model="category" id="cate_pro" type="radio" name="category" value="Other Business Consultant (Branding, Marketing, Financing, etc.)">Other Business Consultant (Branding, Marketing, Financing, etc.)</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="cate_con"><input v-model="category" id="cate_con" type="checkbox" name="category[]" value="Contractor / Project Management">Contractor / Project Management</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="cate_re"><input v-model="category" id="cate_re" type="checkbox" name="category[]" value="Real estate / Travel Agent">Real estate / Travel Agent</label>
+                                    <label for="cate_con"><input v-model="category" id="cate_con" type="radio" name="category" value="Product & Solution Supplier">Product & Solution Supplier</label>
                                 </div>
                                 <div class="col-lg-6 other">
-                                    <label :class="{active: category == 'Other'}" for="cate_o"><input v-model="category" id="cate_o" type="checkbox" name="category[]" value="Other">Other</label>
+                                    <label for="cate_o" :class="{active: category == 'Other'}"><input v-model="category" id="cate_o" type="radio" name="category" value="Others">Others</label>
                                     <textarea class="lh-10 other_category" name="other_category" rows="4" placeholder="Fill in the answer..."></textarea>
                                 </div>
                             </div>
@@ -125,7 +122,7 @@ add_shortcode( 'reg_form', function(){
                             <div class="mb-6">I am interested in attending *</div>
                             <div class="row g-4 lh-12">
                                 <div class="col-lg-6">
-                                    <label :class="{active: interest == 'HoSkar Talk (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="HoSkar Talk (from 5:00 to 6:00)">HoSkar Talk</label>
+                                    <label :class="{active: interest == 'Developers Seminar (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="Developers Seminar (from 5:00 to 6:00)">Developers Seminar</label>
                                 </div>
                                 <div class="col-lg-6">
                                     <label :class="{active: interest == 'HoSkar Networking (from 6:00)'}" for="ra_net"><input v-model="interest" id="ra_net" type="radio" name="interest" value="HoSkar Networking (from 6:00)">HoSkar Networking</label>
@@ -218,7 +215,7 @@ add_shortcode( 'reg_form', function(){
                     data: {
                         step: 1,
                         gender: '',
-                        category: [],
+                        category: '',
                         yourcompany: [],
                         yourcity: [],
                         interest: '',
@@ -243,7 +240,7 @@ add_shortcode( 'reg_form', function(){
                                     && validatePhone($('[name="phone"]').val())
                                     && $('[name="title"]').val() != ''
                                     && $('[name="yourcompany"]').val() != ''
-                                    && $('[name="category[]"]').val() != ''
+                                    && $('[name="category"]').val() != ''
                                     && $('[name="interest"]').val() != ''
                                     && this.checkVietnam()
                                 ){
@@ -255,8 +252,7 @@ add_shortcode( 'reg_form', function(){
                                         data: {
                                             action: 'z_do_ajax',
                                             _action: 'submitReg',
-                                            form_data: $('.reg_form form').serialize(),
-                                            nonce: zing.nonce
+                                            form_data: $('.reg_form form').serialize()
                                         },
                                         dataType: "json",
                                         success: function (res) {
@@ -299,7 +295,7 @@ add_shortcode( 'reg_form', function(){
                                         $('[name="gender"]').parents('.input').addClass('border border-warning');
                                     }
                                     if( this.category == '' ){
-                                        $('[name="category[]"]').parents('.input').addClass('border border-warning');
+                                        $('[name="category"]').parents('.input').addClass('border border-warning');
                                     }
                                     if( this.interest == '' ){
                                         $('[name="interest"]').parents('.input').addClass('border border-warning');
@@ -324,7 +320,7 @@ add_shortcode( 'reg_form', function(){
                                     && $('[name="company_email"]').val() != ''
                                     && $('[name="title"]').val() != ''
                                     && $('[name="yourcompany"]').val() != ''
-                                    && $('[name="category[]"]').val() != ''
+                                    && $('[name="category"]').val() != ''
                                     && $('[name="interest"]').val() != ''
                                 ){
                                     this.step = 2;

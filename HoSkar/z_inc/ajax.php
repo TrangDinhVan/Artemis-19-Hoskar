@@ -2,7 +2,7 @@
 add_action('wp_ajax_nopriv_z_do_ajax', 'z_do_ajax');
 add_action('wp_ajax_z_do_ajax', 'z_do_ajax');
 function z_do_ajax() {
-    check_ajax_referer( 'z_do_ajax', 'nonce' );
+    // check_ajax_referer( 'z_do_ajax', 'nonce' );
     $res = array('mes' => 'ajax-processed'); $_action = $_POST['_action'];
     if( $_action == 'submitReg' ):
         parse_str($_POST['form_data'], $d);
@@ -56,7 +56,8 @@ function z_do_ajax() {
                         $d['title'],
                         $d['detail'],
                         implode( ";", array_merge( $d['yourcompany'], array($d['other_yourcompany']), $d['yourcity'] ) ),
-                        implode( ";", array_merge( $d['category'], array($d['other_category']) ) ),
+                        // implode( ";", array_merge( $d['category'], array($d['other_category']) ) ),
+                        $d['category'],
                         $d['interest'],
                         isset( $d['city'] ) && !empty( $d['city'] ) ? implode( "\n", $d['city'] ) : '',
                         '',
@@ -113,7 +114,8 @@ function z_do_ajax() {
                     array(
                         'objectTypeId' => '0-1',
                         'name' => 'wehub_category',
-                        'value' => isset( $d['category'] ) && !empty( $d['category'] ) ? $d['category'][0] : 'Empty'
+                        // 'value' => isset( $d['category'] ) && !empty( $d['category'] ) ? $d['category'][0] : 'Empty'
+                        'value' => $d['category']
                     ),
                     array(
                         'objectTypeId' => '0-1',
