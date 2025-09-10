@@ -2,7 +2,7 @@
 
 add_shortcode( 'tab_gallery_country', function(){
 
-    ob_start(); 
+    ob_start();
     ?>
 
     <div class="gallery_page tab_gallery_country">
@@ -14,7 +14,7 @@ add_shortcode( 'tab_gallery_country', function(){
             } else {
                 echo 'No title gallery found.';
             } ?>
-        
+
         </h2>
     </div>
     <div class="main">
@@ -41,7 +41,7 @@ add_shortcode( 'tab_gallery_country', function(){
                                         <li class="sub_tab tab-menu-link is-active" data-content="tab-0" data-tab="tab-0">All</li>
                                         <?php
                                         if (have_rows('location_gallery2')) {
-                                            
+
                                             while (have_rows('location_gallery2')) {
                                                 the_row();
                                                 $j = $j +1;
@@ -55,19 +55,19 @@ add_shortcode( 'tab_gallery_country', function(){
                                         }
                                         ?>
                                     </ul>
-                                <?php 
-                                echo '</li>'; 
+                                <?php
+                                echo '</li>';
                             }
                         }
                     ?>
                 </ul>
-                
+
                 <div class="banner_category">
                     <h2>Good Vibes Only!</h2>
                     <img src="https://hoskarnight.com/wp-content/uploads/2024/08/image-17.jpg" alt="Asia Pacific">
                 </div>
                 <div class="tab-content-container">
-                    
+
                             <?php
                             if (have_rows('tab_gallery2')) {
                                 while (have_rows('tab_gallery2')) {
@@ -84,13 +84,13 @@ add_shortcode( 'tab_gallery_country', function(){
                                             the_row();
                                             $gallery = get_sub_field('image2');
                                             if ($gallery) {
-                                                foreach ($gallery as $image) {   
+                                                foreach ($gallery as $image) {
                                                     $images[] = $image;
                                                 }
                                             }
                                         }
 
-                                        shuffle($images);
+                                        // shuffle($images);
                                         $first_images = [];
                                         $count = 0;
                                         foreach ($images as $image) {
@@ -106,14 +106,14 @@ add_shortcode( 'tab_gallery_country', function(){
                                             }
                                         }
 
-                                        
-                                    
+
+
                                     }?>
                                     </div>
                                     <div class="see-more-container" <?php if ($total_images <= 9) echo 'style="display:none;"'; ?>>
                                         <button class="see-more" data-category-id="0" data-location-id="<?php echo get_sub_field('title2'); ?>" data-title_location="<?php echo sanitize_title(get_sub_field('title2')); ?>" data-title-id="<?php echo sanitize_title(get_sub_field('title2')); ?>">See More</button>
                                     </div>
-                               
+
                                 </div>
                                 <?php
                                 }
@@ -149,16 +149,16 @@ add_shortcode( 'tab_gallery_country', function(){
                                     if (isset($location['image2']) && is_array($location['image2'])) {
                                         $total_images = 0;
 
-                                        foreach ($location['image2'] as $image) {  
-                                            $total_images++;  
-                                            if ($count < 9) {                                    
+                                        foreach ($location['image2'] as $image) {
+                                            $total_images++;
+                                            if ($count < 9) {
                                             ?>
                                                 <a class="gallery-item" href="<?php echo esc_url($image['url']); ?>" target="_blank" data-fancybox="mygallery">
                                                     <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
                                                 </a>
                                             <?php
                                             $count++;
-                                            }                                    
+                                            }
                                         }
                                     }?>
                                         </div>
@@ -173,9 +173,9 @@ add_shortcode( 'tab_gallery_country', function(){
                     }
                 }
                 ?>
-                        
-                    
-                </div>                
+
+
+                </div>
             </div>
         </div>
     </div>
