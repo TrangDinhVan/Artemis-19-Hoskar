@@ -47,19 +47,22 @@ jQuery(function($){
         new Swiper('.logos-slider', {
             loop: true,
             freeMode: true,
-            speed: 1500,
+            speed: 3000,
+            slidesPerView: 6,
             autoplay: {
                 delay: 1,
                 disableOnInteraction: false
             },
             breakpoints: {
                 200: {
-                    slidesPerView: 2,
-                    spaceBetween: 15
+                    slidesPerView: 3,
+                    spaceBetween: 15,
+                    speed: 1000
                 },
                 500: {
-                    slidesPerView: 4,
-                    spaceBetween: 15
+                    slidesPerView: 3,
+                    spaceBetween: 15,
+                    speed: 1000
                 },
                 1000: {
                     slidesPerView: 5,
@@ -77,7 +80,8 @@ jQuery(function($){
         new Swiper('.logos-slider-2', {
             loop: true,
             freeMode: true,
-            speed: 1500,
+            speed: 3000,
+            slidesPerView: 6,
             autoplay: {
                 delay: 1,
                 disableOnInteraction: false,
@@ -85,12 +89,14 @@ jQuery(function($){
             },
             breakpoints: {
                 200: {
-                    slidesPerView: 2,
-                    spaceBetween: 15
+                    slidesPerView: 3,
+                    spaceBetween: 15,
+                    speed: 1000
                 },
                 500: {
-                    slidesPerView: 4,
-                    spaceBetween: 15
+                    slidesPerView: 3,
+                    spaceBetween: 15,
+                    speed: 1000
                 },
                 1000: {
                     slidesPerView: 5,

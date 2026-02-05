@@ -1,4 +1,6 @@
 $(document).ready(function() {
+     $('.header__main').css('display','block');
+     //console.log(6576);
 	if ($(window).width() >= 768) {
 	   
 		var $cols = $('.sponsor_benefits.sponsor_benefits_slider .item');
@@ -6,10 +8,11 @@ $(document).ready(function() {
 
 		$cols.each(function() {
 			var height = $(this).outerHeight();
-			console.log(height);
+			// console.log(height);
+            // console.log(32732);
 			maxHeight = Math.max(maxHeight, height);
 		});
-        console.log(maxHeight*2-200,'height');
+        //console.log(maxHeight*2-200,'height');
 		$cols.css('height', maxHeight*2-250 + 'px');
 		var numLabels = $(".testimonials .item").length;
 		if(numLabels == 4 || numLabels == 6) {
@@ -457,23 +460,25 @@ jQuery(document).ready(function() {
         
     });
 
-    jQuery(document).ready(function(){
-		if ($(window).width() < 768){
-            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 650, dir: -1}); 
-        }else if ($(window).width() < 993) {
-            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 800, dir: -1});
-        }else if ($(window).width() <= 1024) {
-            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 1000, dir: -1});
-        }else if ($(window).width() < 1400){
-            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 900, dir: -1});
-        }else if ($(window).width() < 1600){
-            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 1400, dir: -1}); 
-        }else {
-            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 2100, dir: -1});	
-        }
+    
         
+        var windowWidth = $(window).width();
+        if (windowWidth < 768){
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 650, dir: -1});
+        } else if (windowWidth < 993) {
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 800, dir: -1});
+        } else if (windowWidth <= 1024) {
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 1000, dir: -1});
+        } else if (windowWidth < 1400) {
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 900, dir: -1});
+        } else if (windowWidth < 1600) {
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 1400, dir: -1}); 
+        } else {
+            jQuery(".arctext_text .elementor-heading-title").arctext({radius: 2100, dir: -1});
+        }
+    
+
     });
-});
 
 $('.filter-close').click(function(){
     $(this).toggleClass('dropdown');

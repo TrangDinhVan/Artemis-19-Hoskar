@@ -30,7 +30,7 @@ function logos(){
             <div class="zslide logos-slider-2 overflow-hidden">
                 <div class="swiper-wrapper">
                     <?php
-                    for ( $i = 3; $i < count($as); $i++ ) {
+                    for ( $i = 1; $i < count($as); $i++ ) {
                         $a = $as[$i]; ?>
                         <div class="swiper-slide h-auto">
                             <div class="flex-center borderr p-22 rounded h-100">

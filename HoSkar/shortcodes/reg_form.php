@@ -119,20 +119,85 @@ add_shortcode( 'reg_form', function(){
                     </div>
                     <div class="radios">
                         <div class="input">
-                            <div class="mb-6">I am interested in attending *</div>
-                            <div class="row g-4 lh-12">
-                                <div class="col-lg-6">
-                                    <label :class="{active: interest == 'Developers Seminar (from 5:00 to 6:00)'}" for="ra_ta"><input v-model="interest" id="ra_ta" type="radio" name="interest" value="Developers Seminar (from 5:00 to 6:00)">Developers Seminar</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label :class="{active: interest == 'HoSkar Networking (from 6:00)'}" for="ra_net"><input v-model="interest" id="ra_net" type="radio" name="interest" value="HoSkar Networking (from 6:00)">HoSkar Networking</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label :class="{active: interest == 'Both of them'}" for="ra_both"><input v-model="interest" id="ra_both" type="radio" name="interest" value="Both of them">Both sessions</label>
+                            <div class="mb-6">
+                                <?php
+                                // Get the current page title
+                                $current_location = get_the_title();
+                                
+                                // Default settings for each location
+                                $location_settings = array(
+                                    'Registration HCMC' => array(
+                                        'title' => 'I am interested in attending (<a href="https://drive.google.com/file/d/1bApo3t1HP0dg5Ec9EP2TmokA2JPmQm3b/view?usp=drive_link" style="text-decoration: underline;" target="_blank">Detailed Agenda Here</a>) *',
+                                        'options' => array(
+                                            array('id' => 'ra_ta', 'value' => 'Real Estate Talk & Networking', 'label' => 'Real Estate Talk & Networking'),
+                                            array('id' => 'ra_net', 'value' => 'F&B Talk & Networking', 'label' => 'F&B Talk & Networking'),
+                                            array('id' => 'ra_both', 'value' => 'Networking Only', 'label' => 'Networking Only')
+                                        )
+                                    ),
+                                    'default' => array(
+                                        'title' => 'I am interested in attending *',
+                                        'options' => array(
+                                            array('id' => 'ra_ta', 'value' => 'Developer Seminar (from 5:00 to 6:00)', 'label' => 'Developer Seminar'),
+                                            array('id' => 'ra_net', 'value' => 'HoSkar Networking (from 6:00)', 'label' => 'HoSkar Networking'),
+                                            array('id' => 'ra_both', 'value' => 'Both of them', 'label' => 'Both sessions')
+                                        )
+                                    )
+                                );
+                                
+                                // Determine which location we're on
+                                $current_location_key = 'default';
+                                foreach (array_keys($location_settings) as $location_key) {
+                                    if ($location_key !== 'default' && strpos($current_location, $location_key) !== false) {
+                                        $current_location_key = $location_key;
+                                        break;
+                                    }
+                                }
+                                
+                                // Check if we have ACF fields for this location
+                                $acf_title = '';
+                                $acf_options = array();
+                                
+                                // Try to get ACF fields if they exist
+                                if (function_exists('get_field')) {
+                                    // Get the section title from ACF
+                                    $acf_title = get_field('interest_section_title');
+                                    
+                                    // Get the options from ACF if they exist
+                                    if (have_rows('interest_options')) {
+                                        while (have_rows('interest_options')) {
+                                            the_row();
+                                            $acf_options[] = array(
+                                                'id' => 'ra_' . sanitize_title(get_sub_field('option_label')),
+                                                'value' => get_sub_field('option_value'),
+                                                'label' => get_sub_field('option_label')
+                                            );
+                                        }
+                                    }
+                                }
+                                
+                                // Use ACF values if they exist, otherwise fall back to hardcoded values
+                                $settings = $location_settings[$current_location_key];
+                                if (!empty($acf_title)) {
+                                    $settings['title'] = $acf_title;
+                                }
+                                if (!empty($acf_options)) {
+                                    $settings['options'] = $acf_options;
+                                }
+                                ?>
+                                <div class="mb-6"><?php echo $settings['title']; ?></div>
+                                <div class="row g-4 lh-12">
+                                    <?php foreach ($settings['options'] as $option): ?>
+                                    <div class="col-lg-6">
+                                        <label :class="{active: interest == '<?php echo $option['value']; ?>'}" for="<?php echo $option['id']; ?>">
+                                            <input v-model="interest" id="<?php echo $option['id']; ?>" type="radio" name="interest" value="<?php echo $option['value']; ?>">
+                                            <?php echo $option['label']; ?>
+                                        </label>
+                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
+                            <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                         </div>
-                        <p class="text-warning font-8x pt-2 mark-required">*Please fill in this required field.</p>
                     </div>
                     <div class="py-100"></div>
                     <div class="btn-rainbow d-none">
@@ -141,7 +206,7 @@ add_shortcode( 'reg_form', function(){
                 </div>
                 <div class="py-2"></div>
                 <div class="vstack gap-5 lh-10" v-show="step < 4">
-                    <h4 class="font-semi-bold font-15x mb-1">Let’s make HoSkar about you!</h4>
+                    <h4 class="font-semi-bold font-15x mb-1">Let's make HoSkar about you!</h4>
                     <div class="radios">
                         <div class="input">
                             <div class="mb-6 lh-12">I am also interested in attending HoSkar Night in the following destination(s)</div>

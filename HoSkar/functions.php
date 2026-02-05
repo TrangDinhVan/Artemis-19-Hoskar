@@ -56,12 +56,12 @@ include_once( get_template_directory() . '/acf/acf.php' );
 
 
 
-function z_include( $folder ){ foreach (glob("{$folder}/*.php") as $filename){ include $filename; } } z_include( dirname(__FILE__).'/z_inc' ); z_include( dirname(__FILE__).'/shortcodes' );
+function z_include( $folder ){ foreach (glob("{$folder}/*.php") as $filename){ include $filename; } } z_include( dirname(__FILE__).'/z_inc' ); z_include( dirname(__FILE__).'/shortcodes' ); 
 
-function add_theme_scripts() {
+function add_theme_scripts() {  
 	wp_enqueue_style( 'fontawesome.css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css', array(), '1.1', 'all' );
-    wp_enqueue_style( 'slickstyle', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css', array(), '1.1', 'all');
-    wp_enqueue_style( 'slickthemestyle', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css', array(), '1.1', 'all');
+    wp_enqueue_style( 'slickstyle', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css', array(), '1.1', 'all'); 
+    wp_enqueue_style( 'slickthemestyle', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css', array(), '1.1', 'all'); 
     wp_enqueue_script( 'jqueryscript', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js', array ( 'jquery' ), 1.1, true);
     wp_enqueue_script( 'slickscript', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js', array ( 'jquery' ), 1.1, true);
 
@@ -110,7 +110,7 @@ function load_more_posts() {
             $posts_html .= '<img data-src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" src="' . get_the_post_thumbnail_url(get_the_ID(), 'full') . '" alt="' . get_the_title() . '"/>';
             $posts_html .= '</a>';
         endwhile;
-
+        
         if ($query->post_count < 12):
             $no_more_posts = true;
         endif;
@@ -211,7 +211,7 @@ function load_more_gallerys() {
                                         }
                                         $count++;
                                     }
-
+                                    
                                 }else{
                                     if(!in_array($image['url'],$first_images)){
                                         $or_title = sanitize_title(get_sub_field('title_location2', $id));
@@ -268,7 +268,7 @@ function load_more_gallerys() {
                     } else {
                         $response = array('html' => '');
                     }
-                }
+                } 
                 else {
                     if($loca == $location) {
                         $count = 0;
@@ -307,7 +307,7 @@ function load_more_gallerys() {
     } else {
         $response = array('html' => '');
     }
-
+    
     echo json_encode($response);
     wp_die();
 }
@@ -322,7 +322,7 @@ add_action('rest_api_init', function() {
     header("Access-Control-Allow-Credentials: true");
     header("Access-Control-Allow-Headers: Authorization, Content-Type");
 
-    // Nếu không phải domain a.com, sẽ trả về lỗi 403
+    
     if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] !== $site_url) {
         wp_send_json(array('message' => 'Access denied'), 403);
         exit;
