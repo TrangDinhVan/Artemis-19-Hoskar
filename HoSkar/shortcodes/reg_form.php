@@ -123,19 +123,19 @@ add_shortcode( 'reg_form', function(){
                                 <?php
                                 // Get the current page title
                                 $current_location = get_the_title();
-                                
+
                                 // Default settings for each location
                                 $location_settings = array(
                                     'Registration HCMC' => array(
-                                        'title' => 'I am interested in attending (<a href="https://drive.google.com/file/d/1bApo3t1HP0dg5Ec9EP2TmokA2JPmQm3b/view?usp=drive_link" style="text-decoration: underline;" target="_blank">Detailed Agenda Here</a>) *',
+                                        'title' => 'I am interested in attending*',
                                         'options' => array(
-                                            array('id' => 'ra_ta', 'value' => 'Real Estate Talk & Networking', 'label' => 'Real Estate Talk & Networking'),
-                                            array('id' => 'ra_net', 'value' => 'F&B Talk & Networking', 'label' => 'F&B Talk & Networking'),
-                                            array('id' => 'ra_both', 'value' => 'Networking Only', 'label' => 'Networking Only')
+                                            array('id' => 'ra_ta', 'value' => 'MTE Masterclasses', 'label' => 'MTE Masterclasses'),
+                                            array('id' => 'ra_net', 'value' => 'HoSkar Networking', 'label' => 'HoSkar Networking'),
+                                            array('id' => 'ra_both', 'value' => 'Both sessions', 'label' => 'Both sessions')
                                         )
                                     ),
                                     'default' => array(
-                                        'title' => 'I am interested in attending *',
+                                        'title' => 'I am interested in attending*',
                                         'options' => array(
                                             array('id' => 'ra_ta', 'value' => 'Developer Seminar (from 5:00 to 6:00)', 'label' => 'Developer Seminar'),
                                             array('id' => 'ra_net', 'value' => 'HoSkar Networking (from 6:00)', 'label' => 'HoSkar Networking'),
@@ -143,7 +143,7 @@ add_shortcode( 'reg_form', function(){
                                         )
                                     )
                                 );
-                                
+
                                 // Determine which location we're on
                                 $current_location_key = 'default';
                                 foreach (array_keys($location_settings) as $location_key) {
@@ -152,16 +152,16 @@ add_shortcode( 'reg_form', function(){
                                         break;
                                     }
                                 }
-                                
+
                                 // Check if we have ACF fields for this location
                                 $acf_title = '';
                                 $acf_options = array();
-                                
+
                                 // Try to get ACF fields if they exist
                                 if (function_exists('get_field')) {
                                     // Get the section title from ACF
                                     $acf_title = get_field('interest_section_title');
-                                    
+
                                     // Get the options from ACF if they exist
                                     if (have_rows('interest_options')) {
                                         while (have_rows('interest_options')) {
@@ -174,7 +174,7 @@ add_shortcode( 'reg_form', function(){
                                         }
                                     }
                                 }
-                                
+
                                 // Use ACF values if they exist, otherwise fall back to hardcoded values
                                 $settings = $location_settings[$current_location_key];
                                 if (!empty($acf_title)) {
